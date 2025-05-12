@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:ppns_inspect/user/input_nomor.dart';
-import 'package:ppns_inspect/user/inspeksi/Inspeksi_Rumah_Pompa.dart';
+import 'package:ppns_inspect/user/inspeksi/Inspeksi_Jalur_Evakuasi.dart';
 
 
 class TermsCondition extends StatefulWidget {
@@ -101,7 +101,7 @@ Pasal 8.2.2
                         children: <Widget>[
                           Image.asset(
                             'assets/img/logoHorizontal.png',
-                            width: MediaQuery.of(context).size.width - 70,
+                            height: 65,
                           ),
                         ],
                       ),

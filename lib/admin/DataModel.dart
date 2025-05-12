@@ -20,6 +20,24 @@ class DataAPIApar {
   );
 }
 
+class DataAPIP3K {
+  DataAPIP3K({
+    required this.status,
+    required this.pesan,
+    required this.data,
+  });
+  
+  String status;
+  String pesan;
+  List<List<String>> data;
+  
+  factory DataAPIP3K.fromJson(Map<String, dynamic> json) => DataAPIP3K(
+    status: json["status"],
+    pesan: json["pesan"],
+    data: objectToArrayP3K(json["data"]),
+  );
+}
+
 class DataAPIHydrant {
   DataAPIHydrant({
     required this.status,
@@ -135,6 +153,20 @@ List<List<String>> objectToArrayApar(List<dynamic> data) {
   }
   return output;
 }
+
+List<List<String>> objectToArrayP3K(List<dynamic> data) {
+  final List<List<String>> output = [];
+  for(int a=0; a< data.length; a++){
+    final List<String> row = [];
+    row.add(data[a]['id']);
+    row.add(data[a]['nomor']);
+    row.add(data[a]['lokasi']);
+    row.add(data[a]['timestamp']);
+    output.add(row);
+  }
+  return output;
+}
+
 List<List<String>> objectToArrayHydrant(List<dynamic> data) {
   final List<List<String>> output = [];
   for(int a=0; a< data.length; a++){

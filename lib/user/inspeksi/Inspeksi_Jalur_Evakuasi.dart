@@ -119,7 +119,7 @@ class _InspeksiRumahPompaState extends State<InspeksiRumahPompa> {
                         children: <Widget>[
                           Image.asset(
                             'assets/img/logoHorizontal.png',
-                            width: MediaQuery.of(context).size.width - 120,
+                            height: 65,
                           ),
                         ],
                       ),
@@ -131,7 +131,7 @@ class _InspeksiRumahPompaState extends State<InspeksiRumahPompa> {
                     Container(
                       margin: EdgeInsets.only(top: 110),
                       child: Text(
-                        "Inspeksi Hydrant OHB",
+                        "Inspeksi Jalur Evakuasi",
                         style: TextStyle(
                             fontFamily: "SanFrancisco",
                             decoration: TextDecoration.none,

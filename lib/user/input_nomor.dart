@@ -45,7 +45,7 @@ class _InputNomorState extends State<InputNomor> {
                         children: <Widget>[
                           Image.asset(
                             'assets/img/logoHorizontal.png',
-                            width: MediaQuery.of(context).size.width - 70,
+                        height: 65,
                           ),
                         ],
                       ),

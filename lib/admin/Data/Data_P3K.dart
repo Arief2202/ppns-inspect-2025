@@ -1,7 +1,6 @@
 // ignore_for_file: file_names, camel_case_types, library_private_types_in_public_api, prefer_const_literals_to_create_immutables, prefer_const_constructors, prefer_const_constructors_in_immutables, use_build_context_synchronously, sized_box_for_whitespace, sort_child_properties_last, unused_local_variable, must_be_immutable, prefer_final_fields, use_key_in_widget_constructors, unnecessary_this
 
 import 'package:flutter/material.dart';
-import 'package:ppns_inspect/RadioForm.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
@@ -11,17 +10,17 @@ import 'package:table_sticky_headers/table_sticky_headers.dart';
 import 'package:ppns_inspect/admin/DataModel.dart';
 import 'dart:async';
 
-class DataApar extends StatefulWidget {
-  DataApar({super.key, this.restorationId});
+class DataP3K extends StatefulWidget {
+  DataP3K({super.key, this.restorationId});
 
   final String? restorationId;
 
   @override
-  _DataAparState createState() => _DataAparState();
+  _DataP3KState createState() => _DataP3KState();
 }
 
 
-class _DataAparState extends State<DataApar> with RestorationMixin {
+class _DataP3KState extends State<DataP3K> with RestorationMixin {
   @override
   String? get restorationId => widget.restorationId;
   final RestorableDateTime _selectedDate =
@@ -67,37 +66,23 @@ class _DataAparState extends State<DataApar> with RestorationMixin {
     TextEditingController(text: ''),
     TextEditingController(text: ''),
     TextEditingController(text: ''),
-    TextEditingController(text: ''),
-    TextEditingController(text: ''),
-    TextEditingController(text: ''),
-    TextEditingController(text: ''),
-    TextEditingController(text: '')
   ];
 
   void _selectDate(DateTime? newSelectedDate) {
     if (newSelectedDate != null) {
       setState(() {
         _selectedDate.value = newSelectedDate;
-        _controller[4].text = "${_selectedDate.value.year}-${_selectedDate.value.month}-${_selectedDate.value.day} 00:00:00";
-        // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        //   content: Text(_controller[2].text),
-        // ));
       });
     }
   }
 
   Timer? timer;
   List<String> titleColumn = [
-    "id", "Jenis Pemadam", "Nomor",  "Lokasi",  "berat", "Rating", "Tanggal Kadaluarsa", "Created at"
+    "id", "Nomor",  "Lokasi",  "Created at"
   ];
   List<List<String>> makeData = [];
-  String jenis_pemadam = "Dry Chemical Powder";
-  
-  static List<String> FilterKadaluarsa = <String>['Kadaluarsa : Tampilkan Semua', 'Kadaluarsa : Belum', 'Kadaluarsa : Sudah'];
-  String FilterKadaluarsaValue = FilterKadaluarsa.first;
-  String kadaluarsa = "semua";
-  
-  late DataAPIApar currentData = DataAPIApar(status: "", pesan: "", data: makeData);
+    
+  late DataAPIP3K currentData = DataAPIP3K(status: "", pesan: "", data: makeData);
 
   @override
   void initState() {
@@ -113,7 +98,7 @@ class _DataAparState extends State<DataApar> with RestorationMixin {
   }
 
   void updateValue() async {
-    var url = Uri.parse("http://${globals.endpoint}/api_apar.php?read&&kadaluarsa=${kadaluarsa}");  
+    var url = Uri.parse("http://${globals.endpoint}/api_p3k.php?read");  
     try {
       final response = await http.get(url).timeout(
         const Duration(seconds: 1),
@@ -125,7 +110,7 @@ class _DataAparState extends State<DataApar> with RestorationMixin {
         var respon = Json.tryDecode(response.body);
         if(this.mounted){
             setState(() {
-              currentData = DataAPIApar.fromJson(respon);
+              currentData = DataAPIP3K.fromJson(respon);
             });
         }
       }
@@ -213,7 +198,7 @@ class _DataAparState extends State<DataApar> with RestorationMixin {
                   margin: EdgeInsets.only(left: 20.0, right: 10.0, top: 135),
                   child: 
                       Text(
-                        "Data APAR",
+                        "Data P3K",
                         style: TextStyle(
                           fontFamily: "SanFrancisco",
                           decoration: TextDecoration.none,
@@ -241,21 +226,11 @@ class _DataAparState extends State<DataApar> with RestorationMixin {
                       ),
                     ),
                     onPressed: (){
-                          setState(() {
-                            _controller[4].text = "${DateTime.now().year}-${DateTime.now().month}-${DateTime.now().day} ${DateTime.now().hour}:${DateTime.now().minute}:${DateTime.now().second}";
-                          });
                           Alert(
                             context: context,
                             title: "Tambahkan Data",
                             content: Column(
                               children: <Widget>[          
-                                RadioForm(title: "Jenis Pemadam", option: ["Dry Chemical Powder", "CO2", "Clean Agent", "Foam", "Lainnya"], onChange: (String? value) {
-                                  setState(() {
-                                    jenis_pemadam = value!;
-                                  });
-                                    print("Jenis Pemadam : ${jenis_pemadam}");
-                                  },
-                                ),
                                 TextField(
                                   decoration: InputDecoration(
                                     // icon: Icon(Icons.account_circle),
@@ -271,44 +246,6 @@ class _DataAparState extends State<DataApar> with RestorationMixin {
                                   ),
                                   controller: _controller[1],
                                 ),
-                                TextField(
-                                  // obscureText: true,
-                                  decoration: InputDecoration(
-                                    // icon: Icon(Icons.lock),
-                                    labelText: 'Berat',
-                                  ),
-                                  controller: _controller[2],
-                                ),
-                                TextField(
-                                  // obscureText: true,
-                                  decoration: InputDecoration(
-                                    // icon: Icon(Icons.lock),
-                                    labelText: 'Rating',
-                                  ),
-                                  controller: _controller[3],
-                                ),
-                                Padding(padding: EdgeInsets.all(10)),
-                                OutlinedButton(
-                                  onPressed: () {
-                                    _restorableDatePickerRouteFuture.present();
-                                  },
-                                  child: const Text('Pilih Tanggal Kadaluarsa'),
-                                ),
-                                TextField(
-                                  // obscureText: true,
-                                  decoration: InputDecoration(
-                                    // icon: Icon(Icons.lock),
-                                    labelText: 'Tanggal Kadaluarsa',
-                                  ),
-                                  controller: _controller[4],
-                                ),
-                                // TextField(
-                                //   // obscureText: true,
-                                //   decoration: InputDecoration(
-                                //     // icon: Icon(Icons.lock),
-                                //     labelText: 'Tanggal Kadaluarsa',
-                                //   ),
-                                // ),
                               ],
                             ),
                             buttons: [
@@ -318,7 +255,7 @@ class _DataAparState extends State<DataApar> with RestorationMixin {
                                   style: TextStyle(color: Colors.white, fontSize: 20),
                                 ),
                                 onPressed: () async{                                  
-                                  var url = Uri.parse("http://${globals.endpoint}/api_apar.php?create&jenis_pemadam=${jenis_pemadam}&nomor=${_controller[0].text}&lokasi=${_controller[1].text}&berat=${_controller[2].text}&rating=${_controller[3].text}&kadaluarsa=${_controller[4].text}");  
+                                  var url = Uri.parse("http://${globals.endpoint}/api_p3k.php?create&nomor=${_controller[0].text}&lokasi=${_controller[1].text}");  
                                   try {
                                     final response = await http.get(url).timeout(
                                       const Duration(seconds: 1),
@@ -343,46 +280,9 @@ class _DataAparState extends State<DataApar> with RestorationMixin {
               alignment: Alignment.topRight,
               child: Column(children: [
                 Container(
-                  margin: EdgeInsets.only(left: 20.0, right: 10.0, top: 165),
-                  height: 55,
-                  // width: MediaQuery.of(context).size.width-200,
-                  child: DropdownButton(
-                    value: FilterKadaluarsaValue,
-                    icon: Icon(Icons.arrow_downward),
-                    iconSize: 24,
-                    elevation: 16,
-                    isExpanded: true,
-                    style: TextStyle(color: Colors.blue, fontSize: 14.0),
-                    underline: Container(
-                      height: 2,
-                      color: Colors.blue,
-                    ),
-                    onChanged: (String? newValue) {
-                      setState(() {
-                        FilterKadaluarsaValue = newValue!;
-                        if(newValue == FilterKadaluarsa[0]) kadaluarsa = "semua";
-                        else if(newValue == FilterKadaluarsa[1]) kadaluarsa = "belum";
-                        else kadaluarsa="sudah";
-                      });
-                      updateValue();
-                    },
-                    items: FilterKadaluarsa.map<DropdownMenuItem<String>>((String value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value),
-                      );
-                    }).toList(),
-                  )
-                ),
-            ])),
-
-          Align(
-              alignment: Alignment.topRight,
-              child: Column(children: [
-                Container(
                   width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height-220,
-                  margin: EdgeInsets.only(top: 220),
+                  height: MediaQuery.of(context).size.height-175,
+                  margin: EdgeInsets.only(top: 175),
                   decoration: BoxDecoration(color: const Color.fromARGB(49, 244, 67, 54)),
                   child: SimpleTablePage(
                       titleColumn: titleColumn,
@@ -414,10 +314,6 @@ class SimpleTablePage extends StatelessWidget {
     TextEditingController(text: ''),
     TextEditingController(text: ''),
     TextEditingController(text: ''),
-    TextEditingController(text: ''),
-    TextEditingController(text: ''),
-    TextEditingController(text: ''),
-    TextEditingController(text: ''),
     TextEditingController(text: '')
   ];
 
@@ -441,16 +337,12 @@ class SimpleTablePage extends StatelessWidget {
           child: ElevatedButton(
             onPressed: (){
               _controller[0].text = data[i][0];
-              jenis_pemadam = data[i][1];
-              _controller[1].text = data[i][2];
-              _controller[2].text = data[i][3];
-              _controller[3].text = data[i][4];
-              _controller[4].text = data[i][5];
-              _controller[5].text = data[i][6];
-              _controller[6].text = data[i][7];
+              _controller[1].text = data[i][1];
+              _controller[2].text = data[i][2];
+              _controller[3].text = data[i][3];
               Alert(
                 context: context,
-                title: "Edit Data Apar",
+                title: "Edit Data P3K",
                 content: Column(
                   children: <Widget>[
                     TextField(
@@ -460,12 +352,6 @@ class SimpleTablePage extends StatelessWidget {
                         labelText: 'ID',
                       ),
                       controller: _controller[0],
-                    ),  
-                    RadioForm(title: "Jenis Pemadam", option: ["Dry Chemical Powder", "CO2", "Clean Agent", "Foam", "Lainnya"], onChange: (String? value) {
-                        jenis_pemadam = value!;
-                        print("Jenis Pemadam : ${jenis_pemadam}");
-                      },
-                      selected: data[i][1],
                     ),
                     TextField(
                       decoration: InputDecoration(
@@ -482,33 +368,12 @@ class SimpleTablePage extends StatelessWidget {
                       controller: _controller[2],
                     ),
                     TextField(
-                      decoration: InputDecoration(
-                        // icon: Icon(Icons.lock),
-                        labelText: 'Berat',
-                      ),
-                      controller: _controller[3],
-                    ),
-                    TextField(
-                      decoration: InputDecoration(
-                        // icon: Icon(Icons.lock),
-                        labelText: 'Rating',
-                      ),
-                      controller: _controller[4],
-                    ),
-                    TextField(
-                      decoration: InputDecoration(
-                        // icon: Icon(Icons.lock),
-                        labelText: 'Tanggal Kadaluarsa',
-                      ),
-                      controller: _controller[5],
-                    ),
-                    TextField(
                       readOnly: true,
                       decoration: InputDecoration(
                         // icon: Icon(Icons.lock),
                         labelText: 'Created at',
                       ),
-                      controller: _controller[6],
+                      controller: _controller[3],
                     ),
                   ],
                 ),
@@ -521,7 +386,7 @@ class SimpleTablePage extends StatelessWidget {
                     ),
                     onPressed: () async {
                       print(_controller[0].text);
-                      var url = Uri.parse("http://${globals.endpoint}/api_apar.php?delete&id=${_controller[0].text}");  
+                      var url = Uri.parse("http://${globals.endpoint}/api_p3k.php?delete&id=${_controller[0].text}");  
                       try {
                         final response = await http.get(url).timeout(
                           const Duration(seconds: 1),
@@ -539,7 +404,7 @@ class SimpleTablePage extends StatelessWidget {
                       style: TextStyle(color: Colors.white, fontSize: 20),
                     ),
                     onPressed: () async {
-                      var url = Uri.parse("http://${globals.endpoint}/api_apar.php?update&id=${_controller[0].text}&jenis_pemadam=${jenis_pemadam}&nomor=${_controller[1].text}&lokasi=${_controller[2].text}&lokasi=${_controller[2].text}&berat=${_controller[3].text}&rating=${_controller[4].text}&kadaluarsa=${_controller[5].text}");  
+                      var url = Uri.parse("http://${globals.endpoint}/api_p3k.php?update&id=${_controller[0].text}&nomor=${_controller[1].text}&lokasi=${_controller[2].text}");  
                       try {
                         final response = await http.get(url).timeout(
                           const Duration(seconds: 1),

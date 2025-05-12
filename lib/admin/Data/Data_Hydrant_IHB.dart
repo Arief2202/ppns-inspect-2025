@@ -189,7 +189,7 @@ class _DataHydrantIHBState extends State<DataHydrantIHB> with RestorationMixin {
                     children: <Widget>[
                       Image.asset(
                         'assets/img/logoHorizontal.png',
-                        width: MediaQuery.of(context).size.width - 120,
+                        height: 65,
                       ),
                     ],
                   ),

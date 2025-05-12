@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:ppns_inspect/admin/Hasil_Inspeksi.dart';
 import 'package:ppns_inspect/admin/Users.dart';
-import 'package:ppns_inspect/admin/DataAparHydrant.dart';
+import 'package:ppns_inspect/admin/Inventaris.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
@@ -232,7 +232,7 @@ class _PieChartPageState extends State<PieChartPage> with RestorationMixin {
                     children: <Widget>[
                       Image.asset(
                         'assets/img/logoHorizontal.png',
-                        width: MediaQuery.of(context).size.width - 120,
+                        height: 65,
                       ),
                     ],
                   ),

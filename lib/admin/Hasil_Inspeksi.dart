@@ -4,7 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:ppns_inspect/admin/Hasil_Inspeksi/apar.dart';
 import 'package:ppns_inspect/admin/Hasil_Inspeksi/hydrantIHB.dart';
 import 'package:ppns_inspect/admin/Hasil_Inspeksi/hydrantOHB.dart';
-import 'package:ppns_inspect/admin/Hasil_Inspeksi/rumah_pompa.dart';
+import 'package:ppns_inspect/admin/Hasil_Inspeksi/jalur_evakuasi.dart';
+import 'package:ppns_inspect/admin/Hasil_Inspeksi/p3k.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
@@ -89,241 +90,312 @@ class _HasilInspeksiState extends State<HasilInspeksi> {
                     children: <Widget>[
                       Image.asset(
                         'assets/img/logoHorizontal.png',
-                        width: MediaQuery.of(context).size.width - 120,
+                        height: 65,
                       ),
                     ],
                   ),
                 ),
               ])),
-          Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Container(
-                  width: MediaQuery.of(context).size.width,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Text(
-                        "HASIL INSPEKSI",
-                        style: TextStyle(
-                          fontFamily: "SanFrancisco",
-                          decoration: TextDecoration.none,
-                          fontStyle: FontStyle.italic,
-                          fontWeight: FontWeight.w900,
-                          fontSize: 40,
-                          color: Color.fromARGB(255, 255, 50, 50)
-                        ),
+
+          Align(
+            alignment: Alignment.topCenter,
+            child: Container(
+              margin: EdgeInsets.only(top: 120, bottom: 50),
+              child: SingleChildScrollView(
+                child:  
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Container(
+                      width: MediaQuery.of(context).size.width,
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text(
+                            "HASIL INSPEKSI",
+                            style: TextStyle(
+                              fontFamily: "SanFrancisco",
+                              decoration: TextDecoration.none,
+                              fontStyle: FontStyle.italic,
+                              fontWeight: FontWeight.w900,
+                              fontSize: 28,
+                              color: Color.fromARGB(255, 255, 50, 50)
+                            ),
+                          ),
+                        ],
+                      )                
+                    ),
+                  ]
+                )
+              )
+            )
+          ),
+          Align(
+            alignment: Alignment.topCenter,
+            child: Container(
+              margin: EdgeInsets.only(top: 180, bottom: 50),
+              child: SingleChildScrollView(
+                child:  
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Card(
+                      child: InkWell(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) {
+                              return HasilApar();
+                            }),
+                          );
+                        },
+                        child: Container(
+                            width: MediaQuery.of(context).size.width - 50,
+                            padding: EdgeInsets.all(5),
+                            height: 80,
+                            child: Row(
+                              children: [
+                                Image.asset(
+                                  'assets/img/apar.png',
+                                  width: 100,
+                                  height: 100,
+                                ),
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "APAR",
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 18,
+                                      ),
+                                    ),
+                                    Text(
+                                      "Alat Pemadam Api Ringan",
+                                      style: TextStyle(
+                                        fontSize: 12
+                                      ),
+                                      )
+                                  ],
+                                ),
+                              ],
+                            )),
                       ),
-                    ],
-                  )                
-                ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      elevation: 5,
+                      margin: EdgeInsets.all(10),
+                    ),
 
-                Card(
-                  child: InkWell(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) {
-                          return HasilApar();
-                        }),
-                      );
-                    },
-                    child: Container(
-                        width: MediaQuery.of(context).size.width - 50,
-                        padding: EdgeInsets.all(5),
-                        height: 100,
-                        child: Row(
-                          children: [
-                            Image.asset(
-                              'assets/img/apar.png',
-                              width: 100,
-                              height: 100,
-                            ),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
+                    
+                    Card(
+                      child: InkWell(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) {
+                              return HasilHydrantOHB();
+                            }),
+                          );
+                        },
+                        child: Container(
+                            width: MediaQuery.of(context).size.width - 50,
+                            padding: EdgeInsets.all(5),
+                            height: 80,
+                            child: Row(
                               children: [
-                                Text(
-                                  "APAR",
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 18,
-                                  ),
+                                Image.asset(
+                                  'assets/img/hydrant.png',
+                                  width: 100,
+                                  height: 100,
                                 ),
-                                Text(
-                                  "Alat Pemadam Api Ringan",
-                                  style: TextStyle(
-                                    fontSize: 12
-                                  ),
-                                  )
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "HYDRANT OHB",
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 18,
+                                      ),
+                                    ),
+                                    Text(
+                                      "Hydrant Outdoor (Luar Gedung)",
+                                      style: TextStyle(
+                                        fontSize: 12
+                                      ),
+                                      )
+                                  ],
+                                ),
                               ],
-                            ),
-                          ],
-                        )),
-                  ),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                  elevation: 5,
-                  margin: EdgeInsets.all(10),
-                ),
+                            )),
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      elevation: 5,
+                      margin: EdgeInsets.all(10),
+                    ),
+                    
+                    Card(
+                      child: InkWell(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) {
+                              return HasilHydrantIHB();
+                            }),
+                          );
+                        },
+                        child: Container(
+                            width: MediaQuery.of(context).size.width - 50,
+                            padding: EdgeInsets.all(5),
+                            height: 80,
+                            child: Row(
+                              children: [
+                                Image.asset(
+                                  'assets/img/hydrant.png',
+                                  width: 100,
+                                  height: 100,
+                                ),
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "HYDRANT IHB",
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 18,
+                                      ),
+                                    ),
+                                    Text(
+                                      "Hydrant Indoor (dalam gedung)",
+                                      style: TextStyle(
+                                        fontSize: 12
+                                      ),
+                                      )
+                                  ],
+                                ),
+                              ],
+                            )),
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      elevation: 5,
+                      margin: EdgeInsets.all(10),
+                    ),
+                    
+                    Card(
+                      child: InkWell(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) {
+                              return HasilP3K();
+                            }),
+                          );
+                        },
+                        child: Container(
+                            width: MediaQuery.of(context).size.width - 50,
+                            padding: EdgeInsets.all(5),
+                            height: 80,
+                            child: Row(
+                              children: [
+                                Image.asset(
+                                  'assets/img/p3k.png',
+                                  width: 100,
+                                  height: 100,
+                                ),
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "First Aid Box",
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 18,
+                                      ),
+                                    ),
+                                    Text(
+                                      "First Aid Box",
+                                      style: TextStyle(
+                                        fontSize: 12
+                                      ),
+                                      )
+                                  ],
+                                ),
+                              ],
+                            )),
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      elevation: 5,
+                      margin: EdgeInsets.all(10),
+                    ),
+                    
+                    Card(
+                      child: InkWell(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) {
+                              return HasilJalurEvakuasi();
+                            }),
+                          );
+                        },
+                        child: Container(
+                            width: MediaQuery.of(context).size.width - 50,
+                            padding: EdgeInsets.all(5),
+                            height: 80,
+                            child: Row(
+                              children: [
+                                Image.asset(
+                                  'assets/img/emergency_exit.png',
+                                  width: 100,
+                                  height: 100,
+                                ),
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "Evacuation Route",
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 18,
+                                      ),
+                                    ),
+                                    Text(
+                                      "Evacuation Route",
+                                      style: TextStyle(
+                                        fontSize: 12
+                                      ),
+                                      )
+                                  ],
+                                ),
+                              ],
+                            )),
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      elevation: 5,
+                      margin: EdgeInsets.all(10),
+                    ),
 
-                
-                Card(
-                  child: InkWell(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) {
-                          return HasilHydrantOHB();
-                        }),
-                      );
-                    },
-                    child: Container(
-                        width: MediaQuery.of(context).size.width - 50,
-                        padding: EdgeInsets.all(5),
-                        height: 100,
-                        child: Row(
-                          children: [
-                            Image.asset(
-                              'assets/img/hydrant.png',
-                              width: 100,
-                              height: 100,
-                            ),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "HYDRANT OHB",
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 18,
-                                  ),
-                                ),
-                                Text(
-                                  "Hydrant Outdoor (Luar Gedung)",
-                                  style: TextStyle(
-                                    fontSize: 12
-                                  ),
-                                  )
-                              ],
-                            ),
-                          ],
-                        )),
-                  ),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                  elevation: 5,
-                  margin: EdgeInsets.all(10),
+                    
+                  ],
                 ),
-                
-                Card(
-                  child: InkWell(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) {
-                          return HasilHydrantIHB();
-                        }),
-                      );
-                    },
-                    child: Container(
-                        width: MediaQuery.of(context).size.width - 50,
-                        padding: EdgeInsets.all(5),
-                        height: 100,
-                        child: Row(
-                          children: [
-                            Image.asset(
-                              'assets/img/hydrant.png',
-                              width: 100,
-                              height: 100,
-                            ),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "HYDRANT IHB",
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 18,
-                                  ),
-                                ),
-                                Text(
-                                  "Hydrant Indoor (dalam gedung)",
-                                  style: TextStyle(
-                                    fontSize: 12
-                                  ),
-                                  )
-                              ],
-                            ),
-                          ],
-                        )),
-                  ),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                  elevation: 5,
-                  margin: EdgeInsets.all(10),
-                ),
-                
-                Card(
-                  child: InkWell(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) {
-                          return HasilRumahPompa();
-                        }),
-                      );
-                    },
-                    child: Container(
-                        width: MediaQuery.of(context).size.width - 50,
-                        padding: EdgeInsets.all(5),
-                        height: 100,
-                        child: Row(
-                          children: [
-                            Image.asset(
-                              'assets/img/hydrant.png',
-                              width: 100,
-                              height: 100,
-                            ),
-                            Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "Rumah Pompa",
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 18,
-                                  ),
-                                ),
-                                Text(
-                                  "Rumah Pompa",
-                                  style: TextStyle(
-                                    fontSize: 12
-                                  ),
-                                  )
-                              ],
-                            ),
-                          ],
-                        )),
-                  ),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                  elevation: 5,
-                  margin: EdgeInsets.all(10),
-                ),
-
-                
-              ],
-            ),
+              )
+            )
           ),
         ],
       ),

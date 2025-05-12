@@ -1,91 +1,32 @@
 // ignore_for_file: file_names, camel_case_types, library_private_types_in_public_api, prefer_const_literals_to_create_immutables, prefer_const_constructors, prefer_const_constructors_in_immutables, use_build_context_synchronously, sized_box_for_whitespace, sort_child_properties_last
 
 import 'package:flutter/material.dart';
-import 'package:ppns_inspect/admin/Hasil_Inspeksi.dart';
-import 'package:ppns_inspect/admin/Users.dart';
-import 'package:ppns_inspect/admin/Inventaris.dart';
-import 'package:ppns_inspect/manajemen/PieChartPage.dart';
+import 'package:ppns_inspect/admin/Data/Data_Apar.dart';
+import 'package:ppns_inspect/admin/Data/Data_Hydrant_IHB.dart';
+import 'package:ppns_inspect/admin/Data/Data_Hydrant_OHB.dart';
+import 'package:ppns_inspect/admin/Data/Data_P3K.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
-import 'dart:async';
 import 'package:ppns_inspect/globals.dart' as globals;
-import 'package:ppns_inspect/notification.dart';
-import 'package:ppns_inspect/admin/DataModel.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:http/http.dart' as http;
-import 'package:focus_detector/focus_detector.dart';
 
-final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-    FlutterLocalNotificationsPlugin();
-
-class DashboardAdmin extends StatefulWidget {
-  DashboardAdmin({Key? key}) : super(key: key);
+class DataInventaris extends StatefulWidget {
+  DataInventaris({Key? key}) : super(key: key);
 
   @override
-  _DashboardAdminState createState() => _DashboardAdminState();
+  _DataInventarisState createState() => _DataInventarisState();
 }
 
-class _DashboardAdminState extends State<DashboardAdmin> {
+class _DataInventarisState extends State<DataInventaris> {
   @override
   void initState() {
     super.initState();
-    check_kadaluarsa();
-    notif.initialize(flutterLocalNotificationsPlugin);
-    globals.timerNotif = Timer.periodic(
-        Duration(milliseconds: 1000), (Timer t) => updateNotification());
-  }
-
-  void onFocusScreen() {
-    // check_kadaluarsa();
-  }
-
-  void updateNotification() async {
-    try {
-      final response = await http.get(Uri.parse("http://${globals.endpoint}/api_notification.php?read&user_id=${globals.user_id}")).timeout(
-        const Duration(seconds: 1),
-        onTimeout: () {
-          return http.Response('Error', 408);
-        },
-      );
-      if (response.statusCode == 200) {
-        var respon = Json.tryDecode(response.body)['data'];
-        for (int a = 0; a < respon.length; a++) {
-          notif.showNotif(
-              id: int.parse(respon[a]['id']),
-              head: respon[a]['title'],
-              body: respon[a]['content'],
-              fln: flutterLocalNotificationsPlugin);
-              
-          try {
-            await http.get(Uri.parse("http://${globals.endpoint}/api_notification.php?displayed&notif_id=${respon[a]['id']}")).timeout(
-              const Duration(seconds: 1),
-              onTimeout: () {
-                return http.Response('Error', 408);
-              },
-            );
-          } on Exception catch (_){}
-        }
-      }
-    } on Exception catch (_) {}
-  }
-  
-  void check_kadaluarsa() async {
-    try {
-      final response = await http.get(Uri.parse("http://${globals.endpoint}/api_notification.php?check_kadaluarsa")).timeout(
-        const Duration(seconds: 1),
-        onTimeout: () {
-          return http.Response('Error', 408);
-        },
-      );
-      print(response.statusCode);
-    } on Exception catch (_) {}
   }
 
   @override
   Widget build(BuildContext context) {
-    return FocusDetector(
-      onFocusGained: onFocusScreen,
+    return Container(
+      decoration: BoxDecoration(color: Colors.white),
       child: Stack(
         children: <Widget>[
           Align(
@@ -117,9 +58,7 @@ class _DashboardAdminState extends State<DashboardAdmin> {
                                     TextStyle(color: Colors.white, fontSize: 20),
                               ),
                               onPressed: () async {
-                                if(globals.timerNotif != null) globals.timerNotif!.cancel();
-                                final prefs =
-                                    await SharedPreferences.getInstance();
+                                final prefs = await SharedPreferences.getInstance();
                                 await prefs.remove('user_id');
                                 await prefs.remove('user_role');
                                 await prefs.remove('user_name');
@@ -172,7 +111,7 @@ class _DashboardAdminState extends State<DashboardAdmin> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Text(
-                            "ADMIN DASHBOARD",
+                            "INVENTARIS",
                             style: TextStyle(
                               fontFamily: "SanFrancisco",
                               decoration: TextDecoration.none,
@@ -205,39 +144,38 @@ class _DashboardAdminState extends State<DashboardAdmin> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(builder: (context) {
-                              return DataInventaris();
+                              return DataApar();
                             }),
                           );
                         },
                         child: Container(
                             width: MediaQuery.of(context).size.width - 50,
                             padding: EdgeInsets.all(5),
-                            height: 100,
+                            height: 80,
                             child: Row(
                               children: [
-                                Container(
-                                  padding: EdgeInsets.all(2),
-                                  child: Image.asset(
-                                    'assets/img/inventory.png',
-                                    width: 100,
-                                    height: 100,
-                                  ),
+                                Image.asset(
+                                  'assets/img/apar.png',
+                                  width: 100,
+                                  height: 100,
                                 ),
                                 Column(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      "INVENTARIS",
+                                      "APAR",
                                       style: TextStyle(
                                         fontWeight: FontWeight.bold,
-                                        fontSize: 14,
+                                        fontSize: 18,
                                       ),
                                     ),
                                     Text(
-                                      "Description",
-                                      style: TextStyle(fontSize: 12),
-                                    )
+                                      "Alat Pemadam Api Ringan (Apar)",
+                                      style: TextStyle(
+                                        fontSize: 12
+                                      ),
+                                      )
                                   ],
                                 ),
                               ],
@@ -249,45 +187,46 @@ class _DashboardAdminState extends State<DashboardAdmin> {
                       elevation: 5,
                       margin: EdgeInsets.all(10),
                     ),
+                    
+
                     Card(
                       child: InkWell(
                         onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) {
-                              return HasilInspeksi();
-                            }),
-                          );
+                          // Navigator.push(
+                          //   context,
+                          //   MaterialPageRoute(builder: (context) {
+                          //     return DataApar();
+                          //   }),
+                          // );
                         },
                         child: Container(
                             width: MediaQuery.of(context).size.width - 50,
                             padding: EdgeInsets.all(5),
-                            height: 100,
+                            height: 80,
                             child: Row(
                               children: [
-                                Container(
-                                  padding: EdgeInsets.all(2),
-                                  child: Image.asset(
-                                    'assets/img/inputData.png',
-                                    width: 100,
-                                    height: 100,
-                                  ),
+                                Image.asset(
+                                  'assets/img/apab.png',
+                                  width: 100,
+                                  height: 100,
                                 ),
                                 Column(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      "HASIL INSPEKSI",
+                                      "APAB",
                                       style: TextStyle(
                                         fontWeight: FontWeight.bold,
-                                        fontSize: 14,
+                                        fontSize: 18,
                                       ),
                                     ),
                                     Text(
-                                      "Description",
-                                      style: TextStyle(fontSize: 12),
-                                    )
+                                      "Alat Pemadam Api Berat (Apab)",
+                                      style: TextStyle(
+                                        fontSize: 12
+                                      ),
+                                      )
                                   ],
                                 ),
                               ],
@@ -306,39 +245,38 @@ class _DashboardAdminState extends State<DashboardAdmin> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(builder: (context) {
-                              return PieChartPage(date: DateTime.now());
+                              return DataHydrantOHB();
                             }),
                           );
                         },
                         child: Container(
                             width: MediaQuery.of(context).size.width - 50,
                             padding: EdgeInsets.all(5),
-                            height: 100,
+                            height: 80,
                             child: Row(
                               children: [
-                                Container(
-                                  padding: EdgeInsets.all(2),
-                                  child: Image.asset(
-                                    'assets/img/hasilInspeksi.png',
-                                    width: 100,
-                                    height: 100,
-                                  ),
+                                Image.asset(
+                                  'assets/img/hydrant.png',
+                                  width: 100,
+                                  height: 100,
                                 ),
                                 Column(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      "Pie Chart",
+                                      "HYDRANT OHB",
                                       style: TextStyle(
                                         fontWeight: FontWeight.bold,
-                                        fontSize: 14,
+                                        fontSize: 18,
                                       ),
                                     ),
                                     Text(
-                                      "Description",
-                                      style: TextStyle(fontSize: 12),
-                                    )
+                                      "Hydrant Outdoor (Luar Gedung)",
+                                      style: TextStyle(
+                                        fontSize: 12
+                                      ),
+                                      )
                                   ],
                                 ),
                               ],
@@ -357,39 +295,38 @@ class _DashboardAdminState extends State<DashboardAdmin> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(builder: (context) {
-                              return Users();
+                              return DataHydrantIHB();
                             }),
                           );
                         },
                         child: Container(
                             width: MediaQuery.of(context).size.width - 50,
                             padding: EdgeInsets.all(5),
-                            height: 100,
+                            height: 80,
                             child: Row(
                               children: [
-                                Container(
-                                  padding: EdgeInsets.all(2),
-                                  child: Image.asset(
-                                    'assets/img/users.png',
-                                    width: 100,
-                                    height: 100,
-                                  ),
+                                Image.asset(
+                                  'assets/img/hydrant.png',
+                                  width: 100,
+                                  height: 100,
                                 ),
                                 Column(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      "USERS",
+                                      "HYDRANT IHB",
                                       style: TextStyle(
                                         fontWeight: FontWeight.bold,
-                                        fontSize: 14,
+                                        fontSize: 18,
                                       ),
                                     ),
                                     Text(
-                                      "Description",
-                                      style: TextStyle(fontSize: 12),
-                                    )
+                                      "Hydrant Indoor (dalam gedung)",
+                                      style: TextStyle(
+                                        fontSize: 12
+                                      ),
+                                      )
                                   ],
                                 ),
                               ],
@@ -402,7 +339,57 @@ class _DashboardAdminState extends State<DashboardAdmin> {
                       margin: EdgeInsets.all(10),
                     ),
 
+                    Card(
+                      child: InkWell(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) {
+                              return DataP3K();
+                            }),
+                          );
+                        },
+                        child: Container(
+                            width: MediaQuery.of(context).size.width - 50,
+                            padding: EdgeInsets.all(5),
+                            height: 80,
+                            child: Row(
+                              children: [
+                                Image.asset(
+                                  'assets/img/p3k.png',
+                                  width: 100,
+                                  height: 100,
+                                ),
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "P3K",
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 18,
+                                      ),
+                                    ),
+                                    Text(
+                                      "Kotak P3K",
+                                      style: TextStyle(
+                                        fontSize: 12
+                                      ),
+                                      )
+                                  ],
+                                ),
+                              ],
+                            )),
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      elevation: 5,
+                      margin: EdgeInsets.all(10),
+                    ),
 
+                    
                   ],
                 ),
               )

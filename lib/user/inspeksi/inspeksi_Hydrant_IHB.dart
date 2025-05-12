@@ -69,7 +69,7 @@ class _InspeksiHydrantIHBState extends State<InspeksiHydrantIHB> {
                         children: <Widget>[
                           Image.asset(
                             'assets/img/logoHorizontal.png',
-                            width: MediaQuery.of(context).size.width - 120,
+                            height: 65,
                           ),
                         ],
                       ),

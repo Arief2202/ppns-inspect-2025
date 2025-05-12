@@ -188,7 +188,7 @@ class _LandingPageState extends State<LandingPage> {
             children: <Widget>[
               Image.asset(
                 'assets/img/logoVertical.png',
-                width: MediaQuery.of(context).size.width / 1.5,
+                width: MediaQuery.of(context).size.width / 1.7,
               ),
             ],
           ),
@@ -199,7 +199,7 @@ class _LandingPageState extends State<LandingPage> {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Container(
-                margin: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width / 20),
+                margin: EdgeInsets.symmetric(horizontal: MediaQuery.of(context).size.width / 20, vertical: 50),
                 width: double.infinity,
                 height: MediaQuery.of(context).size.width / 10,
                 child: ElevatedButton(
