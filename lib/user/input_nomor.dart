@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:ppns_inspect/user/inspeksi/Inspeksi_Apar.dart';
 import 'package:ppns_inspect/user/inspeksi/Inspeksi_Hydrant_OHB.dart';
+import 'package:ppns_inspect/user/inspeksi/Inspeksi_P3K.dart';
 import 'package:ppns_inspect/user/inspeksi/inspeksi_Hydrant_IHB.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:ppns_inspect/globals.dart' as globals;
@@ -80,9 +81,7 @@ class _InputNomorState extends State<InputNomor> {
                                       },
                                       decoration: InputDecoration(
                                         border: OutlineInputBorder(),
-                                        labelText: widget.code == 'apar'
-                                            ? 'No APAR'
-                                            : 'No Hydrant',
+                                        labelText: widget.code == 'apar' ? "No APAR" : ( widget.code == "P3K" ? "No P3K": "No Hydrant"),
                                         labelStyle: TextStyle(fontSize: 20),
 // errorText: _error[1] ? 'Value Can\'t Be Empty' : null,
                                       ),
@@ -109,6 +108,10 @@ class _InputNomorState extends State<InputNomor> {
                                           url = Uri.parse(
                                               "http://${globals.endpoint}/api_hydrant.php?search&jenis=ihb&nomor=${nomor.text}");
                                         }
+                                        if (widget.code == "P3K") {
+                                          url = Uri.parse(
+                                              "http://${globals.endpoint}/api_P3K.php?search&nomor=${nomor.text}");
+                                        }
                                         try {
                                           final response =
                                               await http.get(url).timeout(
@@ -132,7 +135,7 @@ class _InputNomorState extends State<InputNomor> {
                                                 context: context,
                                                 type: AlertType.success,
                                                 title:
-                                                    "${widget.code == 'apar' ? "APAR" : "Hydrant"} belum di inspeksi",
+                                                    "${widget.code == 'apar' ? "APAR" : ( widget.code == "P3K" ? "P3K": "Hydrant")} belum di inspeksi",
                                                 content: Column(
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.start,
@@ -165,6 +168,7 @@ Lokasi : ${respon['data']['lokasi']}
                                                           MaterialPageRoute(builder: (context) {
                                                             if(widget.code == 'hydrantOHB') return InspeksiHydrantOHB(nomor: nomor.text, id: id);
                                                             else if(widget.code == 'hydrantIHB') return InspeksiHydrantIHB(nomor: nomor.text, id: id);
+                                                            else if(widget.code == 'P3K') return InspeksiP3K(nomor: nomor.text, id: id);
                                                             else return InspeksiApar(nomor: nomor.text, id: id);
                                                           }),
                                                         );
@@ -181,7 +185,7 @@ Lokasi : ${respon['data']['lokasi']}
                                                 context: context,
                                                 type: AlertType.error,
                                                 title:
-                                                    "${widget.code == 'apar' ? "APAR" : "Hydrant"} telah di inspeksi bulan ini!",
+                                                    "${widget.code == 'apar' ? "APAR" : ( widget.code == "P3K" ? "P3K": "Hydrant")} telah di inspeksi bulan ini!",
                                                 content: Column(
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.start,
@@ -223,7 +227,7 @@ Tanggal Inspeksi : ${respon['data_inspeksi']['created_at']}
                                               context: context,
                                               type: AlertType.error,
                                               title:
-                                                  "Nomor ${widget.code == 'apar' ? "APAR" : "Hydrant"}  tidak ditemukan di database!",
+                                                  "Nomor ${widget.code == 'apar' ? "APAR" : ( widget.code == "P3K" ? "P3K": "Hydrant")}  tidak ditemukan di data inventaris!",
                                               buttons: [
                                                 DialogButton(
                                                     child: Text(
@@ -271,6 +275,7 @@ Tanggal Inspeksi : ${respon['data_inspeksi']['created_at']}
                                     MaterialPageRoute(builder: (context) {
                                         if(widget.code == 'hydrantOHB') return InspeksiHydrantOHB(nomor: nomor.text, id: id);
                                         else if(widget.code == 'hydrantIHB') return InspeksiHydrantIHB(nomor: nomor.text, id: id);
+                                        else if(widget.code == 'P3K') return InspeksiP3K(nomor: nomor.text, id: id);
                                         else return InspeksiApar(nomor: nomor.text, id: id);
                                     }),
                                   );

@@ -180,56 +180,56 @@ class _DashboardState extends State<Dashboard> {
                       margin: EdgeInsets.all(10),
                     ),
 
-                    Card(
-                      child: InkWell(
-                        onTap: () {                      
-                          // Navigator.push(
-                          //   context,
-                          //   MaterialPageRoute(builder: (context) {
-                          //     // return InspeksiApar();
-                          //     return TermsCondition(code: 'apar');
-                          //   }),
-                          // );
-                        },
-                        child: Container(
-                            width: MediaQuery.of(context).size.width - 50,
-                            padding: EdgeInsets.all(5),
-                            height: 80,
-                            child: Row(
-                              children: [
-                                Image.asset(
-                                  'assets/img/apab.png',
-                                  width: 100,
-                                  height: 100,
-                                ),
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      "Inspeksi APAB",
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 18,
-                                      ),
-                                    ),
-                                    Text(
-                                      "Alat Pemadam Api Berat",
-                                      style: TextStyle(
-                                        fontSize: 12
-                                      ),
-                                      )
-                                  ],
-                                ),
-                              ],
-                            )),
-                      ),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                      elevation: 5,
-                      margin: EdgeInsets.all(10),
-                    ),
+                    // Card(
+                    //   child: InkWell(
+                    //     onTap: () {                      
+                    //       // Navigator.push(
+                    //       //   context,
+                    //       //   MaterialPageRoute(builder: (context) {
+                    //       //     // return InspeksiApar();
+                    //       //     return TermsCondition(code: 'apar');
+                    //       //   }),
+                    //       // );
+                    //     },
+                    //     child: Container(
+                    //         width: MediaQuery.of(context).size.width - 50,
+                    //         padding: EdgeInsets.all(5),
+                    //         height: 80,
+                    //         child: Row(
+                    //           children: [
+                    //             Image.asset(
+                    //               'assets/img/apab.png',
+                    //               width: 100,
+                    //               height: 100,
+                    //             ),
+                    //             Column(
+                    //               mainAxisAlignment: MainAxisAlignment.start,
+                    //               crossAxisAlignment: CrossAxisAlignment.start,
+                    //               children: [
+                    //                 Text(
+                    //                   "Inspeksi APAB",
+                    //                   style: TextStyle(
+                    //                     fontWeight: FontWeight.bold,
+                    //                     fontSize: 18,
+                    //                   ),
+                    //                 ),
+                    //                 Text(
+                    //                   "Alat Pemadam Api Berat",
+                    //                   style: TextStyle(
+                    //                     fontSize: 12
+                    //                   ),
+                    //                   )
+                    //               ],
+                    //             ),
+                    //           ],
+                    //         )),
+                    //   ),
+                    //   shape: RoundedRectangleBorder(
+                    //     borderRadius: BorderRadius.circular(10.0),
+                    //   ),
+                    //   elevation: 5,
+                    //   margin: EdgeInsets.all(10),
+                    // ),
 
                     
                     Card(
@@ -479,13 +479,13 @@ class _DashboardState extends State<Dashboard> {
                     Card(
                       child: InkWell(
                         onTap: () {                      
-                          // Navigator.push(
-                          //   context,
-                          //   MaterialPageRoute(builder: (context) {
-                          //     // return InspeksiApar();
-                          //     return TermsCondition(code: 'apar');
-                          //   }),
-                          // );
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) {
+                              // return InspeksiApar();
+                              return TermsCondition(code: 'P3K');
+                            }),
+                          );
                         },
                         child: Container(
                             width: MediaQuery.of(context).size.width - 50,
@@ -532,13 +532,13 @@ class _DashboardState extends State<Dashboard> {
                     Card(
                       child: InkWell(
                         onTap: () {                      
-                          // Navigator.push(
-                          //   context,
-                          //   MaterialPageRoute(builder: (context) {
-                          //     // return InspeksiApar();
-                          //     return TermsCondition(code: 'apar');
-                          //   }),
-                          // );
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) {
+                              // return InspeksiApar();
+                              return TermsCondition(code: 'exit');
+                            }),
+                          );
                         },
                         child: Container(
                             width: MediaQuery.of(context).size.width - 50,

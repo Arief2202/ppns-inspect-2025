@@ -276,6 +276,7 @@ List<List<String>> objectToArrayInspeksiP3K(List<dynamic> data) {
     row.add(data[a]['user']['email']);
     row.add(data[a]['p3k']['nomor']);
     row.add(data[a]['p3k']['lokasi']);
+    row.add(data[a]['kasa_steril_bungkus']);
     row.add(data[a]['perban5']);
     row.add(data[a]['perban10']);
     row.add(data[a]['plester125']);
