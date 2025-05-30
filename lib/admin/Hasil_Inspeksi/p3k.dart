@@ -88,25 +88,24 @@ class _HasilP3KState extends State<HasilP3K> with RestorationMixin {
   }
   DateTime selectedDate = DateTime.now();
   Timer? timer;
+  
   List<String> titleColumn = [
-    "id inspeksi", "Email Inspektor", "Lokasi Hydrant", "Kondisi Kotak", "Posisi Kotak", "Kondisi Nozzle", "Kondisi Selang", "Jenis Selang", "Kondisi Coupling", "Kondisi Landing Valve", "Kondisi Tray", "Tanggal Inspeksi"
-  ];
+    "id inspeksi", "Email Inspektor", "Lokasi P3K", "Perban (lebar 5 Cm)", "Perban (lebar 10 Cm)", "Plester (lebar 1,25 Cm)", "Plester Cepat", "Kapas (25 gram)", "Kain segitiga/mittela", "Gunting", "Peniti", "Sarung tangan sekali pakai", "Masker", "Pinset", "Lampu senter", "Gelas untuk cuci mata", "Kantong plastik bersih", "Aquades (100 ml lar Saline)"];
   List<String> titleColumn2 = [
     "id", "Lokasi", "Timestamp"
   ];
   
   List<String> titleColumnExport = [
-    "id inspeksi", "Email Inspektor", "Nomor Hydrant", "Lokasi Hydrant", "Kondisi Kotak", "Posisi Kotak", "Kondisi Nozzle", "Kondisi Selang", "Jenis Selang", "Kondisi Coupling", "Kondisi Landing Valve", "Kondisi Tray", "Tanggal Inspeksi"
-  ];
+    "id inspeksi", "Email Inspektor", "Nomor P3K", "Lokasi P3K",  "Perban (lebar 5 Cm)", "Perban (lebar 10 Cm)", "Plester (lebar 1,25 Cm)", "Plester Cepat", "Kapas (25 gram)", "Kain segitiga/mittela", "Gunting", "Peniti", "Sarung tangan sekali pakai", "Masker", "Pinset", "Lampu senter", "Gelas untuk cuci mata", "Kantong plastik bersih", "Aquades (100 ml lar Saline)"];
   List<String> titleColumnExport2 = [
-    "id", "Nomor Hydrant", "Lokasi", "Timestamp"
+    "id", "Nomor P3K", "Lokasi", "Timestamp"
   ];
 
   List<List<String>> makeData = [];
   
   
-  late DataInspeksiIHBAPI currentData = DataInspeksiIHBAPI(status: "", pesan: "", data: makeData);
-  late DataAPIHydrant currentDataApar = DataAPIHydrant(status: "", pesan: "", data: makeData);
+  late DataInspeksiP3KAPI currentData = DataInspeksiP3KAPI(status: "", pesan: "", data: makeData);
+  late DataAPIP3K currentDataApar = DataAPIP3K(status: "", pesan: "", data: makeData);
 
   static List<String> columnExcel = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'X', 'Y', 'Z'];
   static List<String> DropDownName = <String>['Sudah Di Inspeksi', 'Belum Di Inspeksi'];
@@ -133,7 +132,7 @@ class _HasilP3KState extends State<HasilP3K> with RestorationMixin {
 
 
   void updateValue() async {
-    var url = Uri.parse("http://${globals.endpoint}/api_inspeksi_ihb.php?read&start_date=${selectedDate.year}-${selectedDate.month}-1 00:00:00&end_date=${selectedDate.year}-${selectedDate.month}-31 23:59:59&inspeksi=${inspeksi}&kerusakan=${kerusakan}");  
+    var url = Uri.parse("http://${globals.endpoint}/api_inspeksi_p3k.php?read&start_date=${selectedDate.year}-${selectedDate.month}-1 00:00:00&end_date=${selectedDate.year}-${selectedDate.month}-31 23:59:59&inspeksi=${inspeksi}&kerusakan=${kerusakan}");  
     try {
       final response = await http.get(url).timeout(
         const Duration(seconds: 1),
@@ -144,9 +143,10 @@ class _HasilP3KState extends State<HasilP3K> with RestorationMixin {
       if (response.statusCode == 200) {
         var respon = Json.tryDecode(response.body);
         if (this.mounted) {
+          print(respon);
           setState(() {
-            if(inspeksi == "sudah") currentData = DataInspeksiIHBAPI.fromJson(respon);
-            else currentDataApar = DataAPIHydrant.fromJson(respon);
+            if(inspeksi == "sudah") currentData = DataInspeksiP3KAPI.fromJson(respon);
+            else currentDataApar = DataAPIP3K.fromJson(respon);
           });
         }
       }
@@ -293,7 +293,7 @@ class _HasilP3KState extends State<HasilP3K> with RestorationMixin {
                         var fileBytes = excel.save();
 
                         Directory appDocDirectory = await getApplicationDocumentsDirectory();
-                        var dir = "/storage/emulated/0/ppns_inspect/export/${inspeksi}_inspeksi_hydrant_ihb_${globals.monthName[selectedDate.month-1]}_${selectedDate.year}.xlsx";
+                        var dir = "/storage/emulated/0/ppns_inspect/export/${inspeksi}_inspeksi_kotak_p3k_${globals.monthName[selectedDate.month-1]}_${selectedDate.year}.xlsx";
                         // var dir = "${appDocDirectory.path}/export/${inspeksi}_inspeksi_apar_${monthName[selectedDate.month-1]}_${selectedDate.year}.xlsx";
                         File(join(dir))
                           ..createSync(recursive: true)
@@ -454,7 +454,7 @@ class SimpleTablePage extends StatelessWidget {
         rowsLength: data.length,
         columnsTitleBuilder: (i) => Text(titleColumn[i]),
         contentCellBuilder: (i, j) => Text(inspeksi == 'sudah' ? (i > 1 ? data[j][i+1] : data[j][i]) : (i > 0 ? data[j][i+1] : data[j][i])),
-        legendCell: Text('No Hydrant'),
+        legendCell: Text('No P3K'),
         cellDimensions: CellDimensions.fixed(
           contentCellWidth: 120, 
           contentCellHeight: 50, 

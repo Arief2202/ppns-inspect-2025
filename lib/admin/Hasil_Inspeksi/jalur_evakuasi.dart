@@ -67,36 +67,19 @@ class _HasilJalurEvakuasiState extends State<HasilJalurEvakuasi> with Restoratio
     registerForRestoration(
         _restorableDatePickerRouteFuture, 'date_picker_route_future');
   }
-  static String lokasiText = "Lokasi";
-  static String kondisiText = "Kondisi rumah pompa Panas memadai";
-  static String ventilasiText = "Ventilasi";
-  static String katup_hisapText = "Katup hisap dan pelepasan pompa serta katup bypass terbuka penuh";
-  static String perpipaanText = "Perpipaan bebas dari kebocoran.";
-  static String pengukur_hisapText = "Pembacaan pengukur tekanan saluran hisap";
-  static String pengukur_sistemText = "Pembacaan pengukur tekanan saluran sistem";
-  static String tangki_hisapText = "Tangki hisap penuh";
-  static String saringan_hisapText = "Saringan hisap lubang basah";
-  static String katup_ujiText = "Katup uji aliran air";
-  static String lampu_pengontrolText = "Lampu pilot pengontrol (daya hidup) menyala.";
-  static String lampu_saklarText = "Lampu pilot normal sakelar transfer menyala";
-  static String saklar_isolasiText = "Sakelar isolasi tertutup — sumber siaga (darurat).";
-  static String lampu_rotasiText = "lampu pilot rotasi fase normal menyala.";
-  static String level_oli_motorText = "Level oli pada kaca penglihatan motor vertical";
-  static String pompa_pemeliharaanText = "Pompa pemeliharaan daya untuk tekanan jockey pump";
-  static String tangki_bahan_bakarText = "Tangki bahan bakar terisi minimal dua pertiganya.";
-  static String saklar_pemilihText = "Sakelar pemilih pengontrol berada pada posisi otomatis.";
-  static String pembacaan_teganganText = "Pembacaan tegangan baterai";
-  static String pembacaan_arusText = "Pembacaan arus pengisian baterai";
-  static String lampu_bateraiText = "lampu pilot baterai menyala atau baterai rusak lampu pilot mati.";
-  static String semua_lampu_alarmText = "Semua lampu pilot alarm mati";
-  static String pengukur_waktuText = "Pengukur waktu berjalan mesin sedang membaca";
-  static String ketinggian_oliText = "Ketinggian oli pada penggerak gigi sudut kanan";
-  static String level_oli_mesinText = "Level oli bak mesin";
-  static String ketinggian_airText = "Ketinggian air pendingin";
-  static String tingkat_elektrolitText = "Tingkat elektrolit dalam baterai";
-  static String terminal_bateraiText = "Terminal baterai bebas dari korosi";
-  static String pemanas_jaketText = "Pemanas jaket air sedang beroperasi";
-  static String kondisi_uapText = "Kondisi sistem uap";
+  static String kebersihan = "Akses eksit gedung bersih";
+  static String penanda_exit = "Terdapat tanda yang jelas dan mudah terlihat menuju pintu eksit";
+  static String kebebasan_hambatan = "Jalur evakuasi bebas dari barang-barang yang mengganggu kelancaran evakuasi.";
+  static String penerangan_jalur = "Penerangan cukup, termasuk pencahayaan darurat jika listrik padam.";
+  static String tanda_arah = "Terdapat petunjuk arah yang jelas menuju pintu keluar darurat.";
+  static String material_lantai = "Material lantai tidak licin dan aman untuk dilewati.";
+  static String tanda_pintu_darurat = "Pintu keluar darurat diberi tanda yang jelas dan mudah dikenali.";
+  static String pegangan_rambat = "Terdapat railing di salah satu sisi koridor, terutama untuk disabilitas.";
+  static String pencahayaan_darurat = "Koridor dilengkapi pencahayaan darurat otomatis saat keadaan darurat terjadi.";
+  static String identifikasi_titik_kumpul = "Titik kumpul ditandai dengan jelas dan mudah terlihat oleh semua orang.";
+  static String jalur_menuju_titik_kumpul = "Jalur menuju titik kumpul jelas, praktis, dan tidak terhambat oleh apapun.";
+  static String peralatan_darurat = "Tersedia APAR, kotak P3K,  atau peralatan lain di lokasi strategis.";
+  static String peta_evakuasi = "Peta jalur evakuasi tersedia di lokasi yang mudah dilihat oleh pengguna gedung.";
 
   List<TextEditingController> _controller = [
     TextEditingController(text: ''),
@@ -120,36 +103,19 @@ class _HasilJalurEvakuasiState extends State<HasilJalurEvakuasi> with Restoratio
   List<String> titleColumn = [
     "id inspeksi", 
     "Email Inspektor", 
-    lokasiText,
-    kondisiText,
-    ventilasiText,
-    katup_hisapText,
-    perpipaanText,
-    pengukur_hisapText,
-    pengukur_sistemText,
-    tangki_hisapText,
-    saringan_hisapText,
-    katup_ujiText,
-    lampu_pengontrolText,
-    lampu_saklarText,
-    saklar_isolasiText,
-    lampu_rotasiText,
-    level_oli_motorText,
-    pompa_pemeliharaanText,
-    tangki_bahan_bakarText,
-    saklar_pemilihText,
-    pembacaan_teganganText,
-    pembacaan_arusText,
-    lampu_bateraiText,
-    semua_lampu_alarmText,
-    pengukur_waktuText,
-    ketinggian_oliText,
-    level_oli_mesinText,
-    ketinggian_airText,
-    tingkat_elektrolitText,
-    terminal_bateraiText,
-    pemanas_jaketText,
-    kondisi_uapText,
+    kebersihan,
+    penanda_exit,
+    kebebasan_hambatan,
+    penerangan_jalur,
+    tanda_arah,
+    material_lantai,
+    tanda_pintu_darurat,
+    pegangan_rambat,
+    pencahayaan_darurat,
+    identifikasi_titik_kumpul,
+    jalur_menuju_titik_kumpul,
+    peralatan_darurat,
+    peta_evakuasi
   ];
   TextStyle tsyleTitle = TextStyle(
     fontSize: 18,
@@ -157,53 +123,29 @@ class _HasilJalurEvakuasiState extends State<HasilJalurEvakuasi> with Restoratio
   TextStyle tsyleContent = TextStyle(
     fontSize: 18,
   );
-  List<String> titleColumn2 = [
-    "id", "Lokasi", "Timestamp"
-  ];
-  
+
   List<String> titleColumnExport = [
     "id inspeksi", 
     "Email Inspektor",     
-    lokasiText,
-    kondisiText,
-    ventilasiText,
-    katup_hisapText,
-    perpipaanText,
-    pengukur_hisapText,
-    pengukur_sistemText,
-    tangki_hisapText,
-    saringan_hisapText,
-    katup_ujiText,
-    lampu_pengontrolText,
-    lampu_saklarText,
-    saklar_isolasiText,
-    lampu_rotasiText,
-    level_oli_motorText,
-    pompa_pemeliharaanText,
-    tangki_bahan_bakarText,
-    saklar_pemilihText,
-    pembacaan_teganganText,
-    pembacaan_arusText,
-    lampu_bateraiText,
-    semua_lampu_alarmText,
-    pengukur_waktuText,
-    ketinggian_oliText,
-    level_oli_mesinText,
-    ketinggian_airText,
-    tingkat_elektrolitText,
-    terminal_bateraiText,
-    pemanas_jaketText,
-    kondisi_uapText,
-
-  ];
-  List<String> titleColumnExport2 = [
-    "id", "Nomor Hydrant", "Lokasi", "Timestamp"
+    kebersihan,
+    penanda_exit,
+    kebebasan_hambatan,
+    penerangan_jalur,
+    tanda_arah,
+    material_lantai,
+    tanda_pintu_darurat,
+    pegangan_rambat,
+    pencahayaan_darurat,
+    identifikasi_titik_kumpul,
+    jalur_menuju_titik_kumpul,
+    peralatan_darurat,
+    peta_evakuasi
   ];
 
   List<List<String>> makeData = [];
   
   
-  late DataInspeksiRumahPompaAPI currentData = DataInspeksiRumahPompaAPI(status: "", pesan: "", data: makeData);
+  late DataInspeksiJalurEvakuasiAPI currentData = DataInspeksiJalurEvakuasiAPI(status: "", pesan: "", data: makeData);
   static List<String> columnExcel = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'X', 'Y', 'Z'];
   static List<String> DropDownName = <String>['Sudah Di Inspeksi', 'Belum Di Inspeksi'];
   String dropdownValue = DropDownName.first;
@@ -226,7 +168,7 @@ class _HasilJalurEvakuasiState extends State<HasilJalurEvakuasi> with Restoratio
 
 
   void updateValue() async {
-    var url = Uri.parse("http://${globals.endpoint}/api_inspeksi_rumah_pompa.php?read&start_date=${selectedDate.year}-${selectedDate.month}-1 00:00:00&end_date=${selectedDate.year}-${selectedDate.month}-31 23:59:59&kerusakan=${kerusakan}");  
+    var url = Uri.parse("http://${globals.endpoint}/api_inspeksi_jalur_evakuasi.php?read&start_date=${selectedDate.year}-${selectedDate.month}-1 00:00:00&end_date=${selectedDate.year}-${selectedDate.month}-31 23:59:59&kerusakan=${kerusakan}");  
     try {
       final response = await http.get(url).timeout(
         const Duration(seconds: 1),
@@ -239,7 +181,7 @@ class _HasilJalurEvakuasiState extends State<HasilJalurEvakuasi> with Restoratio
         if (this.mounted) {
           if(respon?.isNotEmpty ?? false){
           setState(() {
-            currentData = DataInspeksiRumahPompaAPI.fromJson(respon);
+            currentData = DataInspeksiJalurEvakuasiAPI.fromJson(respon);
           });
           }
           // print(currentData.data[0]);

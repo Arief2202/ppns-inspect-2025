@@ -120,8 +120,8 @@ class DataInspeksiIHBAPI {
     data: objectToArrayInspeksiIHB(json["data"]),
   );
 }
-class DataInspeksiRumahPompaAPI {
-  DataInspeksiRumahPompaAPI({
+class DataInspeksiP3KAPI {
+  DataInspeksiP3KAPI({
     required this.status,
     required this.pesan,
     required this.data,
@@ -130,10 +130,26 @@ class DataInspeksiRumahPompaAPI {
   String pesan;
   List<List<String>> data;
   
-  factory DataInspeksiRumahPompaAPI.fromJson(Map<String, dynamic> json) => DataInspeksiRumahPompaAPI(
+  factory DataInspeksiP3KAPI.fromJson(Map<String, dynamic> json) => DataInspeksiP3KAPI(
     status: json["status"],
     pesan: json["pesan"],
-    data: objectToArrayInspeksiRumahPompa(json["data"]),
+    data: objectToArrayInspeksiP3K(json["data"]),
+  );
+}
+class DataInspeksiJalurEvakuasiAPI {
+  DataInspeksiJalurEvakuasiAPI({
+    required this.status,
+    required this.pesan,
+    required this.data,
+  });
+  String status;
+  String pesan;
+  List<List<String>> data;
+  
+  factory DataInspeksiJalurEvakuasiAPI.fromJson(Map<String, dynamic> json) => DataInspeksiJalurEvakuasiAPI(
+    status: json["status"],
+    pesan: json["pesan"],
+    data: objectToArrayInspeksiJalurEvakuasi(json["data"]),
   );
 }
 
@@ -252,42 +268,53 @@ List<List<String>> objectToArrayInspeksiIHB(List<dynamic> data) {
   }
   return output;
 }
-List<List<String>> objectToArrayInspeksiRumahPompa(List<dynamic> data) {
+List<List<String>> objectToArrayInspeksiP3K(List<dynamic> data) {
   final List<List<String>> output = [];
   for(int a=0; a< data.length; a++){
     final List<String> row = [];
     row.add(data[a]['id']);
     row.add(data[a]['user']['email']);
-    row.add(data[a]['lokasi']);
-    row.add(data[a]['kondisi']);
-    row.add(data[a]['ventilasi']);
-    row.add(data[a]['katup_hisap']);
-    row.add(data[a]['perpipaan']);
-    row.add(data[a]['pengukur_hisap']);
-    row.add(data[a]['pengukur_sistem']);
-    row.add(data[a]['tangki_hisap']);
-    row.add(data[a]['saringan_hisap']);
-    row.add(data[a]['katup_uji']);
-    row.add(data[a]['lampu_pengontrol']);
-    row.add(data[a]['lampu_saklar']);
-    row.add(data[a]['saklar_isolasi']);
-    row.add(data[a]['lampu_rotasi']);
-    row.add(data[a]['level_oli_motor']);
-    row.add(data[a]['pompa_pemeliharaan']);
-    row.add(data[a]['tangki_bahan_bakar']);
-    row.add(data[a]['saklar_pemilih']);
-    row.add(data[a]['pembacaan_tegangan']);
-    row.add(data[a]['pembacaan_arus']);
-    row.add(data[a]['lampu_baterai']);
-    row.add(data[a]['semua_lampu_alarm']);
-    row.add(data[a]['pengukur_waktu']);
-    row.add(data[a]['ketinggian_oli']);
-    row.add(data[a]['level_oli_mesin']);
-    row.add(data[a]['ketinggian_air']);
-    row.add(data[a]['tingkat_elektrolit']);
-    row.add(data[a]['terminal_baterai']);
-    row.add(data[a]['pemanas_jaket']);
-    row.add(data[a]['kondisi_uap']);
+    row.add(data[a]['p3k']['nomor']);
+    row.add(data[a]['p3k']['lokasi']);
+    row.add(data[a]['perban5']);
+    row.add(data[a]['perban10']);
+    row.add(data[a]['plester125']);
+    row.add(data[a]['plester_cepat']);
+    row.add(data[a]['kapas']);
+    row.add(data[a]['mitella']);
+    row.add(data[a]['gunting']);
+    row.add(data[a]['peniti']);
+    row.add(data[a]['sarung_tangan']);
+    row.add(data[a]['masker']);
+    row.add(data[a]['pinset']);
+    row.add(data[a]['lampu_senter']);
+    row.add(data[a]['gelas_cuci_mata']);
+    row.add(data[a]['kantong_plastik']);
+    row.add(data[a]['aquades']);
+    row.add(data[a]['created_at']);
+    output.add(row);
+  }
+  return output;
+}
+List<List<String>> objectToArrayInspeksiJalurEvakuasi(List<dynamic> data) {
+  final List<List<String>> output = [];
+  for(int a=0; a< data.length; a++){
+    final List<String> row = [];
+    row.add(data[a]['id']);
+    row.add(data[a]['user']['email']);
+    row.add(data[a]['kebersihan']);
+    row.add(data[a]['penanda_exit']);
+    row.add(data[a]['kebebasan_hambatan']);
+    row.add(data[a]['penerangan_jalur']);
+    row.add(data[a]['tanda_arah']);
+    row.add(data[a]['material_lantai']);
+    row.add(data[a]['tanda_pintu_darurat']);
+    row.add(data[a]['pegangan_rambat']);
+    row.add(data[a]['pencahayaan_darurat']);
+    row.add(data[a]['identifikasi_titik_kumpul']);
+    row.add(data[a]['jalur_menuju_titik_kumpul']);
+    row.add(data[a]['peralatan_darurat']);
+    row.add(data[a]['peta_evakuasi']);
     row.add(data[a]['created_at']);
     output.add(row);
   }

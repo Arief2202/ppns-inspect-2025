@@ -189,55 +189,55 @@ class _DataInventarisState extends State<DataInventaris> {
                     ),
                     
 
-                    Card(
-                      child: InkWell(
-                        onTap: () {
-                          // Navigator.push(
-                          //   context,
-                          //   MaterialPageRoute(builder: (context) {
-                          //     return DataApar();
-                          //   }),
-                          // );
-                        },
-                        child: Container(
-                            width: MediaQuery.of(context).size.width - 50,
-                            padding: EdgeInsets.all(5),
-                            height: 80,
-                            child: Row(
-                              children: [
-                                Image.asset(
-                                  'assets/img/apab.png',
-                                  width: 100,
-                                  height: 100,
-                                ),
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      "APAB",
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 18,
-                                      ),
-                                    ),
-                                    Text(
-                                      "Alat Pemadam Api Berat (Apab)",
-                                      style: TextStyle(
-                                        fontSize: 12
-                                      ),
-                                      )
-                                  ],
-                                ),
-                              ],
-                            )),
-                      ),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                      elevation: 5,
-                      margin: EdgeInsets.all(10),
-                    ),
+                    // Card(
+                    //   child: InkWell(
+                    //     onTap: () {
+                    //       // Navigator.push(
+                    //       //   context,
+                    //       //   MaterialPageRoute(builder: (context) {
+                    //       //     return DataApar();
+                    //       //   }),
+                    //       // );
+                    //     },
+                    //     child: Container(
+                    //         width: MediaQuery.of(context).size.width - 50,
+                    //         padding: EdgeInsets.all(5),
+                    //         height: 80,
+                    //         child: Row(
+                    //           children: [
+                    //             Image.asset(
+                    //               'assets/img/apab.png',
+                    //               width: 100,
+                    //               height: 100,
+                    //             ),
+                    //             Column(
+                    //               mainAxisAlignment: MainAxisAlignment.start,
+                    //               crossAxisAlignment: CrossAxisAlignment.start,
+                    //               children: [
+                    //                 Text(
+                    //                   "APAB",
+                    //                   style: TextStyle(
+                    //                     fontWeight: FontWeight.bold,
+                    //                     fontSize: 18,
+                    //                   ),
+                    //                 ),
+                    //                 Text(
+                    //                   "Alat Pemadam Api Berat (Apab)",
+                    //                   style: TextStyle(
+                    //                     fontSize: 12
+                    //                   ),
+                    //                   )
+                    //               ],
+                    //             ),
+                    //           ],
+                    //         )),
+                    //   ),
+                    //   shape: RoundedRectangleBorder(
+                    //     borderRadius: BorderRadius.circular(10.0),
+                    //   ),
+                    //   elevation: 5,
+                    //   margin: EdgeInsets.all(10),
+                    // ),
                     
                     Card(
                       child: InkWell(
