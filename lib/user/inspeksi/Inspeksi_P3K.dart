@@ -33,6 +33,7 @@ class _InspeksiP3KState extends State<InspeksiP3K> {
     "November",
     "Desember",
   ];
+  String durasi = "00:00";
   String nomor;
   String kasa_steril_bungkus = "";
   String perban5 = "";
@@ -162,7 +163,7 @@ class _InspeksiP3KState extends State<InspeksiP3K> {
                             foregroundColor: Colors.white
                           ),
                           onPressed: () async{     
-                            var url = Uri.parse("http://${globals.endpoint}/api_inspeksi_p3k.php?create&user_id=${globals.user_id}&kotak_id=${widget.id}&kasa_steril_bungkus=${kasa_steril_bungkus}&perban5=${perban5}&perban10=${perban10}&plester125=${plester125}&plester_cepat=${plester_cepat}&kapas=${kapas}&mitella=${mitella}&gunting=${gunting}&peniti=${peniti}&sarung_tangan=${sarung_tangan}&masker=${masker}&pinset=${pinset}&lampu_senter=${lampu_senter}&gelas_cuci_mata=${gelas_cuci_mata}&kantong_plastik=${kantong_plastik}&aquades=${aquades}");  
+                            var url = Uri.parse("http://${globals.endpoint}/api_inspeksi_p3k.php?create&user_id=${globals.user_id}&kotak_id=${widget.id}&kasa_steril_bungkus=${kasa_steril_bungkus}&perban5=${perban5}&perban10=${perban10}&plester125=${plester125}&plester_cepat=${plester_cepat}&kapas=${kapas}&mitella=${mitella}&gunting=${gunting}&peniti=${peniti}&sarung_tangan=${sarung_tangan}&masker=${masker}&pinset=${pinset}&lampu_senter=${lampu_senter}&gelas_cuci_mata=${gelas_cuci_mata}&kantong_plastik=${kantong_plastik}&aquades=${aquades}&durasi_inspeksi=${durasi}");  
                             try {
                               final response = await http.get(url).timeout(
                                 const Duration(seconds: 1),

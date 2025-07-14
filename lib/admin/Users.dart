@@ -205,11 +205,11 @@ class _UsersState extends State<Users> {
                             title: "Tambahkan User",
                             content: Column(
                               children: <Widget>[                 
-                                RadioForm(title: "Role", option: ["Inspektor", "Manajemen", "Admin"], onChange: (String? value) {
+                                RadioForm(title: "Role", option: ["Inspektor", "Supervisor", "Admin"], onChange: (String? value) {
                                   setState(() {
                                     if(value == "Inspektor") _controller[0].text = "0";
                                     if(value == "Admin") _controller[0].text = "1";
-                                    if(value == "Manajemen") _controller[0].text = "2";
+                                    if(value == "Supervisor") _controller[0].text = "2";
                                   });
                                     print("Role : ${_controller[0].text}");
                                   },
@@ -374,7 +374,7 @@ class SimpleTablePage extends State<SimpleTablePageState>{//StatelessWidget {
         columnsLength: titleColumn.length,
         rowsLength: data.data.length,
         columnsTitleBuilder: (i) => Text(titleColumn[i]),
-        contentCellBuilder: (i, j) => Text( i!=1?(i == 4 ? data.data[j][i+1] : data.data[j][i]):(data.data[j][i] == '0' ? "Inspektor" : data.data[j][i] == '1' ? "Admin" : data.data[j][i] == '2' ? "Manajemen" : "Unknown") ),
+        contentCellBuilder: (i, j) => Text( i!=1?(i == 4 ? data.data[j][i+1] : data.data[j][i]):(data.data[j][i] == '0' ? "Inspektor" : data.data[j][i] == '1' ? "Admin" : data.data[j][i] == '2' ? "Supervisor" : "Unknown") ),
         legendCell: Text(''),
         cellDimensions: CellDimensions.fixed(
           contentCellWidth: 100, 
@@ -401,16 +401,16 @@ class SimpleTablePage extends State<SimpleTablePageState>{//StatelessWidget {
                 title: "Edit Data User",
                 content: Column(
                   children: <Widget>[
-                    RadioForm(title: "Role", option: ["Inspektor", "Manajemen", "Admin"], onChange: (String? value) {
+                    RadioForm(title: "Role", option: ["Inspektor", "Supervisor", "Admin"], onChange: (String? value) {
                       setState(() {
                         if(value == "Inspektor") selectedRole = 0;
                         if(value == "Admin") selectedRole = 1;
-                        if(value == "Manajemen") selectedRole = 2;
+                        if(value == "Supervisor") selectedRole = 2;
                         _controller[1].text = "${selectedRole}";
                       });
                         print("Role : ${_controller[1].text}");
                       },
-                      selected: selectedRole == 0 ? "Inspektor" : selectedRole == 1 ? "Admin" : selectedRole == 2 ? "Manajemen" : "",
+                      selected: selectedRole == 0 ? "Inspektor" : selectedRole == 1 ? "Admin" : selectedRole == 2 ? "Supervisor" : "",
                     ),
                     TextField(
                       decoration: InputDecoration(

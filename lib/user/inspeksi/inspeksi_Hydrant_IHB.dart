@@ -34,6 +34,7 @@ class _InspeksiHydrantIHBState extends State<InspeksiHydrantIHB> {
     "Desember",
   ];
   String nomor;
+  String durasi = "00:00";
 
   String kondisi_kotak = "";
   String posisi_kotak = "";
@@ -146,7 +147,7 @@ class _InspeksiHydrantIHBState extends State<InspeksiHydrantIHB> {
                             foregroundColor: Colors.white
                           ),
                           onPressed: () async{     
-                            var url = Uri.parse("http://${globals.endpoint}/api_inspeksi_ihb.php?create&user_id=${globals.user_id}&hydrant_id=${widget.id}&kondisi_kotak=${kondisi_kotak}&posisi_kotak=${posisi_kotak}&kondisi_nozzle=${kondisi_nozzle}&kondisi_selang=${kondisi_selang}&jenis_selang=${jenis_selang}&kondisi_coupling=${kondisi_coupling}&kondisi_landing_valve=${kondisi_landing_valve}&kondisi_tray=${kondisi_tray}");  
+                            var url = Uri.parse("http://${globals.endpoint}/api_inspeksi_ihb.php?create&user_id=${globals.user_id}&hydrant_id=${widget.id}&kondisi_kotak=${kondisi_kotak}&posisi_kotak=${posisi_kotak}&kondisi_nozzle=${kondisi_nozzle}&kondisi_selang=${kondisi_selang}&jenis_selang=${jenis_selang}&kondisi_coupling=${kondisi_coupling}&kondisi_landing_valve=${kondisi_landing_valve}&kondisi_tray=${kondisi_tray}&durasi_inspeksi=${durasi}");  
                             try {
                               final response = await http.get(url).timeout(
                                 const Duration(seconds: 1),

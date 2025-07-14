@@ -89,14 +89,14 @@ class _HasilAparState extends State<HasilApar> with RestorationMixin {
   DateTime selectedDate = DateTime.now();
   Timer? timer;
   List<String> titleColumn = [
-    "id inspeksi", "Email Inspektor", "Jenis Pemadam", "Lokasi Apar", "Berat", "Rating", "Tanggal Kadaluarsa Apar", "Apar Tersedia", "Kondisi Tabung", "Segel Pin", "Tuas Pegangan", "Label Segitiga", "Label Instruksi", "Kondisi Selang", "Tekanan Tabung", "Posisi", "Tanggal Inspeksi"
+    "id inspeksi", "Email Inspektor", "Jenis Pemadam", "Lokasi Apar", "Berat", "Rating", "Tanggal Kadaluarsa Apar", "Apar Tersedia", "Kondisi Tabung", "Segel Pin", "Tuas Pegangan", "Label Segitiga", "Label Instruksi", "Kondisi Selang", "Tekanan Tabung", "Posisi", "Kondisi Roda", "Tanggal Inspeksi"
   ];
   List<String> titleColumn2 = [
     "id", "Jenis Pemadam", "Lokasi Apar", "Berat", "Rating", "Tanggal Kadaluarsa", "Timestamp"
   ];
   
   List<String> titleColumnExport = [
-    "id inspeksi", "Email Inspektor", "Nomor Apar", "Jenis Pemadam", "Lokasi Apar", "Berat",  "Rating",  "Tanggal Kadaluarsa Apar", "Apar Tersedia", "Kondisi Tabung", "Segel Pin", "Tuas Pegangan", "Label Segitiga", "Label Instruksi", "Kondisi Selang", "Tekanan Tabung", "Posisi", "Tanggal Inspeksi"
+    "id inspeksi", "Email Inspektor", "Nomor Apar", "Jenis Pemadam", "Lokasi Apar", "Berat",  "Rating",  "Tanggal Kadaluarsa Apar", "Apar Tersedia", "Kondisi Tabung", "Segel Pin", "Tuas Pegangan", "Label Segitiga", "Label Instruksi", "Kondisi Selang", "Tekanan Tabung", "Posisi", "Kondisi Roda", "Tanggal Inspeksi"
   ];
   List<String> titleColumnExport2 = [
     "id", "Jenis Pemadam", "Nomor Apar", "Lokasi", "Berat", "Rating", "Tanggal Kadaluarsa", "Timestamp"

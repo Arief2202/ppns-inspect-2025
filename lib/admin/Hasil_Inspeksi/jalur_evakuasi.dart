@@ -81,6 +81,13 @@ class _HasilJalurEvakuasiState extends State<HasilJalurEvakuasi> with Restoratio
   static String peralatan_darurat = "Tersedia APAR, kotak P3K,  atau peralatan lain di lokasi strategis.";
   static String peta_evakuasi = "Peta jalur evakuasi tersedia di lokasi yang mudah dilihat oleh pengguna gedung.";
 
+  static String pintu_dikunci = "Pintu eksit tidak dikunci atau digembok.";
+  static String pintu_berfungsi = "Pintu exit berfungsi.";
+  static String terdapat_ganjal = "Terdapat ganjal atau ikatan penahan pintu selalu terbuka, pada pintu yang harus selalu pada keadaan tertutup.";
+  static String terbebas_halangan = "Terbebas halangan benda dan lain-lain di depan pintu eksi.";
+  static String terbebas_hambatan = "Akses eksit dan koridor yang digunakan sebagai jalur untuk ke luar Bebas dari segala macam hambatan.";
+  static String pintu_pelepasan_terkunci = "Eksit pelepasan di lantai dasar yang menuju ke jalan umum atau tempat terbuka di luar bangunan tidak terkunci.";
+
   List<TextEditingController> _controller = [
     TextEditingController(text: ''),
     TextEditingController(text: ''),
@@ -115,7 +122,13 @@ class _HasilJalurEvakuasiState extends State<HasilJalurEvakuasi> with Restoratio
     identifikasi_titik_kumpul,
     jalur_menuju_titik_kumpul,
     peralatan_darurat,
-    peta_evakuasi
+    peta_evakuasi,
+    pintu_dikunci,
+    pintu_berfungsi,
+    terdapat_ganjal,
+    terbebas_halangan,
+    terbebas_hambatan,
+    pintu_pelepasan_terkunci,
   ];
   TextStyle tsyleTitle = TextStyle(
     fontSize: 18,
@@ -139,11 +152,16 @@ class _HasilJalurEvakuasiState extends State<HasilJalurEvakuasi> with Restoratio
     identifikasi_titik_kumpul,
     jalur_menuju_titik_kumpul,
     peralatan_darurat,
-    peta_evakuasi
+    peta_evakuasi,
+    pintu_dikunci,
+    pintu_berfungsi,
+    terdapat_ganjal,
+    terbebas_halangan,
+    terbebas_hambatan,
+    pintu_pelepasan_terkunci,
   ];
 
   List<List<String>> makeData = [];
-  
   
   late DataInspeksiJalurEvakuasiAPI currentData = DataInspeksiJalurEvakuasiAPI(status: "", pesan: "", data: makeData);
   static List<String> columnExcel = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'X', 'Y', 'Z'];

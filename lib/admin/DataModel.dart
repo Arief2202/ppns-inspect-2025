@@ -217,6 +217,7 @@ List<List<String>> objectToArrayInspeksiApar(List<dynamic> data) {
     row.add(data[a]['kondisi_selang']);
     row.add(data[a]['tekanan_tabung']);
     row.add(data[a]['posisi']);
+    row.add(data[a]['kondisi_roda']);
     row.add(data[a]['created_at']);
     output.add(row);
   }
@@ -316,6 +317,12 @@ List<List<String>> objectToArrayInspeksiJalurEvakuasi(List<dynamic> data) {
     row.add(data[a]['jalur_menuju_titik_kumpul']);
     row.add(data[a]['peralatan_darurat']);
     row.add(data[a]['peta_evakuasi']);
+    row.add(data[a]['pintu_dikunci']);
+    row.add(data[a]['pintu_berfungsi']);
+    row.add(data[a]['terdapat_ganjal']);
+    row.add(data[a]['terbebas_halangan']);
+    row.add(data[a]['terbebas_hambatan']);
+    row.add(data[a]['pintu_pelepasan_terkunci']);
     row.add(data[a]['created_at']);
     output.add(row);
   }

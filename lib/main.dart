@@ -62,9 +62,16 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   void initState() {
     super.initState();
+    checkStoragePermission();
     autoLogIn();
   }
-
+  void checkStoragePermission() async {
+    var status = await Permission.manageExternalStorage.request();
+    if (status.isPermanentlyDenied) {
+      openAppSettings();
+    }
+  }
+  
   void autoLogIn() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     final String? endpoint = prefs.getString('endpoint');

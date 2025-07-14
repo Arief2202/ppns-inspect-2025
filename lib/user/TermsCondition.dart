@@ -22,64 +22,84 @@ class _TermsConditionState extends State<TermsCondition> {
     super.initState();
     if(code == "apar"){
       setState(() {
-        nfpa = "NFPA 10";
+        nfpa = """Permen PUPR Nomor 26 Tahun 2008 tentang Persyaratan Teknis Sistem Proteksi Kebakaran Pada Bangunan Gedung dan Lingkungan""";
         desc = """
-Pasal F.7.2.2
-1. Memastikan APAR terletak di tempat yang sudah ditentukan sebelumnya.
-2. Memastikan APAR terlihat dengan mudah atau ada tanda yang menunjukkan di mana alat pemadam api berada.
-3. Memastikan APAR dapat diakses dengan mudah.
-4. Memastikan pengukur tekanan berada dalam rentang atau posisi yang dapat dioperasikan.
-5. Memastikan tabung alat pemadam api sudah terisi penuh dengan media yang diperlukan. Untuk memastikan, Anda bisa angkat tabung APAR atau dengan cara menimbangnya. Jika dirasa berat, berarti APAR sudah terisi dengan media pemadam api.
-6. Jika menggunakan alat pemadam api berukuran besar/beroda, pastikan kondisi ban, roda, troli, selang, dan Nozzle dapat berfungsi dengan baik.
-7. Kemudian untuk alat pemadam yang tidak dapat diisi ulang, Anda dapat mengecek pada bagian indikator tekanan alat pemadam api ringan.""";
+(1) Lokasi di tempat yang ditentukan.  
+(2) Halangan akses atau pandangan (visibilitas).  
+(3) Pelat nama instruksi operasi jelas terbaca dan menghadap keluar.  
+(4) Terisi penuh ditentukan dengan ditimbang, dirasakan dengan diangkat,  atau dilihat indikator tekanan (bila ada).  
+(5) Pemeriksaan visuil untuk kerusakan fisik, karat, kebocoran, atau nozel tersumbat. 
+(6) Bacaan penunjuk atau indikator tekanan menunjukkan pada posisi dapat dioperasikan. 
+(7) Untuk yang memakai roda, kondisi dari roda, kereta, slang dan nozel.  
+(8) Terdapat label (tag) pemeliharaan. 
+""";
       });
     }
     else if(code == "hydrantIHB" || code == "hydrantOHB"){
       setState(() {
-        nfpa = "NFPA 25";
+        nfpa = """Permen PUPR Nomor 26 Tahun 2008 tentang Persyaratan Teknis Sistem Proteksi Kebakaran Pada Bangunan Gedung dan Lingkungan""";
         desc = """
-Pasal 7.2
-1. Lakukan koordinasi dengan tim K3 atau operator gedung tempat fire hydrant tersebut berada saat akan mengaktifkan hydrant.
-2. Standar inspeksi hydrant diawali dengan pemeriksaan visual dari keadaan di sekitar area hydrant.
-3. Lakukan pemeriksaan terhadap semua hydrant valve atau katup, sambungan, serta sistem perpipaan. Buka setiap valve hydrant, kemudian perhatikan bagaimana kinerjanya. Apabila ditemukan adanya gangguan pada kinerja sistem, maka segera ganti komponen tersebut dengan yang baru. Selain itu, cek juga bagaimana kondisi tutup valve serta lubrikasinya.
-4. Pasang hydrant equipment yang meliputi hose dan Nozzle. Kondisinya komponen tersebut dalam posisi siap untuk digunakan.
-5. Aktifkan hydrant pump, lalu alirkan air secara perlahan hingga ke posisi terbuka penuh.
-6. Lakukan pengecekan terhadap instalasi fire hydrant pada saat air dialirkan dari pompa. Periksa apakah ditemukan adanya kebocoran. Jika ada yang bocor, maka harus segera diperbaiki.
-7. Standar inspeksi hydrant juga mencakup pemeriksaan kejernihan air yang mengalir dari instalasi fire hydrant.
-8. Lakukan flushing yang bertujuan untuk menghilangkan endapan dalam instalasi hydrant. Endapan tersebut harus dihilangkan karena bisa menahan laju pasokan air untuk instalasi hydrant. Selanjutnya, tutup kran air secara perlahan supaya tidak mengalami water hammer. 
-9. Jika pemeriksaan dan pengujian hydrant sudah selesai dilakukan, buat dokumentasi atas kegiatan inspeksi yang sudah dilakukan kali ini.""";
+Tabel 7.4.5.2 (2) hidran halaman
+- kemudahan akses
+- kebocoran pilar/ aoutlet
+- mur operasi hidran aus
+- alur nozel yang aus
+- ketersediaan kunci pilar hidran""";
       });
     }
     else if(code == "P3K"){
       setState(() {
-        nfpa = "NFPA 25";
+        nfpa = "Permenaker RI No. PER-15/MEN/VIII/2008 tentang Pertolongan Pertama Pada Kecelakaan di Tempat Kerja";
         desc = """
-Pasal 7.2
-1. Lakukan koordinasi dengan tim K3 atau operator gedung tempat fire hydrant tersebut berada saat akan mengaktifkan hydrant.
-2. Standar inspeksi hydrant diawali dengan pemeriksaan visual dari keadaan di sekitar area hydrant.
-3. Lakukan pemeriksaan terhadap semua hydrant valve atau katup, sambungan, serta sistem perpipaan. Buka setiap valve hydrant, kemudian perhatikan bagaimana kinerjanya. Apabila ditemukan adanya gangguan pada kinerja sistem, maka segera ganti komponen tersebut dengan yang baru. Selain itu, cek juga bagaimana kondisi tutup valve serta lubrikasinya.
-4. Pasang hydrant equipment yang meliputi hose dan Nozzle. Kondisinya komponen tersebut dalam posisi siap untuk digunakan.
-5. Aktifkan hydrant pump, lalu alirkan air secara perlahan hingga ke posisi terbuka penuh.
-6. Lakukan pengecekan terhadap instalasi fire hydrant pada saat air dialirkan dari pompa. Periksa apakah ditemukan adanya kebocoran. Jika ada yang bocor, maka harus segera diperbaiki.
-7. Standar inspeksi hydrant juga mencakup pemeriksaan kejernihan air yang mengalir dari instalasi fire hydrant.
-8. Lakukan flushing yang bertujuan untuk menghilangkan endapan dalam instalasi hydrant. Endapan tersebut harus dihilangkan karena bisa menahan laju pasokan air untuk instalasi hydrant. Selanjutnya, tutup kran air secara perlahan supaya tidak mengalami water hammer. 
-9. Jika pemeriksaan dan pengujian hydrant sudah selesai dilakukan, buat dokumentasi atas kegiatan inspeksi yang sudah dilakukan kali ini.""";
+ketentuan isi :
+- kasa steril
+- Perban (lebar 5 cm) 
+- Perban (lebar 10 cm) 
+- Plester (lebar 1,25 cm) 
+- Plester Cepat 
+- Kapas (25 gram) 
+- Kain segitiga/mittela 
+- Gunting 
+- Peniti 
+- Sarung tangan sekali pakai (pasangan) 
+- Masker 
+- Pinset 
+- Lampu senter 
+- Gelas untuk cuci mata 
+- Kantong plastik bersih 
+- Aquades (100 ml lar. Saline) 
+- Povidon Iodin (60 ml) 
+- Alkohol 70%
+- oxygen
+- obat luka bakar 
+- Buku panduan P3K di tempat kerja 
+- Buku catatan 
+- Daftar isi kotak""";
       });
     }
     else if(code == "exit"){
       setState(() {
-        nfpa = "NFPA 25";
+        nfpa = "Permen PUPR Nomor 26 Tahun 2008 tentang Persyaratan Teknis Sistem Proteksi Kebakaran Pada Bangunan Gedung dan Lingkungan BAB III";
         desc = """
-Pasal 7.2
-1. Lakukan koordinasi dengan tim K3 atau operator gedung tempat fire hydrant tersebut berada saat akan mengaktifkan hydrant.
-2. Standar inspeksi hydrant diawali dengan pemeriksaan visual dari keadaan di sekitar area hydrant.
-3. Lakukan pemeriksaan terhadap semua hydrant valve atau katup, sambungan, serta sistem perpipaan. Buka setiap valve hydrant, kemudian perhatikan bagaimana kinerjanya. Apabila ditemukan adanya gangguan pada kinerja sistem, maka segera ganti komponen tersebut dengan yang baru. Selain itu, cek juga bagaimana kondisi tutup valve serta lubrikasinya.
-4. Pasang hydrant equipment yang meliputi hose dan Nozzle. Kondisinya komponen tersebut dalam posisi siap untuk digunakan.
-5. Aktifkan hydrant pump, lalu alirkan air secara perlahan hingga ke posisi terbuka penuh.
-6. Lakukan pengecekan terhadap instalasi fire hydrant pada saat air dialirkan dari pompa. Periksa apakah ditemukan adanya kebocoran. Jika ada yang bocor, maka harus segera diperbaiki.
-7. Standar inspeksi hydrant juga mencakup pemeriksaan kejernihan air yang mengalir dari instalasi fire hydrant.
-8. Lakukan flushing yang bertujuan untuk menghilangkan endapan dalam instalasi hydrant. Endapan tersebut harus dihilangkan karena bisa menahan laju pasokan air untuk instalasi hydrant. Selanjutnya, tutup kran air secara perlahan supaya tidak mengalami water hammer. 
-9. Jika pemeriksaan dan pengujian hydrant sudah selesai dilakukan, buat dokumentasi atas kegiatan inspeksi yang sudah dilakukan kali ini.""";
+7.3.5.1 Inspeksi Inspeksi harus dilakukan secara berkala 
+setiap bulan, atau lebih sering tergantung kondisi, untuk 
+sebagai berikut: 
+(1) Pintu eksit 
+(a) Tidak boleh dikunci atau digembok. 
+(b) Kerusakan pada penutup pintu otomatik (door closer).
+(c) Terdapatnya ganjal atau ikatan yang menahan pintu selalu
+ terbuka, pada pintu yang harus selalu pada keadaan tertutup.  
+(d) Halangan benda dan lain-lain di depan pintu eksit.
+(3) Akses eksit dan koridor yang digunakan sebagai jalur 
+untuk ke luar  
+(a) Bebas dari segala macam hambatan.  
+(b) Tidak digunakan untuk gudang.  
+(4) Eksit pelepasan di lantai dasar yang menuju ke jalan 
+umum atau tempat terbuka di luar bangunan harus tidak
+ boleh dikunci.  
+(5) Tanda eksit  
+(a) Jelas kelihatan tidak terhalang.  
+(b) Lampu pencahayaannya hidup. """;
       });
     }
   }
@@ -111,19 +131,41 @@ Pasal 7.2
                     ),
                 ])),
                 
+              // Align(
+              //     alignment: Alignment.topCenter,
+              //     child: Column(children: [
+              //       Container(
+              //         margin: EdgeInsets.only(top: 130),
+              //         child: 
+              //             Text(
+              //               "AS REGULATORY INFORMATION IS USED",
+              //               style: TextStyle(
+              //                 fontFamily: "SanFrancisco",
+              //                 decoration: TextDecoration.none,
+              //                 fontStyle: FontStyle.italic,
+              //                 fontWeight: FontWeight.w900,
+              //                 fontSize: 14,
+              //                 color: Colors.black
+              //               ),
+              //             ),
+              //       ),
+              //     ]
+              //   )
+              // ),
               Align(
                   alignment: Alignment.topCenter,
                   child: Column(children: [
                     Container(
                       margin: EdgeInsets.only(top: 130),
+                      padding: EdgeInsets.only(left: 20, right: 20),
                       child: 
                           Text(
-                            "AS REGULATORY INFORMATION IS USED",
+                            nfpa,
                             style: TextStyle(
                               fontFamily: "SanFrancisco",
                               decoration: TextDecoration.none,
                               fontStyle: FontStyle.italic,
-                              fontWeight: FontWeight.w900,
+                              fontWeight: FontWeight.w800,
                               fontSize: 14,
                               color: Colors.black
                             ),
@@ -133,33 +175,12 @@ Pasal 7.2
                 )
               ),
               Align(
-                  alignment: Alignment.topCenter,
-                  child: Column(children: [
-                    Container(
-                      margin: EdgeInsets.only(top: 140),
-                      child: 
-                          Text(
-                            nfpa,
-                            style: TextStyle(
-                              fontFamily: "SanFrancisco",
-                              decoration: TextDecoration.none,
-                              fontStyle: FontStyle.italic,
-                              fontWeight: FontWeight.w900,
-                              fontSize: 50,
-                              color: Colors.black
-                            ),
-                          ),
-                    ),
-                  ]
-                )
-              ),
-              Align(
-                  alignment: Alignment.topCenter,
+                  alignment: Alignment.topLeft,
                   child: Column(children: [                    
                      Container(
-                        width: MediaQuery.of(context).size.width,
+                        // width: MediaQuery.of(context).size.width,
                         height: MediaQuery.of(context).size.height-350,
-                        margin: EdgeInsets.only(left:30, right: 30, bottom: 200 , top: 220),
+                        margin: EdgeInsets.only(left:20, right: 30, bottom: 200 , top: 190),
                         // decoration: new BoxDecoration(color: const Color.fromARGB(49, 244, 67, 54)),
                         child: SingleChildScrollView(
                           child: Column(
@@ -172,7 +193,7 @@ Pasal 7.2
                                     fontFamily: "SanFrancisco",
                                     decoration: TextDecoration.none,
                                     fontStyle: FontStyle.italic,
-                                    fontSize: 12.5,
+                                    fontSize: 14,
                                     color: Colors.black
                                   ),
                                 ),

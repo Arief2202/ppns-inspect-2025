@@ -110,7 +110,7 @@ class _InputNomorState extends State<InputNomor> {
                                         }
                                         if (widget.code == "P3K") {
                                           url = Uri.parse(
-                                              "http://${globals.endpoint}/api_P3K.php?search&nomor=${nomor.text}");
+                                              "http://${globals.endpoint}/api_p3k.php?search&nomor=${nomor.text}");
                                         }
                                         try {
                                           final response =

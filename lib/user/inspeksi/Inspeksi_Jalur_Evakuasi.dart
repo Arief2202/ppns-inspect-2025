@@ -32,6 +32,10 @@ class _InspeksiJalurEvakuasiState extends State<InspeksiJalurEvakuasi> {
     "November",
     "Desember",
   ];
+  String durasi = "00:00";
+
+  String lokasi = "";
+  
   String kebersihan = "";
   String penanda_exit = "";
   String kebebasan_hambatan = "";
@@ -45,6 +49,15 @@ class _InspeksiJalurEvakuasiState extends State<InspeksiJalurEvakuasi> {
   String jalur_menuju_titik_kumpul = "";
   String peralatan_darurat = "";
   String peta_evakuasi = "";
+  
+  String pintu_dikunci = "";
+  String pintu_berfungsi = "";
+  String terdapat_ganjal = "";
+  String terbebas_halangan = "";
+  String terbebas_hambatan = "";
+  String pintu_pelepasan_terkunci = "";
+
+  static String lokasiText = "Lokasi Akses eksit";
 
   static String kebersihanText = "Akses eksit gedung bersih";
   static String penanda_exitText = "Terdapat tanda yang jelas dan mudah terlihat menuju pintu eksit";
@@ -60,6 +73,12 @@ class _InspeksiJalurEvakuasiState extends State<InspeksiJalurEvakuasi> {
   static String peralatan_daruratText = "Tersedia APAR, kotak P3K,  atau peralatan lain di lokasi strategis.";
   static String peta_evakuasiText = "Peta jalur evakuasi tersedia di lokasi yang mudah dilihat oleh pengguna gedung.";
 
+  static String pintu_dikunciText = "Pintu eksit tidak dikunci atau digembok.";
+  static String pintu_berfungsiText = "Pintu exit berfungsi.";
+  static String terdapat_ganjalText = "Terdapat ganjal atau ikatan penahan pintu selalu terbuka, pada pintu yang harus selalu pada keadaan tertutup.";
+  static String terbebas_halanganText = "Terbebas halangan benda dan lain-lain di depan pintu eksi.";
+  static String terbebas_hambatanText = "Akses eksit dan koridor yang digunakan sebagai jalur untuk ke luar Bebas dari segala macam hambatan.";
+  static String pintu_pelepasan_terkunciText = "Eksit pelepasan di lantai dasar yang menuju ke jalan umum atau tempat terbuka di luar bangunan tidak terkunci.";
 
   @override
   void initState() {
@@ -131,6 +150,7 @@ class _InspeksiJalurEvakuasiState extends State<InspeksiJalurEvakuasi> {
                                   disabledInput("Email Inspektor", "${globals.user_email}"),   
                                   SizedBox(height: 20),
                                   disabledInput("Tanggal Inspeksi", "${now.day} ${monthName[now.month-1]} ${now.year}"),                
+                                  RadioForm(title: "${lokasiText} :", option: ["Gedung 1", "Gedung 2", "Gedung 3"], onChange: (String? value) {setState(() {lokasi = value!;});log("${lokasiText} : ${lokasi}");}),
                                   RadioForm(title: "${kebersihanText} :", option: ["Ya", "Tidak", "Lainnya"], onChange: (String? value) {setState(() {kebersihan = value!;});log("${kebersihanText} : ${kebersihan}");}),
                                   RadioForm(title: "${penanda_exitText} :", option: ["Ya", "Tidak", "Lainnya"], onChange: (String? value) {setState(() {penanda_exit = value!;});log("${penanda_exitText} : ${penanda_exit}");}),
                                   RadioForm(title: "${kebebasan_hambatanText} :", option: ["Ya", "Tidak", "Lainnya"], onChange: (String? value) {setState(() {kebebasan_hambatan = value!;});log("${kebebasan_hambatanText} : ${kebebasan_hambatan}");}),
@@ -144,6 +164,12 @@ class _InspeksiJalurEvakuasiState extends State<InspeksiJalurEvakuasi> {
                                   RadioForm(title: "${jalur_menuju_titik_kumpulText} :", option: ["Ya", "Tidak", "Lainnya"], onChange: (String? value) {setState(() {jalur_menuju_titik_kumpul = value!;});log("${jalur_menuju_titik_kumpulText} : ${jalur_menuju_titik_kumpul}");}),
                                   RadioForm(title: "${peralatan_daruratText} :", option: ["Ya", "Tidak", "Lainnya"], onChange: (String? value) {setState(() {peralatan_darurat = value!;});log("${peralatan_daruratText} : ${peralatan_darurat}");}),
                                   RadioForm(title: "${peta_evakuasiText} :", option: ["Ya", "Tidak", "Lainnya"], onChange: (String? value) {setState(() {peta_evakuasi = value!;});log("${peta_evakuasiText} : ${peta_evakuasi}");}),
+                                  RadioForm(title: "${pintu_dikunciText} :", option: ["Ya", "Tidak", "Lainnya"], onChange: (String? value) {setState(() {pintu_dikunci = value!;});log("${pintu_dikunciText} : ${pintu_dikunci}");}),
+                                  RadioForm(title: "${pintu_berfungsiText} :", option: ["Ya", "Tidak", "Lainnya"], onChange: (String? value) {setState(() {pintu_berfungsi = value!;});log("${pintu_berfungsiText} : ${pintu_berfungsi}");}),
+                                  RadioForm(title: "${terdapat_ganjalText} :", option: ["Ya", "Tidak", "Lainnya"], onChange: (String? value) {setState(() {terdapat_ganjal = value!;});log("${terdapat_ganjalText} : ${terdapat_ganjal}");}),
+                                  RadioForm(title: "${terbebas_halanganText} :", option: ["Ya", "Tidak", "Lainnya"], onChange: (String? value) {setState(() {terbebas_halangan = value!;});log("${terbebas_halanganText} : ${terbebas_halangan}");}),
+                                  RadioForm(title: "${terbebas_hambatanText} :", option: ["Ya", "Tidak", "Lainnya"], onChange: (String? value) {setState(() {terbebas_hambatan = value!;});log("${terbebas_hambatanText} : ${terbebas_hambatan}");}),
+                                  RadioForm(title: "${pintu_pelepasan_terkunciText} :", option: ["Ya", "Tidak", "Lainnya"], onChange: (String? value) {setState(() {pintu_pelepasan_terkunci = value!;});log("${pintu_pelepasan_terkunciText} : ${pintu_pelepasan_terkunci}");}),
                                   Padding(padding: EdgeInsets.all(20))
                                 ],
                               ),
@@ -166,7 +192,8 @@ class _InspeksiJalurEvakuasiState extends State<InspeksiJalurEvakuasi> {
                             foregroundColor: Colors.white
                           ),
                           onPressed: () async{     
-                            var url = Uri.parse("http://${globals.endpoint}/api_inspeksi_jalur_evakuasi.php?create&user_id=${globals.user_id}&kebersihan=${kebersihan}&penanda_exit=${penanda_exit}&kebebasan_hambatan=${kebebasan_hambatan}&penerangan_jalur=${penerangan_jalur}&tanda_arah=${tanda_arah}&material_lantai=${material_lantai}&tanda_pintu_darurat=${tanda_pintu_darurat}&pegangan_rambat=${pegangan_rambat}&pencahayaan_darurat=${pencahayaan_darurat}&identifikasi_titik_kumpul=${identifikasi_titik_kumpul}&jalur_menuju_titik_kumpul=${jalur_menuju_titik_kumpul}&peralatan_darurat=${peralatan_darurat}&peta_evakuasi=${peta_evakuasi}");  
+                            var url = Uri.parse("http://${globals.endpoint}/api_inspeksi_jalur_evakuasi.php?create&user_id=${globals.user_id}&lokasi=${lokasi}&kebersihan=${kebersihan}&penanda_exit=${penanda_exit}&kebebasan_hambatan=${kebebasan_hambatan}&penerangan_jalur=${penerangan_jalur}&tanda_arah=${tanda_arah}&material_lantai=${material_lantai}&tanda_pintu_darurat=${tanda_pintu_darurat}&pegangan_rambat=${pegangan_rambat}&pencahayaan_darurat=${pencahayaan_darurat}&identifikasi_titik_kumpul=${identifikasi_titik_kumpul}&jalur_menuju_titik_kumpul=${jalur_menuju_titik_kumpul}&peralatan_darurat=${peralatan_darurat}&peta_evakuasi=${peta_evakuasi}&pintu_dikunci=${pintu_dikunci}&pintu_berfungsi=${pintu_berfungsi}&terdapat_ganjal=${terdapat_ganjal}&terbebas_halangan=${terbebas_halangan}&terbebas_hambatan=${terbebas_hambatan}&pintu_pelepasan_terkunci=${pintu_pelepasan_terkunci}&durasi_inspeksi=${durasi}");  
+                            print(url);
                             try {
                               final response = await http.get(url).timeout(
                                 const Duration(seconds: 2),

@@ -39,7 +39,7 @@ dependencies:
   webview_flutter: ^4.10.0
   url_launcher: ^6.3.1
   loader_overlay: ^5.0.0
-  flutter_local_notifications: ^18.0.1
+  flutter_local_notifications: ^19.3.0
   timezone: ^0.10.0
   rxdart: ^0.28.0
   path_provider: ^2.1.5
@@ -47,15 +47,15 @@ dependencies:
   flutter_timezone: ^4.1.0
   flutter_staggered_grid_view: ^0.7.0
   horizontal_data_table: ^4.3.1
-  intl: ^0.19.0
+  intl: ^0.20.2
   flutter_launcher_icons: ^0.14.3
   table_sticky_headers: ^2.0.5
   excel: ^4.0.6
   dropdown_button2: ^2.3.9
-  permission_handler: ^11.3.1
+  permission_handler: ^12.0.1
   pie_chart: ^5.4.0
   focus_detector: ^2.0.1
-  month_year_picker: ^0.4.0+1
+  month_year_picker: ^0.5.0+1
   rflutter_alert: ^2.0.7
 
 dev_dependencies:
@@ -67,7 +67,7 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^5.0.0
+  flutter_lints: ^6.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

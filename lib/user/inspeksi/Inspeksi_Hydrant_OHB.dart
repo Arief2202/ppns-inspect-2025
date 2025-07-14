@@ -34,6 +34,7 @@ class _InspeksiHydrantOHBState extends State<InspeksiHydrantOHB> {
     "Desember",
   ];
   String nomor;
+  String durasi = "00:00";
 
   String kondisi_kotak = "";
   String posisi_kotak = "";
@@ -152,7 +153,7 @@ class _InspeksiHydrantOHBState extends State<InspeksiHydrantOHB> {
                             foregroundColor: Colors.white
                           ),
                           onPressed: () async{     
-                            var url = Uri.parse("http://${globals.endpoint}/api_inspeksi_ohb.php?create&user_id=${globals.user_id}&hydrant_id=${widget.id}&kondisi_kotak=${kondisi_kotak}&posisi_kotak=${posisi_kotak}&kondisi_nozzle=${kondisi_nozzle}&kondisi_selang=${kondisi_selang}&jenis_selang=${jenis_selang}&kondisi_coupling=${kondisi_coupling}&tuas_pembuka=${tuas_pembuka}&kondisi_outlet=${kondisi_outlet}&penutup_cop=${penutup_cop}&flushing_hydrant=${flushing_hydrant}&tekanan_hydrant=${tekanan_hydrant}");  
+                            var url = Uri.parse("http://${globals.endpoint}/api_inspeksi_ohb.php?create&user_id=${globals.user_id}&hydrant_id=${widget.id}&kondisi_kotak=${kondisi_kotak}&posisi_kotak=${posisi_kotak}&kondisi_nozzle=${kondisi_nozzle}&kondisi_selang=${kondisi_selang}&jenis_selang=${jenis_selang}&kondisi_coupling=${kondisi_coupling}&tuas_pembuka=${tuas_pembuka}&kondisi_outlet=${kondisi_outlet}&penutup_cop=${penutup_cop}&flushing_hydrant=${flushing_hydrant}&tekanan_hydrant=${tekanan_hydrant}&durasi_inspeksi=${durasi}");  
                             try {
                               final response = await http.get(url).timeout(
                                 const Duration(seconds: 1),

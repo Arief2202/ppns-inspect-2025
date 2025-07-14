@@ -35,6 +35,9 @@ class _InspeksiAparState extends State<InspeksiApar>{
   ];
   TextEditingController alasan = TextEditingController(text: '');
   String noApar;
+
+  String durasi = "00:00";
+  
   String tersedia = "Tersedia";
   String kondisi_tabung = "-";
   String segel_pin = "-";
@@ -64,7 +67,8 @@ class _InspeksiAparState extends State<InspeksiApar>{
                   alignment: Alignment.topCenter,
                   child: Column(children: [
                     Container(
-                      margin: EdgeInsets.only(top: 35),
+                      margin:
+                          EdgeInsets.only(top: 35),
                       child: Column(
                         children: <Widget>[
                           Image.asset(
@@ -165,7 +169,7 @@ class _InspeksiAparState extends State<InspeksiApar>{
                                 );
                             }
                             else{
-                              var url = Uri.parse("http://${globals.endpoint}/api_inspeksi_apar.php?create&user_id=${globals.user_id}&apar_id=${widget.id}&tersedia=${tersedia}&alasan=${tersedia == "Tersedia" ? "-" : alasan.text}&kondisi_tabung=${kondisi_tabung}&segel_pin=${segel_pin}&tuas_pegangan=${tuas_pegangan}&label_segitiga=${label_segitiga}&label_instruksi=${label_instruksi}&kondisi_selang=${kondisi_selang}&tekanan_tabung=${tekanan_tabung}&posisi=${posisi}");  
+                              var url = Uri.parse("http://${globals.endpoint}/api_inspeksi_apar.php?create&user_id=${globals.user_id}&apar_id=${widget.id}&tersedia=${tersedia}&alasan=${tersedia == "Tersedia" ? "-" : alasan.text}&kondisi_tabung=${kondisi_tabung}&segel_pin=${segel_pin}&tuas_pegangan=${tuas_pegangan}&label_segitiga=${label_segitiga}&label_instruksi=${label_instruksi}&kondisi_selang=${kondisi_selang}&tekanan_tabung=${tekanan_tabung}&posisi=${posisi}&durasi_inspeksi=${durasi}");  
                               try {
                                 final response = await http.get(url).timeout(
                                   const Duration(seconds: 1),
@@ -243,6 +247,7 @@ class InspeksiApar2 extends StatefulWidget {
 class _InspeksiAparState2 extends State<InspeksiApar2> {
   _InspeksiAparState2({required this.noApar});
   DateTime now = DateTime.now();
+  DateTime startInspect = DateTime.now();
   static List<String> monthName = [
     "Januari",
     "Februari",
@@ -258,6 +263,7 @@ class _InspeksiAparState2 extends State<InspeksiApar2> {
     "Desember",
   ];
   String noApar;
+  String durasi = "00:00";
 
   String kondisi_tabung = "";
   String segel_pin = "";
@@ -267,6 +273,7 @@ class _InspeksiAparState2 extends State<InspeksiApar2> {
   String kondisi_selang = "";
   String tekanan_tabung = "";
   String posisi = "";
+  String kondisi_roda = "";
 
   @override
   void initState() {
@@ -283,16 +290,18 @@ class _InspeksiAparState2 extends State<InspeksiApar2> {
           decoration: BoxDecoration(color: Colors.white),
           child: Stack(
             children: <Widget>[
+              
               Align(
                   alignment: Alignment.topCenter,
                   child: Column(children: [
                     Container(
-                      margin: EdgeInsets.only(top: 35),
+                      margin:
+                          EdgeInsets.only(top: 35),
                       child: Column(
                         children: <Widget>[
                           Image.asset(
                             'assets/img/logoHorizontal.png',
-                            width: MediaQuery.of(context).size.width - 120,
+                            height: 65,
                           ),
                         ],
                       ),
@@ -347,6 +356,7 @@ class _InspeksiAparState2 extends State<InspeksiApar2> {
                                   RadioForm(title: "Kondisi Selang :", option: ["Baik", "Rusak", "Lainnya"], onChange: (String? value) {setState(() {kondisi_selang = value!;});log("Kondisi Selang : ${kondisi_selang}");}),
                                   RadioForm(title: "Tekanan Tabung (Posisi Jarum) :", option: ["Tepat di hijau", "Kurang dari hijau", "Lebih dari hijau", "Tidak tersedia"], onChange: (String? value) {setState(() {tekanan_tabung = value!;});log("Tekanan Tabung : ${tekanan_tabung}");}),
                                   RadioForm(title: "Posisi Alat Pemadam Api :", option: ["Terlihat", "Terhalang"], onChange: (String? value) {setState(() {posisi = value!;});log("Posisi : ${posisi}");}),
+                                  RadioForm(title: "Kondisi Roda :", option: ["Berfungsi", "Tidak", "Not Applicable"], onChange: (String? value) {setState(() {kondisi_roda = value!;});log("kondisi_roda : ${kondisi_roda}");}),
                                   Padding(padding: EdgeInsets.all(20))
                                 ],
                               ),
@@ -369,7 +379,7 @@ class _InspeksiAparState2 extends State<InspeksiApar2> {
                             foregroundColor: Colors.white
                           ),
                           onPressed: () async{     
-                            var url = Uri.parse("http://${globals.endpoint}/api_inspeksi_apar.php?create&user_id=${globals.user_id}&apar_id=${widget.id}&tersedia=Tersedia&alasan=-&kondisi_tabung=${kondisi_tabung}&segel_pin=${segel_pin}&tuas_pegangan=${tuas_pegangan}&label_segitiga=${label_segitiga}&label_instruksi=${label_instruksi}&kondisi_selang=${kondisi_selang}&tekanan_tabung=${tekanan_tabung}&posisi=${posisi}");  
+                            var url = Uri.parse("http://${globals.endpoint}/api_inspeksi_apar.php?create&user_id=${globals.user_id}&apar_id=${widget.id}&tersedia=Tersedia&alasan=-&kondisi_tabung=${kondisi_tabung}&segel_pin=${segel_pin}&tuas_pegangan=${tuas_pegangan}&label_segitiga=${label_segitiga}&label_instruksi=${label_instruksi}&kondisi_selang=${kondisi_selang}&tekanan_tabung=${tekanan_tabung}&posisi=${posisi}&kondisi_roda=${kondisi_roda}&durasi_inspeksi=${durasi}");  
                             try {
                               final response = await http.get(url).timeout(
                                 const Duration(seconds: 1),
