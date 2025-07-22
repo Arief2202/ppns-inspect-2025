@@ -378,7 +378,20 @@ class _InspeksiAparState2 extends State<InspeksiApar2> {
                             backgroundColor: Colors.green,
                             foregroundColor: Colors.white
                           ),
-                          onPressed: () async{     
+                          onPressed: () async{                                 
+                            Duration diff = DateTime.now().difference(now);                            
+                            int days = diff.inDays;
+                            int hours = diff.inHours % 24;
+                            int minutes = diff.inMinutes % 60;
+                            int seconds = diff.inSeconds % 60;
+                            durasi = "";
+                            if(days > 0) durasi += "${days} Hari ";                      
+                            durasi += hours<10? '0' : '';
+                            durasi += "${hours}:";
+                            durasi += minutes<10? '0' : '';
+                            durasi += "${minutes}:";
+                            durasi += seconds<10? '0' : '';
+                            durasi += "${seconds}";
                             var url = Uri.parse("http://${globals.endpoint}/api_inspeksi_apar.php?create&user_id=${globals.user_id}&apar_id=${widget.id}&tersedia=Tersedia&alasan=-&kondisi_tabung=${kondisi_tabung}&segel_pin=${segel_pin}&tuas_pegangan=${tuas_pegangan}&label_segitiga=${label_segitiga}&label_instruksi=${label_instruksi}&kondisi_selang=${kondisi_selang}&tekanan_tabung=${tekanan_tabung}&posisi=${posisi}&kondisi_roda=${kondisi_roda}&durasi_inspeksi=${durasi}");  
                             try {
                               final response = await http.get(url).timeout(

@@ -35,7 +35,19 @@ class _TermsConditionState extends State<TermsCondition> {
 """;
       });
     }
-    else if(code == "hydrantIHB" || code == "hydrantOHB"){
+    else if(code == "hydrantIHB"){
+      setState(() {
+        nfpa = """Permen PUPR Nomor 26 Tahun 2008 tentang Persyaratan Teknis Sistem Proteksi Kebakaran Pada Bangunan Gedung dan Lingkungan""";
+        desc = """
+Tabel 7.4.5.2 (3)
+-	sambungan selang
+-	kondisi slang (termasuk kopling)
+-	nozel slang
+-	alat penyimpan slang (rak dan penggulung)
+- kondisi kotak atau boks""";
+      });
+    }
+    else if(code == "hydrantOHB"){
       setState(() {
         nfpa = """Permen PUPR Nomor 26 Tahun 2008 tentang Persyaratan Teknis Sistem Proteksi Kebakaran Pada Bangunan Gedung dan Lingkungan""";
         desc = """

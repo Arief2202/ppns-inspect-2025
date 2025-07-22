@@ -146,7 +146,20 @@ class _InspeksiHydrantIHBState extends State<InspeksiHydrantIHB> {
                             backgroundColor: Colors.green,
                             foregroundColor: Colors.white
                           ),
-                          onPressed: () async{     
+                          onPressed: () async{                                 
+                            Duration diff = DateTime.now().difference(now);                            
+                            int days = diff.inDays;
+                            int hours = diff.inHours % 24;
+                            int minutes = diff.inMinutes % 60;
+                            int seconds = diff.inSeconds % 60;
+                            durasi = "";
+                            if(days > 0) durasi += "${days} Hari ";                      
+                            durasi += hours<10? '0' : '';
+                            durasi += "${hours}:";
+                            durasi += minutes<10? '0' : '';
+                            durasi += "${minutes}:";
+                            durasi += seconds<10? '0' : '';
+                            durasi += "${seconds}";
                             var url = Uri.parse("http://${globals.endpoint}/api_inspeksi_ihb.php?create&user_id=${globals.user_id}&hydrant_id=${widget.id}&kondisi_kotak=${kondisi_kotak}&posisi_kotak=${posisi_kotak}&kondisi_nozzle=${kondisi_nozzle}&kondisi_selang=${kondisi_selang}&jenis_selang=${jenis_selang}&kondisi_coupling=${kondisi_coupling}&kondisi_landing_valve=${kondisi_landing_valve}&kondisi_tray=${kondisi_tray}&durasi_inspeksi=${durasi}");  
                             try {
                               final response = await http.get(url).timeout(

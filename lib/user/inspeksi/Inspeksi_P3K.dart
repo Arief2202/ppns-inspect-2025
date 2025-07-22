@@ -51,6 +51,10 @@ class _InspeksiP3KState extends State<InspeksiP3K> {
   String gelas_cuci_mata = "";
   String kantong_plastik = "";
   String aquades = "";
+  String oxygen = "";
+  String obat_luka_bakar = "";
+  String buku_catatan = "";
+  String daftar_isi = "";
 
   @override
   void initState() {
@@ -121,7 +125,6 @@ class _InspeksiP3KState extends State<InspeksiP3K> {
                                   SizedBox(height: 20),
                                   disabledInput("Nomor", "${nomor}"), 
                                   SizedBox(height: 20),
-                                  
                                   disabledInput("Email Inspektor", "${globals.user_email}"),   
                                   SizedBox(height: 20),
                                   disabledInput("Tanggal Inspeksi", "${now.day} ${monthName[now.month-1]} ${now.year}"),                
@@ -141,6 +144,10 @@ class _InspeksiP3KState extends State<InspeksiP3K> {
                                   RadioForm(title: "Gelas Untuk Cuci Mata:", option: ["Ada", "Tidak", "Lainnya"], onChange: (String? value) {setState(() {gelas_cuci_mata = value!;});log("gelas_cuci_mata: ${gelas_cuci_mata}");}),
                                   RadioForm(title: "Kantong Plastik Bersih:", option: ["Ada", "Tidak", "Lainnya"], onChange: (String? value) {setState(() {kantong_plastik = value!;});log("kantong_plastik: ${kantong_plastik}");}),
                                   RadioForm(title: "Aquades (100ml lar Saline):", option: ["Ada", "Tidak", "Lainnya"], onChange: (String? value) {setState(() {aquades = value!;});log("aquades: ${aquades}");}),
+                                  RadioForm(title: "Oxygen:", option: ["Ada", "Tidak", "Lainnya"], onChange: (String? value) {setState(() {oxygen = value!;});log("oxygen: ${oxygen}");}),
+                                  RadioForm(title: "Obat Luka Bakar:", option: ["Ada", "Tidak", "Lainnya"], onChange: (String? value) {setState(() {obat_luka_bakar = value!;});log("obat_luka_bakar: ${obat_luka_bakar}");}),
+                                  RadioForm(title: "Buku Catatan:", option: ["Ada", "Tidak", "Lainnya"], onChange: (String? value) {setState(() {buku_catatan = value!;});log("buku_catatan: ${buku_catatan}");}),
+                                  RadioForm(title: "Daftar Isi:", option: ["Ada", "Tidak", "Lainnya"], onChange: (String? value) {setState(() {daftar_isi = value!;});log("daftar_isi: ${daftar_isi}");}),
                                   Padding(padding: EdgeInsets.all(20))
                                 ],
                               ),
@@ -163,7 +170,21 @@ class _InspeksiP3KState extends State<InspeksiP3K> {
                             foregroundColor: Colors.white
                           ),
                           onPressed: () async{     
-                            var url = Uri.parse("http://${globals.endpoint}/api_inspeksi_p3k.php?create&user_id=${globals.user_id}&kotak_id=${widget.id}&kasa_steril_bungkus=${kasa_steril_bungkus}&perban5=${perban5}&perban10=${perban10}&plester125=${plester125}&plester_cepat=${plester_cepat}&kapas=${kapas}&mitella=${mitella}&gunting=${gunting}&peniti=${peniti}&sarung_tangan=${sarung_tangan}&masker=${masker}&pinset=${pinset}&lampu_senter=${lampu_senter}&gelas_cuci_mata=${gelas_cuci_mata}&kantong_plastik=${kantong_plastik}&aquades=${aquades}&durasi_inspeksi=${durasi}");  
+                            Duration diff = DateTime.now().difference(now);                            
+                            int days = diff.inDays;
+                            int hours = diff.inHours % 24;
+                            int minutes = diff.inMinutes % 60;
+                            int seconds = diff.inSeconds % 60;
+                            durasi = "";
+                            if(days > 0) durasi += "${days} Hari ";                      
+                            durasi += hours<10? '0' : '';
+                            durasi += "${hours}:";
+                            durasi += minutes<10? '0' : '';
+                            durasi += "${minutes}:";
+                            durasi += seconds<10? '0' : '';
+                            durasi += "${seconds}";
+
+                            var url = Uri.parse("http://${globals.endpoint}/api_inspeksi_p3k.php?create&user_id=${globals.user_id}&kotak_id=${widget.id}&kasa_steril_bungkus=${kasa_steril_bungkus}&perban5=${perban5}&perban10=${perban10}&plester125=${plester125}&plester_cepat=${plester_cepat}&kapas=${kapas}&mitella=${mitella}&gunting=${gunting}&peniti=${peniti}&sarung_tangan=${sarung_tangan}&masker=${masker}&pinset=${pinset}&lampu_senter=${lampu_senter}&gelas_cuci_mata=${gelas_cuci_mata}&kantong_plastik=${kantong_plastik}&aquades=${aquades}&oxygen=${oxygen}&obat_luka_bakar=${obat_luka_bakar}&buku_catatan=${buku_catatan}&daftar_isi=${daftar_isi}&durasi_inspeksi=${durasi}");  
                             try {
                               final response = await http.get(url).timeout(
                                 const Duration(seconds: 1),

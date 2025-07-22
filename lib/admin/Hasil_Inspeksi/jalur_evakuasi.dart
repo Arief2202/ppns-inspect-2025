@@ -1,4 +1,4 @@
-// ignore_for_file: file_names, camel_case_types, library_private_types_in_public_api, prefer_const_literals_to_create_immutables, prefer_const_constructors, prefer_const_constructors_in_immutables, use_build_context_synchronously, sized_box_for_whitespace, sort_child_properties_last, unused_local_variable, must_be_immutable, prefer_final_fields, use_key_in_widget_constructors, unnecessary_this, depend_on_referenced_packages, non_constant_identifier_names, curly_braces_in_flow_control_structures, unnecessary_brace_in_string_interps, unused_field
+// ignore_for_file: file_names, camel_case_types, library_private_types_in_public_api, prefer_const_literals_to_create_immutables, prefer_const_constructors, prefer_const_constructors_in_immutables, use_build_context_synchronously, sized_box_for_whitespace, sort_child_properties_last, unused_local_variable, must_be_immutable, prefer_final_fields, use_key_in_widget_constructors, unnecessary_this, depend_on_referenced_packages, non_constant_identifier_names, curly_braces_in_flow_control_structures, unnecessary_brace_in_string_interps
 
 import 'package:flutter/material.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
@@ -16,6 +16,7 @@ import 'package:excel/excel.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 
+String inspeksi = 'sudah';
 
 class HasilJalurEvakuasi extends StatefulWidget {
   HasilJalurEvakuasi({super.key, this.restorationId});
@@ -67,26 +68,6 @@ class _HasilJalurEvakuasiState extends State<HasilJalurEvakuasi> with Restoratio
     registerForRestoration(
         _restorableDatePickerRouteFuture, 'date_picker_route_future');
   }
-  static String kebersihan = "Akses eksit gedung bersih";
-  static String penanda_exit = "Terdapat tanda yang jelas dan mudah terlihat menuju pintu eksit";
-  static String kebebasan_hambatan = "Jalur evakuasi bebas dari barang-barang yang mengganggu kelancaran evakuasi.";
-  static String penerangan_jalur = "Penerangan cukup, termasuk pencahayaan darurat jika listrik padam.";
-  static String tanda_arah = "Terdapat petunjuk arah yang jelas menuju pintu keluar darurat.";
-  static String material_lantai = "Material lantai tidak licin dan aman untuk dilewati.";
-  static String tanda_pintu_darurat = "Pintu keluar darurat diberi tanda yang jelas dan mudah dikenali.";
-  static String pegangan_rambat = "Terdapat railing di salah satu sisi koridor, terutama untuk disabilitas.";
-  static String pencahayaan_darurat = "Koridor dilengkapi pencahayaan darurat otomatis saat keadaan darurat terjadi.";
-  static String identifikasi_titik_kumpul = "Titik kumpul ditandai dengan jelas dan mudah terlihat oleh semua orang.";
-  static String jalur_menuju_titik_kumpul = "Jalur menuju titik kumpul jelas, praktis, dan tidak terhambat oleh apapun.";
-  static String peralatan_darurat = "Tersedia APAR, kotak P3K,  atau peralatan lain di lokasi strategis.";
-  static String peta_evakuasi = "Peta jalur evakuasi tersedia di lokasi yang mudah dilihat oleh pengguna gedung.";
-
-  static String pintu_dikunci = "Pintu eksit tidak dikunci atau digembok.";
-  static String pintu_berfungsi = "Pintu exit berfungsi.";
-  static String terdapat_ganjal = "Terdapat ganjal atau ikatan penahan pintu selalu terbuka, pada pintu yang harus selalu pada keadaan tertutup.";
-  static String terbebas_halangan = "Terbebas halangan benda dan lain-lain di depan pintu eksi.";
-  static String terbebas_hambatan = "Akses eksit dan koridor yang digunakan sebagai jalur untuk ke luar Bebas dari segala macam hambatan.";
-  static String pintu_pelepasan_terkunci = "Eksit pelepasan di lantai dasar yang menuju ke jalan umum atau tempat terbuka di luar bangunan tidak terkunci.";
 
   List<TextEditingController> _controller = [
     TextEditingController(text: ''),
@@ -108,62 +89,25 @@ class _HasilJalurEvakuasiState extends State<HasilJalurEvakuasi> with Restoratio
   DateTime selectedDate = DateTime.now();
   Timer? timer;
   List<String> titleColumn = [
-    "id inspeksi", 
-    "Email Inspektor", 
-    kebersihan,
-    penanda_exit,
-    kebebasan_hambatan,
-    penerangan_jalur,
-    tanda_arah,
-    material_lantai,
-    tanda_pintu_darurat,
-    pegangan_rambat,
-    pencahayaan_darurat,
-    identifikasi_titik_kumpul,
-    jalur_menuju_titik_kumpul,
-    peralatan_darurat,
-    peta_evakuasi,
-    pintu_dikunci,
-    pintu_berfungsi,
-    terdapat_ganjal,
-    terbebas_halangan,
-    terbebas_hambatan,
-    pintu_pelepasan_terkunci,
+    "id inspeksi", "Email Inspektor", "Kebersihan","Penanda Exit","Kebebasan Hambatan","Penerangan Jalur","Tanda Arah","Material Lantai","Tanda Pintu Darurat","Pegangan Rambat","Pencahayaan Darurat","Identifikasi Titik Kumpul","jalur_menuju_titik_kumpul","peralatan_darurat","peta_evakuasi","pintu_dikunci","pintu_berfungsi","terdapat_ganjal","terbebas_halangan","terbebas_hambatan","pintu_pelepasan_terkunci","durasi_inspeksi",
+    
   ];
-  TextStyle tsyleTitle = TextStyle(
-    fontSize: 18,
-  );
-  TextStyle tsyleContent = TextStyle(
-    fontSize: 18,
-  );
-
+  List<String> titleColumn2 = [
+    "id", "Lokasi", "Timestamp"
+  ];
+  
   List<String> titleColumnExport = [
-    "id inspeksi", 
-    "Email Inspektor",     
-    kebersihan,
-    penanda_exit,
-    kebebasan_hambatan,
-    penerangan_jalur,
-    tanda_arah,
-    material_lantai,
-    tanda_pintu_darurat,
-    pegangan_rambat,
-    pencahayaan_darurat,
-    identifikasi_titik_kumpul,
-    jalur_menuju_titik_kumpul,
-    peralatan_darurat,
-    peta_evakuasi,
-    pintu_dikunci,
-    pintu_berfungsi,
-    terdapat_ganjal,
-    terbebas_halangan,
-    terbebas_hambatan,
-    pintu_pelepasan_terkunci,
+    "id inspeksi", "Email Inspektor", "Nomor Hydrant", "Lokasi Hydrant", "Kondisi Kotak", "Posisi Kotak", "Kondisi Nozzle", "Kondisi Selang", "Jenis Selang", "Kondisi Coupling", "Tuas Pembuka Pillar Hydrant", "Kondisi Outlet Cop dan Bonet Pillar Hydrant", "Penutup Cop Hydrant", "Apakah akan dilakukan flushing Hydrant", "Berapa Tekanan Jalur Hydrant", "Tanggal Inspeksi"
+  ];
+  List<String> titleColumnExport2 = [
+    "id", "Nomor Hydrant", "Lokasi", "Timestamp"
   ];
 
   List<List<String>> makeData = [];
   
-  late DataInspeksiJalurEvakuasiAPI currentData = DataInspeksiJalurEvakuasiAPI(status: "", pesan: "", data: makeData);
+  
+  late DataInspeksiOHBAPI currentData = DataInspeksiOHBAPI(status: "", pesan: "", data: makeData);
+  late DataAPIHydrant currentDataApar = DataAPIHydrant(status: "", pesan: "", data: makeData);
   static List<String> columnExcel = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'X', 'Y', 'Z'];
   static List<String> DropDownName = <String>['Sudah Di Inspeksi', 'Belum Di Inspeksi'];
   String dropdownValue = DropDownName.first;
@@ -175,6 +119,9 @@ class _HasilJalurEvakuasiState extends State<HasilJalurEvakuasi> with Restoratio
   @override
   void initState() {
     super.initState();
+    setState(() {
+      inspeksi = "sudah";
+    });
     updateValue();
     timer = Timer.periodic(Duration(milliseconds: 500), (Timer t) => updateValue());
   }
@@ -186,7 +133,7 @@ class _HasilJalurEvakuasiState extends State<HasilJalurEvakuasi> with Restoratio
 
 
   void updateValue() async {
-    var url = Uri.parse("http://${globals.endpoint}/api_inspeksi_jalur_evakuasi.php?read&start_date=${selectedDate.year}-${selectedDate.month}-1 00:00:00&end_date=${selectedDate.year}-${selectedDate.month}-31 23:59:59&kerusakan=${kerusakan}");  
+    var url = Uri.parse("http://${globals.endpoint}/api_inspeksi_ohb.php?read&start_date=${selectedDate.year}-${selectedDate.month}-1 00:00:00&end_date=${selectedDate.year}-${selectedDate.month}-31 23:59:59&inspeksi=${inspeksi}&kerusakan=${kerusakan}");  
     try {
       final response = await http.get(url).timeout(
         const Duration(seconds: 1),
@@ -197,26 +144,13 @@ class _HasilJalurEvakuasiState extends State<HasilJalurEvakuasi> with Restoratio
       if (response.statusCode == 200) {
         var respon = Json.tryDecode(response.body);
         if (this.mounted) {
-          if(respon?.isNotEmpty ?? false){
           setState(() {
-            currentData = DataInspeksiJalurEvakuasiAPI.fromJson(respon);
+            if(inspeksi == "sudah") currentData = DataInspeksiOHBAPI.fromJson(respon);
+            else currentDataApar = DataAPIHydrant.fromJson(respon);
           });
-          }
-          // print(currentData.data[0]);
         }
       }
     } on Exception catch (_) {}
-
-    setState(() {
-      tsyleTitle = TextStyle(
-        fontSize: 18,
-        fontWeight: FontWeight.w500
-      );
-      tsyleContent = TextStyle(
-        fontSize: 18,
-        // fontWeight: FontWeight.w700
-      );
-    });
   }
 
   @override
@@ -300,7 +234,7 @@ class _HasilJalurEvakuasiState extends State<HasilJalurEvakuasi> with Restoratio
                   margin: EdgeInsets.only(left: 20.0, right: 10.0, top: 135),
                   child: 
                       Text(
-                        "Hasil Inspeksi Jalur Evakuasi",
+                        "Hasil Inspeksi Hydrant OHB",
                         style: TextStyle(
                           fontFamily: "SanFrancisco",
                           decoration: TextDecoration.none,
@@ -332,26 +266,41 @@ class _HasilJalurEvakuasiState extends State<HasilJalurEvakuasi> with Restoratio
                         if (!status.isGranted) {
                           await Permission.storage.request();
                         }
-                        if(currentData.data.isNotEmpty){
-                          var excel = Excel.createExcel();
-                          Sheet sheetObject = excel['Sheet1'];
-                          // CellStyle cellStyle = CellStyle(fontFamily :getFontFamily(FontFamily.Calibri));
-                          for(int a = 0; a< titleColumn.length; a++){
-                            sheetObject.cell(CellIndex.indexByString('A${a+1}')).value = TextCellValue(titleColumn[a]);
-                            sheetObject.cell(CellIndex.indexByString('B${a+1}')).value = TextCellValue(currentData.data[0][a]);
-                          }          
-                          var fileBytes = excel.save();
 
-                          Directory appDocDirectory = await getApplicationDocumentsDirectory();
-                          var dir = "/storage/emulated/0/ppns_inspect/export/inspeksi_rumah_pompa_${globals.monthName[selectedDate.month-1]}_${selectedDate.year}.xlsx";
-                          // var dir = "${appDocDirectory.path}/export/${inspeksi}_inspeksi_apar_${monthName[selectedDate.month-1]}_${selectedDate.year}.xlsx";
-                          File(join(dir))
-                            ..createSync(recursive: true)
-                            ..writeAsBytesSync(fileBytes!);
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                            content: Text("Export Complete\nDir : ${dir}"),
-                          ));
-                        } 
+                        var excel = Excel.createExcel();
+                        Sheet sheetObject = excel['Sheet1'];
+                        // CellStyle cellStyle = CellStyle(fontFamily :getFontFamily(FontFamily.Calibri));
+                        if(inspeksi=='sudah'){
+                          for(int a = 0; a< titleColumnExport.length; a++){
+                            sheetObject.cell(CellIndex.indexByString('${columnExcel[a]}1')).value = TextCellValue(titleColumnExport[a]);
+                          }
+                          for(int i=0; i<currentData.data.length; i++){
+                            for(int j=0; j<titleColumnExport.length; j++){
+                              sheetObject.cell(CellIndex.indexByString('${columnExcel[j]}${i+2}')).value = TextCellValue(currentData.data[i][j]);
+                            }
+                          }                      
+                        }
+                        else{
+                          for(int a = 0; a< titleColumnExport2.length; a++){
+                            sheetObject.cell(CellIndex.indexByString('${columnExcel[a]}1')).value = TextCellValue(titleColumnExport2[a]);
+                          }
+                          for(int i=0; i<currentDataApar.data.length; i++){
+                            for(int j=0; j<titleColumnExport2.length; j++){
+                              sheetObject.cell(CellIndex.indexByString('${columnExcel[j]}${i+2}')).value = TextCellValue(currentDataApar.data[i][j]);
+                            }
+                          }                      
+                        }
+                        var fileBytes = excel.save();
+
+                        Directory appDocDirectory = await getApplicationDocumentsDirectory();
+                        var dir = "/storage/emulated/0/ppns_inspect/export/${inspeksi}_inspeksi_hydrant_ohb_${globals.monthName[selectedDate.month-1]}_${selectedDate.year}.xlsx";
+                        // var dir = "${appDocDirectory.path}/export/${inspeksi}_inspeksi_apar_${monthName[selectedDate.month-1]}_${selectedDate.year}.xlsx";
+                        File(join(dir))
+                          ..createSync(recursive: true)
+                          ..writeAsBytesSync(fileBytes!);
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          content: Text("Export Complete\nDir : ${dir}"),
+                        ));
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.red,
@@ -390,32 +339,91 @@ class _HasilJalurEvakuasiState extends State<HasilJalurEvakuasi> with Restoratio
                   )
                 ),
             ])),
-            Align(
+          Align(
+              alignment: Alignment.topRight,
+              child: Column(children: [
+                Container(
+                  margin: EdgeInsets.only(left: 20.0, right: 10.0, top: 170),
+                  height: 48,
+                  width: MediaQuery.of(context).size.width/2-30,
+                  child: DropdownButton(
+                    value: dropdownValue,
+                    icon: Icon(Icons.arrow_downward),
+                    iconSize: 24,
+                    elevation: 16,
+                    isExpanded: true,
+                    style: TextStyle(color: Colors.blue, fontSize: 14.0),
+                    underline: Container(
+                      height: 2,
+                      color: Colors.blue,
+                    ),
+                    onChanged: (String? newValue) {
+                      setState(() {
+                        dropdownValue = newValue!;
+                        if(newValue == DropDownName[0]) inspeksi = "sudah";
+                        else if(newValue == DropDownName[1]) inspeksi = "belum";
+                        else inspeksi="sudah";
+                      });
+                      updateValue();
+                    },
+                    items: DropDownName.map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
+                  )
+                ),
+            ])),
+            
+          if(inspeksi == "sudah") Align(
+              alignment: Alignment.topLeft,
+              child: Column(children: [
+                Container(
+                  margin: EdgeInsets.only(left: 20.0, right: 10.0, top: 220),
+                  height: 55,
+                  // width: MediaQuery.of(context).size.width-200,
+                  child: DropdownButton(
+                    value: FilterKerusakanValue,
+                    icon: Icon(Icons.arrow_downward),
+                    iconSize: 24,
+                    elevation: 16,
+                    isExpanded: true,
+                    style: TextStyle(color: Colors.blue, fontSize: 14.0),
+                    underline: Container(
+                      height: 2,
+                      color: Colors.blue,
+                    ),
+                    onChanged: (String? newValue) {
+                      setState(() {
+                        FilterKerusakanValue = newValue!;
+                        if(newValue == FilterKerusakan[0]) kerusakan = "semua";
+                        else if(newValue == FilterKerusakan[1]) kerusakan = "tidak";
+                        else kerusakan="rusak";
+                      });
+                      updateValue();
+                    },
+                    items: FilterKerusakan.map<DropdownMenuItem<String>>((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
+                  )
+                ),
+            ])),
+
+          Align(
               alignment: Alignment.topRight,
               child: Column(children: [
                 Container(
                   width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height-230,
-                  margin: EdgeInsets.only(top: 230),
-                  // decoration: BoxDecoration(color: const Color.fromARGB(49, 244, 67, 54)),
-                  child: SingleChildScrollView(child:
-                  Padding(
-                    padding: EdgeInsets.all(10),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        if(currentData.data.isNotEmpty) for(int a=0; a<titleColumn.length; a++) Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(style: tsyleTitle, "${titleColumn[a]} : "),
-                            Text(style: tsyleContent, "${currentData.data[0][a]}"),
-                            SizedBox(height: 10),
-                        ],)
-                      ],
-                    ),
-                  ),
+                  height: MediaQuery.of(context).size.height- (inspeksi == "belum" ? 220 : 280),
+                  margin: EdgeInsets.only(top: (inspeksi == "belum" ? 220 : 280)),
+                  decoration: BoxDecoration(color: const Color.fromARGB(49, 244, 67, 54)),
+                  child: SimpleTablePage(
+                      titleColumn: inspeksi == "sudah" ? titleColumn : titleColumn2,
+                      data: inspeksi == "sudah" ? currentData.data : currentDataApar.data,
                   ),
                 )
               ]
@@ -445,15 +453,15 @@ class SimpleTablePage extends StatelessWidget {
         columnsLength: titleColumn.length,
         rowsLength: data.length,
         columnsTitleBuilder: (i) => Text(titleColumn[i]),
-        contentCellBuilder: (i, j) => Text((i > 1 ? data[j][i+1] : data[j][i])),
-        // legendCell: Text('No Hydrant'),
+        contentCellBuilder: (i, j) => Text(inspeksi == 'sudah' ? (i > 1 ? data[j][i+1] : data[j][i]) : (i > 0 ? data[j][i+1] : data[j][i])),
+        legendCell: Text('No Hydrant'),
         cellDimensions: CellDimensions.fixed(
           contentCellWidth: 120, 
           contentCellHeight: 50, 
           stickyLegendWidth: 85, 
           stickyLegendHeight: 50
         ),
-        rowsTitleBuilder: (i) => Text(data[i][2]),
+        rowsTitleBuilder: (i) => Text(inspeksi == 'sudah' ? data[i][2] : data[i][1]),
       ),
     );
   }

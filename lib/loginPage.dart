@@ -43,7 +43,7 @@ class LoginPageState extends State<LoginPage> {
                       children: <Widget>[
                         Image.asset(
                           'assets/img/logoHorizontal.png',
-                          width: MediaQuery.of(context).size.width,
+                          width: MediaQuery.of(context).size.width/2,
                         ),
                       ],
                     ),

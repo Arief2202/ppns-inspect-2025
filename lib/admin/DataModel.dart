@@ -218,6 +218,7 @@ List<List<String>> objectToArrayInspeksiApar(List<dynamic> data) {
     row.add(data[a]['tekanan_tabung']);
     row.add(data[a]['posisi']);
     row.add(data[a]['kondisi_roda']);
+    row.add(data[a]['durasi_inspeksi']);
     row.add(data[a]['created_at']);
     output.add(row);
   }
@@ -243,6 +244,7 @@ List<List<String>> objectToArrayInspeksiOHB(List<dynamic> data) {
     row.add(data[a]['penutup_cop']);
     row.add(data[a]['flushing_hydrant']);
     row.add(data[a]['tekanan_hydrant']);
+    row.add(data[a]['durasi_inspeksi']);
     row.add(data[a]['created_at']);
     output.add(row);
   }
@@ -264,6 +266,7 @@ List<List<String>> objectToArrayInspeksiIHB(List<dynamic> data) {
     row.add(data[a]['kondisi_coupling']);
     row.add(data[a]['kondisi_landing_valve']);
     row.add(data[a]['kondisi_tray']);
+    row.add(data[a]['durasi_inspeksi']);
     row.add(data[a]['created_at']);
     output.add(row);
   }
@@ -293,6 +296,11 @@ List<List<String>> objectToArrayInspeksiP3K(List<dynamic> data) {
     row.add(data[a]['gelas_cuci_mata']);
     row.add(data[a]['kantong_plastik']);
     row.add(data[a]['aquades']);
+    row.add(data[a]['oxygen']);
+    row.add(data[a]['obat_luka_bakar']);
+    row.add(data[a]['buku_catatan']);
+    row.add(data[a]['daftar_isi']);
+    row.add(data[a]['durasi_inspeksi']);
     row.add(data[a]['created_at']);
     output.add(row);
   }
@@ -323,6 +331,7 @@ List<List<String>> objectToArrayInspeksiJalurEvakuasi(List<dynamic> data) {
     row.add(data[a]['terbebas_halangan']);
     row.add(data[a]['terbebas_hambatan']);
     row.add(data[a]['pintu_pelepasan_terkunci']);
+    row.add(data[a]['durasi_inspeksi']);
     row.add(data[a]['created_at']);
     output.add(row);
   }

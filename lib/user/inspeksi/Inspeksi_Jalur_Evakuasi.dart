@@ -192,6 +192,19 @@ class _InspeksiJalurEvakuasiState extends State<InspeksiJalurEvakuasi> {
                             foregroundColor: Colors.white
                           ),
                           onPressed: () async{     
+                            Duration diff = DateTime.now().difference(now);                            
+                            int days = diff.inDays;
+                            int hours = diff.inHours % 24;
+                            int minutes = diff.inMinutes % 60;
+                            int seconds = diff.inSeconds % 60;
+                            durasi = "";
+                            if(days > 0) durasi += "${days} Hari ";                      
+                            durasi += hours<10? '0' : '';
+                            durasi += "${hours}:";
+                            durasi += minutes<10? '0' : '';
+                            durasi += "${minutes}:";
+                            durasi += seconds<10? '0' : '';
+                            durasi += "${seconds}";
                             var url = Uri.parse("http://${globals.endpoint}/api_inspeksi_jalur_evakuasi.php?create&user_id=${globals.user_id}&lokasi=${lokasi}&kebersihan=${kebersihan}&penanda_exit=${penanda_exit}&kebebasan_hambatan=${kebebasan_hambatan}&penerangan_jalur=${penerangan_jalur}&tanda_arah=${tanda_arah}&material_lantai=${material_lantai}&tanda_pintu_darurat=${tanda_pintu_darurat}&pegangan_rambat=${pegangan_rambat}&pencahayaan_darurat=${pencahayaan_darurat}&identifikasi_titik_kumpul=${identifikasi_titik_kumpul}&jalur_menuju_titik_kumpul=${jalur_menuju_titik_kumpul}&peralatan_darurat=${peralatan_darurat}&peta_evakuasi=${peta_evakuasi}&pintu_dikunci=${pintu_dikunci}&pintu_berfungsi=${pintu_berfungsi}&terdapat_ganjal=${terdapat_ganjal}&terbebas_halangan=${terbebas_halangan}&terbebas_hambatan=${terbebas_hambatan}&pintu_pelepasan_terkunci=${pintu_pelepasan_terkunci}&durasi_inspeksi=${durasi}");  
                             print(url);
                             try {
