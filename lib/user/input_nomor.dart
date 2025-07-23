@@ -1,8 +1,10 @@
 // ignore_for_file: file_names, camel_case_types, library_private_types_in_public_api, prefer_const_literals_to_create_immutables, prefer_const_constructors, prefer_const_constructors_in_immutables, use_build_context_synchronously, sized_box_for_whitespace, sort_child_properties_last, must_be_immutable, override_on_non_overriding_member, unnecessary_this, curly_braces_in_flow_control_structures
 
 import 'package:flutter/material.dart';
+import 'package:ppns_inspect/RadioForm.dart';
 import 'package:ppns_inspect/user/inspeksi/Inspeksi_Apar.dart';
 import 'package:ppns_inspect/user/inspeksi/Inspeksi_Hydrant_OHB.dart';
+import 'package:ppns_inspect/user/inspeksi/Inspeksi_Jalur_Evakuasi.dart';
 import 'package:ppns_inspect/user/inspeksi/Inspeksi_P3K.dart';
 import 'package:ppns_inspect/user/inspeksi/inspeksi_Hydrant_IHB.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
@@ -20,6 +22,8 @@ class InputNomor extends StatefulWidget {
 class _InputNomorState extends State<InputNomor> {
   TextEditingController nomor = TextEditingController(text: '');
   String id = "0";
+  String lokasi = "";
+  static String lokasi_text = "Lokasi akses eksit.";
 
   @override
   void initState() {
@@ -71,7 +75,10 @@ class _InputNomorState extends State<InputNomor> {
                                 children: [
                                   Container(
                                     margin: EdgeInsets.only(top: 20),
-                                    child: TextField(
+                                    child: widget.code == 'exit' ?
+                                      RadioForm(title: "${lokasi_text} :", option: ["Gedung 1", "Gedung 2", "Gedung 3"], onChange: (String? value) {setState(() {lokasi = value!;});})
+                                    : 
+                                    TextField(
                                       controller: nomor,
                                       obscureText: false,
                                       onChanged: (value) {
@@ -112,6 +119,11 @@ class _InputNomorState extends State<InputNomor> {
                                           url = Uri.parse(
                                               "http://${globals.endpoint}/api_p3k.php?search&nomor=${nomor.text}");
                                         }
+                                        if (widget.code == "exit") {
+                                          url = Uri.parse(
+                                              "http://${globals.endpoint}/api_inspeksi_jalur_evakuasi.php?search&lokasi=${lokasi}");
+                                          print(url);
+                                        }
                                         try {
                                           final response =
                                               await http.get(url).timeout(
@@ -128,14 +140,14 @@ class _InputNomorState extends State<InputNomor> {
                                               if (this.mounted) {
                                                 setState(() {
                                                   checked = true;
-                                                  id = respon['data']['id'];
+                                                  if(widget.code != 'exit') id = respon['data']['id'];
                                                 });
                                               }
                                               Alert(
                                                 context: context,
                                                 type: AlertType.success,
                                                 title:
-                                                    "${widget.code == 'apar' ? "APAR" : ( widget.code == "P3K" ? "P3K": "Hydrant")} belum di inspeksi",
+                                                    "${widget.code == 'apar' ? "APAR" : ( widget.code == "P3K" ? "P3K": ( widget.code == "exit" ? "Jalur Evakuasi": "Hydrant"))} belum di inspeksi",
                                                 content: Column(
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.start,
@@ -144,10 +156,9 @@ class _InputNomorState extends State<InputNomor> {
                                                   children: [
                                                     SizedBox(height: 10),
                                                     Text(
-                                                      """
-Nomor  : ${respon['data']['nomor']}
-Lokasi : ${respon['data']['lokasi']}
-"""+(widget.code == 'apar' ? "Kadaluarsa : ${respon['data']['tanggal_kadaluarsa']}":""),
+(widget.code != 'exit' ? "Nomor  : ${respon['data']['nomor']}" : "") +
+"Lokasi : ${widget.code == 'exit' ? lokasi : respon['data']['lokasi']}" +
+(widget.code == 'apar' ? "Kadaluarsa : ${respon['data']['tanggal_kadaluarsa']}":""),
                                                       style: TextStyle(
                                                           fontSize: 14),
                                                     )
@@ -169,6 +180,7 @@ Lokasi : ${respon['data']['lokasi']}
                                                             if(widget.code == 'hydrantOHB') return InspeksiHydrantOHB(nomor: nomor.text, id: id);
                                                             else if(widget.code == 'hydrantIHB') return InspeksiHydrantIHB(nomor: nomor.text, id: id);
                                                             else if(widget.code == 'P3K') return InspeksiP3K(nomor: nomor.text, id: id);
+                                                            else if(widget.code == 'exit') return InspeksiJalurEvakuasi(lokasi: lokasi);
                                                             else return InspeksiApar(nomor: nomor.text, id: id);
                                                           }),
                                                         );
@@ -185,7 +197,7 @@ Lokasi : ${respon['data']['lokasi']}
                                                 context: context,
                                                 type: AlertType.error,
                                                 title:
-                                                    "${widget.code == 'apar' ? "APAR" : ( widget.code == "P3K" ? "P3K": "Hydrant")} telah di inspeksi bulan ini!",
+                                                    "${widget.code == 'apar' ? "APAR" : ( widget.code == "P3K" ? "P3K": ( widget.code == "exit" ? "Jalur Evakuasi": "Hydrant"))} telah di inspeksi bulan ini!",
                                                 content: Column(
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.start,

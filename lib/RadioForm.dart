@@ -37,7 +37,6 @@ class _RadioFormState  extends State<RadioForm> {
     return Container(
       child : Column(
         children: [
-          SizedBox(height: 20),
           SizedBox(
             width: 500,
             height: (MediaQuery.of(context).size.width/8.5 > title.length) ? 30 : ((MediaQuery.of(context).size.width/8.5)*2 > title.length) ? 45 : 70,
@@ -82,6 +81,8 @@ class _RadioFormState  extends State<RadioForm> {
                 },
               ), // controller: _data[1],
             ),
+            
+          SizedBox(height: 20),
         ]
       ),
     );

@@ -270,7 +270,7 @@ umum atau tempat terbuka di luar bangunan harus tidak
                             Navigator.push(
                               context,
                               MaterialPageRoute(builder: (context) {
-                                return code == "exit" ? InspeksiJalurEvakuasi() :  InputNomor(code: code);
+                                return InputNomor(code: code);
                               }),
                             );
                           }, 
