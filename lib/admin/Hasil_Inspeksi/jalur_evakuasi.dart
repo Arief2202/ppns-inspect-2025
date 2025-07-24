@@ -87,14 +87,14 @@ class _HasilJalurEvakuasiState extends State<HasilJalurEvakuasi> with Restoratio
   DateTime selectedDate = DateTime.now();
   Timer? timer;
   List<String> titleColumn = [
-    "id inspeksi", "Email Inspektor", "Lokasi", "Pintu Terkunci", "Pintu Berfungsi", "Ganjal", "Ganjal Tangga", "Kebersihan Tangga", "Hambatan Eksit", "Eksit Terkunci", "Visibilitas Eksit", "Pencahayaan Eksit", "durasi_inspeksi"
+    "id inspeksi", "Email Inspektor", "Lokasi", "Pintu Terkunci", "Pintu Berfungsi", "Ganjal", "Ganjal Tangga", "Kebersihan Tangga", "Hambatan Eksit", "Eksit Terkunci", "Visibilitas Eksit", "Pencahayaan Eksit", "durasi_inspeksi", "Tanggal Inspeksi"
   ];
   List<String> titleColumn2 = [
     "id", "Lokasi", "Timestamp"
   ];
   
   List<String> titleColumnExport = [
-    "id inspeksi", "Email Inspektor", "Lokasi", "Pintu Terkunci", "Pintu Berfungsi", "Ganjal", "Ganjal Tangga", "Kebersihan Tangga", "Hambatan Eksit", "Eksit Terkunci", "Visibilitas Eksit", "Pencahayaan Eksit", "durasi_inspeksi"
+    "id inspeksi", "Email Inspektor", "Lokasi", "Pintu Terkunci", "Pintu Berfungsi", "Ganjal", "Ganjal Tangga", "Kebersihan Tangga", "Hambatan Eksit", "Eksit Terkunci", "Visibilitas Eksit", "Pencahayaan Eksit", "durasi_inspeksi", "Tanggal Inspeksi"
   ];
   List<String> titleColumnExport2 = [
     "id", "Nomor Hydrant", "Lokasi", "Timestamp"

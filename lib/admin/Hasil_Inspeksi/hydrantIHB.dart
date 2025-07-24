@@ -89,14 +89,14 @@ class _HasilHydrantIHBState extends State<HasilHydrantIHB> with RestorationMixin
   DateTime selectedDate = DateTime.now();
   Timer? timer;
   List<String> titleColumn = [
-    "id inspeksi", "Email Inspektor", "Lokasi Hydrant", "Kondisi Kotak", "Posisi Kotak", "Kondisi Nozzle", "Kondisi Selang", "Jenis Selang", "Kondisi Coupling", "Kondisi Landing Valve", "Kondisi Tray", "Tanggal Inspeksi"
+    "id inspeksi", "Email Inspektor", "Lokasi Hydrant", "Kondisi Kotak", "Posisi Kotak", "Kondisi Nozzle", "Kondisi Selang", "Jenis Selang", "Kondisi Coupling", "Kondisi Landing Valve", "Kondisi Tray", "Durasi Inspeksi", "Tanggal Inspeksi"
   ];
   List<String> titleColumn2 = [
     "id", "Lokasi", "Timestamp"
   ];
   
   List<String> titleColumnExport = [
-    "id inspeksi", "Email Inspektor", "Nomor Hydrant", "Lokasi Hydrant", "Kondisi Kotak", "Posisi Kotak", "Kondisi Nozzle", "Kondisi Selang", "Jenis Selang", "Kondisi Coupling", "Kondisi Landing Valve", "Kondisi Tray", "Tanggal Inspeksi"
+    "id inspeksi", "Email Inspektor", "Nomor Hydrant", "Lokasi Hydrant", "Kondisi Kotak", "Posisi Kotak", "Kondisi Nozzle", "Kondisi Selang", "Jenis Selang", "Kondisi Coupling", "Kondisi Landing Valve", "Kondisi Tray", "Durasi Inspeksi", "Tanggal Inspeksi"
   ];
   List<String> titleColumnExport2 = [
     "id", "Nomor Hydrant", "Lokasi", "Timestamp"

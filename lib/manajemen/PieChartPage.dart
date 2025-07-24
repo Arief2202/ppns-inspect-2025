@@ -118,6 +118,16 @@ class _PieChartPageState extends State<PieChartPage> with RestorationMixin {
     "Belum di inspeksi": 0,
     "Normal": 0,
   };
+  Map<String, double> dataMapP3K = {
+    "Rusak": 0,
+    "Belum di inspeksi": 0,
+    "Normal": 0,
+  };
+  Map<String, double> dataMapExit = {
+    "Rusak": 0,
+    "Belum di inspeksi": 0,
+    "Normal": 0,
+  };
 
   @override
   void initState() {
@@ -158,6 +168,14 @@ class _PieChartPageState extends State<PieChartPage> with RestorationMixin {
             dataMapOHB['Rusak'] = double.parse(respon['ohb']['rusak']);
             dataMapOHB['Belum di inspeksi'] = double.parse(respon['ohb']['belum']);
             dataMapOHB['Normal'] = double.parse(respon['ohb']['normal']);
+            
+            dataMapP3K['Rusak'] = double.parse(respon['p3k']['rusak']);
+            dataMapP3K['Belum di inspeksi'] = double.parse(respon['p3k']['belum']);
+            dataMapP3K['Normal'] = double.parse(respon['p3k']['normal']);
+            
+            dataMapExit['Rusak'] = double.parse(respon['exit']['rusak']);
+            dataMapExit['Belum di inspeksi'] = double.parse(respon['exit']['belum']);
+            dataMapExit['Normal'] = double.parse(respon['exit']['normal']);
           });
         }
       }
@@ -315,6 +333,7 @@ class _PieChartPageState extends State<PieChartPage> with RestorationMixin {
               child: SingleChildScrollView(
                   child: Column(
                 children: [
+                  SizedBox(height: 50),
                   PieChart(
                     dataMap: dataMapApar,
                     animationDuration: Duration(milliseconds: 800),
@@ -397,7 +416,64 @@ class _PieChartPageState extends State<PieChartPage> with RestorationMixin {
                       showChartValuesOutside: false,
                       decimalPlaces: 1,
                     ),
-                  )
+                  ),
+                  SizedBox(height: 50),
+                  PieChart(
+                    dataMap: dataMapP3K,
+                    animationDuration: Duration(milliseconds: 800),
+                    chartLegendSpacing: 32,
+                    chartRadius: MediaQuery.of(context).size.width / 3.2,
+                    // colorList: colorList,
+                    initialAngleInDegree: 0,
+                    chartType: ChartType.ring,
+                    ringStrokeWidth: 32,
+                    centerText: "Kotak\nP3K",
+                    legendOptions: LegendOptions(
+                      showLegendsInRow: false,
+                      legendPosition: LegendPosition.right,
+                      showLegends: true,
+                      // legendShape: _BoxShape.circle,
+                      legendTextStyle: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    chartValuesOptions: ChartValuesOptions(
+                      showChartValueBackground: true,
+                      showChartValues: true,
+                      showChartValuesInPercentage: true,
+                      showChartValuesOutside: false,
+                      decimalPlaces: 1,
+                    ),
+                  ),
+                  SizedBox(height: 50),
+                  PieChart(
+                    dataMap: dataMapExit,
+                    animationDuration: Duration(milliseconds: 800),
+                    chartLegendSpacing: 32,
+                    chartRadius: MediaQuery.of(context).size.width / 3.2,
+                    // colorList: colorList,
+                    initialAngleInDegree: 0,
+                    chartType: ChartType.ring,
+                    ringStrokeWidth: 32,
+                    centerText: "Jalur\nEvakuasi",
+                    legendOptions: LegendOptions(
+                      showLegendsInRow: false,
+                      legendPosition: LegendPosition.right,
+                      showLegends: true,
+                      // legendShape: _BoxShape.circle,
+                      legendTextStyle: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    chartValuesOptions: ChartValuesOptions(
+                      showChartValueBackground: true,
+                      showChartValues: true,
+                      showChartValuesInPercentage: true,
+                      showChartValuesOutside: false,
+                      decimalPlaces: 1,
+                    ),
+                  ),
+                  SizedBox(height: 50),
                 ],
               )),
             ),

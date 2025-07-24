@@ -89,14 +89,14 @@ class _HasilHydrantOHBState extends State<HasilHydrantOHB> with RestorationMixin
   DateTime selectedDate = DateTime.now();
   Timer? timer;
   List<String> titleColumn = [
-    "id inspeksi", "Email Inspektor", "Lokasi Hydrant", "Kondisi Kotak", "Posisi Kotak", "Kondisi Nozzle", "Kondisi Selang", "Jenis Selang", "Kondisi Coupling", "Tuas Pembuka Pillar Hydrant", "Kondisi Outlet Cop dan Bonet Pillar Hydrant", "Penutup Cop Hydrant", "Apakah akan dilakukan flushing Hydrant", "Berapa Tekanan Jalur Hydrant", "Tanggal Inspeksi"
+    "id inspeksi", "Email Inspektor", "Lokasi Hydrant", "Kondisi Kotak", "Posisi Kotak", "Kondisi Nozzle", "Kondisi Selang", "Jenis Selang", "Kondisi Coupling", "Tuas Pembuka Pillar Hydrant", "Kondisi Outlet Cop dan Bonet Pillar Hydrant", "Penutup Cop Hydrant", "Apakah akan dilakukan flushing Hydrant", "Berapa Tekanan Jalur Hydrant", "Durasi Inspeksi", "Tanggal Inspeksi"
   ];
   List<String> titleColumn2 = [
     "id", "Lokasi", "Timestamp"
   ];
   
   List<String> titleColumnExport = [
-    "id inspeksi", "Email Inspektor", "Nomor Hydrant", "Lokasi Hydrant", "Kondisi Kotak", "Posisi Kotak", "Kondisi Nozzle", "Kondisi Selang", "Jenis Selang", "Kondisi Coupling", "Tuas Pembuka Pillar Hydrant", "Kondisi Outlet Cop dan Bonet Pillar Hydrant", "Penutup Cop Hydrant", "Apakah akan dilakukan flushing Hydrant", "Berapa Tekanan Jalur Hydrant", "Tanggal Inspeksi"
+    "id inspeksi", "Email Inspektor", "Nomor Hydrant", "Lokasi Hydrant", "Kondisi Kotak", "Posisi Kotak", "Kondisi Nozzle", "Kondisi Selang", "Jenis Selang", "Kondisi Coupling", "Tuas Pembuka Pillar Hydrant", "Kondisi Outlet Cop dan Bonet Pillar Hydrant", "Penutup Cop Hydrant", "Apakah akan dilakukan flushing Hydrant", "Berapa Tekanan Jalur Hydrant", "Durasi Inspeksi", "Tanggal Inspeksi"
   ];
   List<String> titleColumnExport2 = [
     "id", "Nomor Hydrant", "Lokasi", "Timestamp"

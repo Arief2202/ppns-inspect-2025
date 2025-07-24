@@ -7,8 +7,15 @@ import 'package:ppns_inspect/user/TermsCondition.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
+import 'dart:async';
 import 'package:ppns_inspect/globals.dart' as globals;
 import 'package:http/http.dart' as http;
+import 'package:ppns_inspect/notification.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+
+
+final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+    FlutterLocalNotificationsPlugin();
 
 class Dashboard extends StatefulWidget {
   Dashboard({Key? key}) : super(key: key);
@@ -21,7 +28,58 @@ class _DashboardState extends State<Dashboard> {
   @override
   void initState() {
     super.initState();
+    check_reminder_inspeksi();
+    notif.initialize(flutterLocalNotificationsPlugin);
+    globals.timerNotif = Timer.periodic(
+        Duration(milliseconds: 1000), (Timer t) => updateNotification());
   }
+
+  void onFocusScreen() {
+    // check_kadaluarsa();
+  }
+
+  void updateNotification() async {
+    try {
+      final response = await http.get(Uri.parse("http://${globals.endpoint}/api_notification.php?read&user_id=${globals.user_id}")).timeout(
+        const Duration(seconds: 1),
+        onTimeout: () {
+          return http.Response('Error', 408);
+        },
+      );
+      if (response.statusCode == 200) {
+        var respon = Json.tryDecode(response.body)['data'];
+        for (int a = 0; a < respon.length; a++) {
+          notif.showNotif(
+              id: int.parse(respon[a]['id']),
+              head: respon[a]['title'],
+              body: respon[a]['content'],
+              fln: flutterLocalNotificationsPlugin);
+              
+          try {
+            await http.get(Uri.parse("http://${globals.endpoint}/api_notification.php?displayed&notif_id=${respon[a]['id']}")).timeout(
+              const Duration(seconds: 1),
+              onTimeout: () {
+                return http.Response('Error', 408);
+              },
+            );
+          } on Exception catch (_){}
+        }
+      }
+    } on Exception catch (_) {}
+  }
+  
+  void check_reminder_inspeksi() async {
+    try {
+      final response = await http.get(Uri.parse("http://${globals.endpoint}/api_notification.php?check_reminder_inspeksi&user_id=${globals.user_id}")).timeout(
+        const Duration(seconds: 1),
+        onTimeout: () {
+          return http.Response('Error', 408);
+        },
+      );
+      print(response.statusCode);
+    } on Exception catch (_) {}
+  }
+
 
   bool checked = false;
   String id = "0";
@@ -133,397 +191,6 @@ class _DashboardState extends State<Dashboard> {
                       MenuWidget(context, TermsCondition(code: 'P3K'), 'assets/img/p3k.png', "Inspeksi Kotak P3K", "Kotak P3K"),
                       MenuWidget(context, TermsCondition(code: 'exit'), 'assets/img/emergency_exit.png', "Inspeksi Jalur Evakuasi", "Jalur Evakuasi"),
 
-                      // Card(
-                      //   child: InkWell(
-                      //     onTap: () {
-                      //       // Navigator.push(
-                      //       //   context,
-                      //       //   MaterialPageRoute(builder: (context) {
-                      //       //     // return InspeksiApar();
-                      //       //     return TermsCondition(code: 'apar');
-                      //       //   }),
-                      //       // );
-                      //     },
-                      //     child: Container(
-                      //         width: MediaQuery.of(context).size.width - 50,
-                      //         padding: EdgeInsets.all(5),
-                      //         height: 80,
-                      //         child: Row(
-                      //           children: [
-                      //             Image.asset(
-                      //               'assets/img/apab.png',
-                      //               width: 100,
-                      //               height: 100,
-                      //             ),
-                      //             Column(
-                      //               mainAxisAlignment: MainAxisAlignment.start,
-                      //               crossAxisAlignment: CrossAxisAlignment.start,
-                      //               children: [
-                      //                 Text(
-                      //                   "Inspeksi APAB",
-                      //                   style: TextStyle(
-                      //                     fontWeight: FontWeight.bold,
-                      //                     fontSize: 18,
-                      //                   ),
-                      //                 ),
-                      //                 Text(
-                      //                   "Alat Pemadam Api Berat",
-                      //                   style: TextStyle(
-                      //                     fontSize: 12
-                      //                   ),
-                      //                   )
-                      //               ],
-                      //             ),
-                      //           ],
-                      //         )),
-                      //   ),
-                      //   shape: RoundedRectangleBorder(
-                      //     borderRadius: BorderRadius.circular(10.0),
-                      //   ),
-                      //   elevation: 5,
-                      //   margin: EdgeInsets.all(10),
-                      // ),
-
-                      // Card(
-                      //   child: InkWell(
-                      //     onTap: () {
-                      //       Navigator.push(
-                      //         context,
-                      //         MaterialPageRoute(builder: (context) {
-                      //           return TermsCondition(code: 'hydrantOHB');
-                      //         }),
-                      //       );
-                      //     },
-                      //     child: Container(
-                      //         width: MediaQuery.of(context).size.width - 50,
-                      //         padding: EdgeInsets.all(5),
-                      //         height: 80,
-                      //         child: Row(
-                      //           children: [
-                      //             Image.asset(
-                      //               'assets/img/hydrant.png',
-                      //               width: 100,
-                      //               height: 100,
-                      //             ),
-                      //             Column(
-                      //               mainAxisAlignment: MainAxisAlignment.start,
-                      //               crossAxisAlignment:
-                      //                   CrossAxisAlignment.start,
-                      //               children: [
-                      //                 Text(
-                      //                   "Inspeksi HYDRANT OHB",
-                      //                   style: TextStyle(
-                      //                     fontWeight: FontWeight.bold,
-                      //                     fontSize: 18,
-                      //                   ),
-                      //                 ),
-                      //                 Text(
-                      //                   "Hydrant Outdoor (Luar Gedung)",
-                      //                   style: TextStyle(fontSize: 12),
-                      //                 )
-                      //               ],
-                      //             ),
-                      //           ],
-                      //         )),
-                      //   ),
-                      //   shape: RoundedRectangleBorder(
-                      //     borderRadius: BorderRadius.circular(10.0),
-                      //   ),
-                      //   elevation: 5,
-                      //   margin: EdgeInsets.all(10),
-                      // ),
-
-                      // Card(
-                      //   child: InkWell(
-                      //     onTap: () {
-                      //       Navigator.push(
-                      //         context,
-                      //         MaterialPageRoute(builder: (context) {
-                      //           return TermsCondition(code: 'hydrantIHB');
-                      //         }),
-                      //       );
-                      //     },
-                      //     child: Container(
-                      //         width: MediaQuery.of(context).size.width - 50,
-                      //         padding: EdgeInsets.all(5),
-                      //         height: 80,
-                      //         child: Row(
-                      //           children: [
-                      //             Image.asset(
-                      //               'assets/img/hydrant.png',
-                      //               width: 100,
-                      //               height: 100,
-                      //             ),
-                      //             Column(
-                      //               mainAxisAlignment: MainAxisAlignment.start,
-                      //               crossAxisAlignment:
-                      //                   CrossAxisAlignment.start,
-                      //               children: [
-                      //                 Text(
-                      //                   "Inspeksi HYDRANT IHB",
-                      //                   style: TextStyle(
-                      //                     fontWeight: FontWeight.bold,
-                      //                     fontSize: 18,
-                      //                   ),
-                      //                 ),
-                      //                 Text(
-                      //                   "Hydrant Indoor (dalam gedung)",
-                      //                   style: TextStyle(fontSize: 12),
-                      //                 )
-                      //               ],
-                      //             ),
-                      //           ],
-                      //         )),
-                      //   ),
-                      //   shape: RoundedRectangleBorder(
-                      //     borderRadius: BorderRadius.circular(10.0),
-                      //   ),
-                      //   elevation: 5,
-                      //   margin: EdgeInsets.all(10),
-                      // ),
-
-                      //              Card(
-                      //                   child: InkWell(
-                      //                     onTap: () async{
-
-                      //                       FocusManager.instance.primaryFocus?.unfocus();
-                      //                       var url = Uri.parse("http://${globals.endpoint}/api_inspeksi_rumah_pompa.php?search");
-
-                      //                       try {
-                      //                         final response =
-                      //                             await http.get(url).timeout(
-                      //                           const Duration(seconds: 1),
-                      //                           onTimeout: () {
-                      //                             return http.Response(
-                      //                                 'Error', 408);
-                      //                           },
-                      //                         );
-                      //                         if (response.statusCode == 200) {
-                      //                           var respon =
-                      //                               Json.tryDecode(response.body);
-                      //                           if (respon['inspection']) {
-                      //                             if (this.mounted) {
-                      //                               setState(() {
-                      //                                 checked = true;
-                      //                               });
-                      //                             }
-                      //                             Alert(
-                      //                               context: context,
-                      //                               type: AlertType.success,
-                      //                               title:
-                      //                                   "Rumah Pompa Hydrant belum di inspeksi",
-                      //                               content: Column(
-                      //                                 crossAxisAlignment:
-                      //                                     CrossAxisAlignment.start,
-                      //                                 mainAxisAlignment:
-                      //                                     MainAxisAlignment.start,
-                      //                                 children: [
-                      //                                   SizedBox(height: 10),
-                      //                                 ],
-                      //                               ),
-                      //                               buttons: [
-                      //                                 DialogButton(
-                      //                                     child: Text(
-                      //                                       "Next",
-                      //                                       style: TextStyle(
-                      //                                           color: Colors.white,
-                      //                                           fontSize: 20),
-                      //                                     ),
-                      //                                     onPressed: () {
-                      //                                       Navigator.pop(context);
-                      //                                       Navigator.push(
-                      //                                         context,
-                      //                                         MaterialPageRoute(builder: (context) {
-                      //                                           return TermsCondition(code: 'rumah_pompa');
-                      //                                         }),
-                      //                                       );
-                      //                                     }),
-                      //                               ],
-                      //                             ).show();
-                      //                           } else {
-                      //                             if (this.mounted) {
-                      //                               setState(() {
-                      //                                 checked = false;
-                      //                               });
-                      //                             }
-                      //                             Alert(
-                      //                               context: context,
-                      //                               type: AlertType.error,
-                      //                               title:
-                      //                                   "Rumah Pompa Hydrant telah di inspeksi bulan ini!",
-                      //                               content: Column(
-                      //                                 crossAxisAlignment:
-                      //                                     CrossAxisAlignment.start,
-                      //                                 mainAxisAlignment:
-                      //                                     MainAxisAlignment.start,
-                      //                                 children: [
-                      //                                   SizedBox(height: 10),
-                      //                                   Text(
-                      //                                     """
-                      // Email Inspektor  : ${respon['data_user']['email']}
-                      // Tanggal Inspeksi : ${respon['data_inspeksi']['created_at']}
-                      // """,
-                      //                                     style: TextStyle(
-                      //                                         fontSize: 14),
-                      //                                   )
-                      //                                 ],
-                      //                               ),
-                      //                               buttons: [
-                      //                                 DialogButton(
-                      //                                     child: Text(
-                      //                                       "Close",
-                      //                                       style: TextStyle(
-                      //                                           color: Colors.white,
-                      //                                           fontSize: 20),
-                      //                                     ),
-                      //                                     onPressed: () {
-                      //                                       Navigator.pop(context);
-                      //                                     }),
-                      //                               ],
-                      //                             ).show();
-                      //                           }
-                      //                         }
-                      //                       } on Exception catch (_) {}
-                      //                     },
-                      //                     child: Container(
-                      //                         width: MediaQuery.of(context).size.width - 50,
-                      //                         padding: EdgeInsets.all(5),
-                      //                         height: 80,
-                      //                         child: Row(
-                      //                           children: [
-                      //                             Image.asset(
-                      //                               'assets/img/hydrant.png',
-                      //                               width: 100,
-                      //                               height: 100,
-                      //                             ),
-                      //                             Column(
-                      //                               mainAxisAlignment: MainAxisAlignment.start,
-                      //                               crossAxisAlignment: CrossAxisAlignment.start,
-                      //                               children: [
-                      //                                 Text(
-                      //                                   "RUMAH POMPA",
-                      //                                   style: TextStyle(
-                      //                                     fontWeight: FontWeight.bold,
-                      //                                     fontSize: 18,
-                      //                                   ),
-                      //                                 ),
-                      //                                 Text(
-                      //                                   "Rumah Pompa",
-                      //                                   style: TextStyle(
-                      //                                     fontSize: 12
-                      //                                   ),
-                      //                                   )
-                      //                               ],
-                      //                             ),
-                      //                           ],
-                      //                         )),
-                      //                   ),
-                      //                   shape: RoundedRectangleBorder(
-                      //                     borderRadius: BorderRadius.circular(10.0),
-                      //                   ),
-                      //                   elevation: 5,
-                      //                   margin: EdgeInsets.all(10),
-                      //                 ),
-
-                      // Card(
-                      //   child: InkWell(
-                      //     onTap: () {
-                      //       Navigator.push(
-                      //         context,
-                      //         MaterialPageRoute(builder: (context) {
-                      //           // return InspeksiApar();
-                      //           return TermsCondition(code: 'P3K');
-                      //         }),
-                      //       );
-                      //     },
-                      //     child: Container(
-                      //         width: MediaQuery.of(context).size.width - 50,
-                      //         padding: EdgeInsets.all(5),
-                      //         height: 80,
-                      //         child: Row(
-                      //           children: [
-                      //             Image.asset(
-                      //               'assets/img/p3k.png',
-                      //               width: 100,
-                      //               height: 100,
-                      //             ),
-                      //             Column(
-                      //               mainAxisAlignment: MainAxisAlignment.start,
-                      //               crossAxisAlignment:
-                      //                   CrossAxisAlignment.start,
-                      //               children: [
-                      //                 Text(
-                      //                   "Inspeksi Kotak P3K",
-                      //                   style: TextStyle(
-                      //                     fontWeight: FontWeight.bold,
-                      //                     fontSize: 18,
-                      //                   ),
-                      //                 ),
-                      //                 Text(
-                      //                   "Kotak P3K",
-                      //                   style: TextStyle(fontSize: 12),
-                      //                 )
-                      //               ],
-                      //             ),
-                      //           ],
-                      //         )),
-                      //   ),
-                      //   shape: RoundedRectangleBorder(
-                      //     borderRadius: BorderRadius.circular(10.0),
-                      //   ),
-                      //   elevation: 5,
-                      //   margin: EdgeInsets.all(10),
-                      // ),
-
-                      // Card(
-                      //   child: InkWell(
-                      //     onTap: () {
-                      //       Navigator.push(
-                      //         context,
-                      //         MaterialPageRoute(builder: (context) {
-                      //           // return InspeksiApar();
-                      //           return TermsCondition(code: 'exit');
-                      //         }),
-                      //       );
-                      //     },
-                      //     child: Container(
-                      //         width: MediaQuery.of(context).size.width - 50,
-                      //         padding: EdgeInsets.all(5),
-                      //         height: 80,
-                      //         child: Row(
-                      //           children: [
-                      //             Image.asset(
-                      //               'assets/img/emergency_exit.png',
-                      //               width: 100,
-                      //               height: 100,
-                      //             ),
-                      //             Column(
-                      //               mainAxisAlignment: MainAxisAlignment.start,
-                      //               crossAxisAlignment:
-                      //                   CrossAxisAlignment.start,
-                      //               children: [
-                      //                 Text(
-                      //                   "Inspeksi Jalur Evakuasi",
-                      //                   style: TextStyle(
-                      //                     fontWeight: FontWeight.bold,
-                      //                     fontSize: 18,
-                      //                   ),
-                      //                 ),
-                      //                 Text(
-                      //                   "Jalur Evakuasi",
-                      //                   style: TextStyle(fontSize: 12),
-                      //                 )
-                      //               ],
-                      //             ),
-                      //           ],
-                      //         )),
-                      //   ),
-                      //   shape: RoundedRectangleBorder(
-                      //     borderRadius: BorderRadius.circular(10.0),
-                      //   ),
-                      //   elevation: 5,
-                      //   margin: EdgeInsets.all(10),
-                      // ),
                     ],
                   ),
                 ),

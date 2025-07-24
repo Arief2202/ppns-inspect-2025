@@ -90,13 +90,13 @@ class _HasilP3KState extends State<HasilP3K> with RestorationMixin {
   Timer? timer;
   
   List<String> titleColumn = [
-    "id inspeksi", "Email Inspektor", "Lokasi P3K", "Kasa Steril Bungkus", "Perban (lebar 5 Cm)", "Perban (lebar 10 Cm)", "Plester (lebar 1,25 Cm)", "Plester Cepat", "Kapas (25 gram)", "Kain segitiga/mittela", "Gunting", "Peniti", "Sarung tangan sekali pakai", "Masker", "Pinset", "Lampu senter", "Gelas untuk cuci mata", "Kantong plastik bersih", "Aquades (100 ml lar Saline)", "oxygen", "obat_luka_bakar", "buku_catatan", "daftar_isi", "durasi_inspeksi"];
+    "id inspeksi", "Email Inspektor", "Lokasi P3K", "Kasa Steril Bungkus", "Perban (lebar 5 Cm)", "Perban (lebar 10 Cm)", "Plester (lebar 1,25 Cm)", "Plester Cepat", "Kapas (25 gram)", "Kain segitiga/mittela", "Gunting", "Peniti", "Sarung tangan sekali pakai", "Masker", "Pinset", "Lampu senter", "Gelas untuk cuci mata", "Kantong plastik bersih", "Aquades (100 ml lar Saline)", "oxygen", "obat_luka_bakar", "buku_catatan", "daftar_isi", "durasi_inspeksi", "Tanggal Inspeksi"];
   List<String> titleColumn2 = [
     "id", "Lokasi", "Timestamp"
   ];
   
   List<String> titleColumnExport = [
-    "id inspeksi", "Email Inspektor", "Nomor P3K", "Lokasi P3K",   "Kasa Steril Bungkus",  "Perban (lebar 5 Cm)", "Perban (lebar 10 Cm)", "Plester (lebar 1,25 Cm)", "Plester Cepat", "Kapas (25 gram)", "Kain segitiga/mittela", "Gunting", "Peniti", "Sarung tangan sekali pakai", "Masker", "Pinset", "Lampu senter", "Gelas untuk cuci mata", "Kantong plastik bersih", "Aquades (100 ml lar Saline)", "oxygen", "obat_luka_bakar", "buku_catatan", "daftar_isi", "durasi_inspeksi"];
+    "id inspeksi", "Email Inspektor", "Nomor P3K", "Lokasi P3K",   "Kasa Steril Bungkus",  "Perban (lebar 5 Cm)", "Perban (lebar 10 Cm)", "Plester (lebar 1,25 Cm)", "Plester Cepat", "Kapas (25 gram)", "Kain segitiga/mittela", "Gunting", "Peniti", "Sarung tangan sekali pakai", "Masker", "Pinset", "Lampu senter", "Gelas untuk cuci mata", "Kantong plastik bersih", "Aquades (100 ml lar Saline)", "oxygen", "obat_luka_bakar", "buku_catatan", "daftar_isi", "durasi_inspeksi", "Tanggal Inspeksi"];
   List<String> titleColumnExport2 = [
     "id", "Nomor P3K", "Lokasi", "Timestamp"
   ];
