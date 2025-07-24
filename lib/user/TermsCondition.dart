@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:ppns_inspect/user/input_nomor.dart';
-import 'package:ppns_inspect/user/inspeksi/Inspeksi_Jalur_Evakuasi.dart';
 
 
 class TermsCondition extends StatefulWidget {
