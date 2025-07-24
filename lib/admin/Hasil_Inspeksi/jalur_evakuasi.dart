@@ -227,7 +227,7 @@ class _HasilJalurEvakuasiState extends State<HasilJalurEvakuasi> with Restoratio
                   margin: EdgeInsets.only(left: 20.0, right: 10.0, top: 135),
                   child: 
                       Text(
-                        "Hasil Inspeksi Hydrant OHB",
+                        "Hasil Inspeksi Jalur Evakuasi",
                         style: TextStyle(
                           fontFamily: "SanFrancisco",
                           decoration: TextDecoration.none,
