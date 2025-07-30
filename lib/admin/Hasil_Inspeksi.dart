@@ -6,6 +6,7 @@ import 'package:ppns_inspect/admin/Hasil_Inspeksi/hydrantIHB.dart';
 import 'package:ppns_inspect/admin/Hasil_Inspeksi/hydrantOHB.dart';
 import 'package:ppns_inspect/admin/Hasil_Inspeksi/jalur_evakuasi.dart';
 import 'package:ppns_inspect/admin/Hasil_Inspeksi/p3k.dart';
+import 'package:ppns_inspect/admin/Hasil_Inspeksi/rumah_pompa.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
@@ -142,11 +143,12 @@ class _HasilInspeksiState extends State<HasilInspeksi> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     
-                    MenuWidget(context, HasilApar(), 'assets/img/apar.png', "APAR & APAB", "Alat Pemadam Api Ringan & Alat Pemadam Api Berat"),
-                    MenuWidget(context, HasilHydrantOHB(), 'assets/img/hydrant.png', "Hydrant OHB", "Hydrant Outdoor (Luar Gedung)"),
-                    MenuWidget(context, HasilHydrantIHB(), 'assets/img/hydrant.png', "Hydrant IHB", "Hydrant Intdoor (Dalam Gedung)"),
-                    MenuWidget(context, HasilP3K(), 'assets/img/p3k.png', "Kotak P3K", "Kotak P3K"),
-                    MenuWidget(context, HasilJalurEvakuasi(), 'assets/img/emergency_exit.png', "Evacuation Route", "Jalur Evakuasi"),
+                    MenuWidget(redirect: HasilApar(), img: 'assets/img/apar.png', title: "APAR & APAB", desc: "Alat Pemadam Api Ringan & Alat Pemadam Api Berat"),
+                    MenuWidget(redirect: HasilHydrantOHB(), img: 'assets/img/hydrant.png', title: "Hydrant OHB", desc: "Hydrant Outdoor (Luar Gedung)"),
+                    MenuWidget(redirect: HasilHydrantIHB(), img: 'assets/img/hydrant.png', title: "Hydrant IHB", desc: "Hydrant Intdoor (Dalam Gedung)"),
+                    MenuWidget(redirect: HasilP3K(), img: 'assets/img/p3k.png', title: "Kotak P3K", desc: "Kotak P3K"),
+                    MenuWidget(redirect: HasilJalurEvakuasi(), img: 'assets/img/emergency_exit.png', title: "Evacuation Route", desc: "Jalur Evakuasi"),
+                    MenuWidget(redirect: HasilRumahPompa(), img: 'assets/img/rumah_pompa.png', title: "Rumah Pompa", desc: "Rumah Pompa"),
                   ],
                 ),
               )

@@ -201,10 +201,10 @@ class _DashboardAdminState extends State<DashboardAdmin> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
 
-                    MenuWidget(context, DataInventaris(), 'assets/img/inventory.png', "Inventaris", "Data Inventaris yang dapat dilakukan inspeksi oleh user"),
-                    MenuWidget(context, HasilInspeksi(), 'assets/img/inputData.png', "Hasil Inspeksi", "Menampilkan hasil inspeksi dari masing - masing item inventaris"),
-                    MenuWidget(context, PieChartPage(date: DateTime.now()), 'assets/img/hasilInspeksi.png', "Pie Chart", "Visualisasi Data dengan bentuk pie chart"),
-                    MenuWidget(context, Users(), 'assets/img/users.png', "Users", "Menampilkan user yang terdaftar"),
+                    MenuWidget(redirect:  DataInventaris(), img: 'assets/img/inventory.png', title: "Inventaris", desc: "Data Inventaris yang dapat dilakukan inspeksi oleh user"),
+                    MenuWidget(redirect:  HasilInspeksi(), img: 'assets/img/inputData.png', title: "Hasil Inspeksi", desc: "Menampilkan hasil inspeksi dari masing - masing item inventaris"),
+                    MenuWidget(redirect:  PieChartPage(date: DateTime.now()), img: 'assets/img/hasilInspeksi.png', title: "Pie Chart", desc: "Visualisasi Data dengan bentuk pie chart"),
+                    MenuWidget(redirect:  Users(), img: 'assets/img/users.png', title: "Users", desc: "Menampilkan user yang terdaftar"),
 
                   ],
                 ),

@@ -139,12 +139,10 @@ class _DataInventarisState extends State<DataInventaris> {
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    
-                      MenuWidget(context, DataApar(), 'assets/img/apar.png', "APAR & APAB", "Alat Pemadam Api Ringan & Alat Pemadam Api Berat"),
-                      MenuWidget(context, DataHydrantOHB(), 'assets/img/hydrant.png', "Hydrant OHB", "Hydrant Outdoor (Luar Gedung)"),
-                      MenuWidget(context, DataHydrantIHB(), 'assets/img/hydrant.png', "Hydrant IHB", "Hydrant Intdoor (Dalam Gedung)"),
-                      MenuWidget(context, DataP3K(), 'assets/img/p3k.png', "Kotak P3K", "Kotak P3K"),
-
+                      MenuWidget(redirect: DataApar(), img: 'assets/img/apar.png', title: "APAR & APAB", desc: "Alat Pemadam Api Ringan & Alat Pemadam Api Berat"),
+                      MenuWidget(redirect: DataHydrantOHB(), img: 'assets/img/hydrant.png', title: "Hydrant OHB", desc: "Hydrant Outdoor (Luar Gedung)"),
+                      MenuWidget(redirect: DataHydrantIHB(), img: 'assets/img/hydrant.png', title: "Hydrant IHB", desc: "Hydrant Intdoor (Dalam Gedung)"),
+                      MenuWidget(redirect: DataP3K(), img: 'assets/img/p3k.png', title: "Kotak P3K", desc: "Kotak P3K"),
                     
                   ],
                 ),
