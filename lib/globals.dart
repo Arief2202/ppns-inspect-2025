@@ -15,6 +15,7 @@ String user_card_id = "";
 String user_role = "";
 Timer? timerNotif;
 Timer? timerData;
+String? tempDir = "";
 
 List<String> monthName = [
   "Jan",
