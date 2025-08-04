@@ -1,6 +1,20 @@
 
 // ignore_for_file: camel_case_types, unnecessary_null_comparison, file_names, non_constant_identifier_names
 import 'dart:convert';
+import 'dart:io';
+import 'package:http/http.dart';
+import 'package:ppns_inspect/globals.dart' as globals;
+
+MultipartFile addPhoto(String fileDir, String varReq){
+  File selectedImage = File(fileDir);
+
+  return MultipartFile(
+    varReq,
+    selectedImage.readAsBytes().asStream(),
+    selectedImage.lengthSync(),
+    filename: selectedImage.path.split('/').last,
+  );
+}
 
 class dataRadioForm {
   dataRadioForm({
@@ -258,6 +272,16 @@ List<List<String>> objectToArrayInspeksiApar(List<dynamic> data) {
     row.add(data[a]['kondisi_roda']);
     row.add(data[a]['durasi_inspeksi']);
     row.add(data[a]['created_at']);
+    row.add(data[a]['tersedia_img'] == null ? "-" : "http://${globals.endpoint}${data[a]['tersedia_img']}");
+    row.add(data[a]['kondisi_tabung_img'] == null ? "-" : "http://${globals.endpoint}${data[a]['kondisi_tabung_img']}");
+    row.add(data[a]['segel_pin_img'] == null ? "-" : "http://${globals.endpoint}${data[a]['segel_pin_img']}");
+    row.add(data[a]['tuas_pegangan_img'] == null ? "-" : "http://${globals.endpoint}${data[a]['tuas_pegangan_img']}");
+    row.add(data[a]['label_segitiga_img'] == null ? "-" : "http://${globals.endpoint}${data[a]['label_segitiga_img']}");
+    row.add(data[a]['label_instruksi_img'] == null ? "-" : "http://${globals.endpoint}${data[a]['label_instruksi_img']}");
+    row.add(data[a]['kondisi_selang_img'] == null ? "-" : "http://${globals.endpoint}${data[a]['kondisi_selang_img']}");
+    row.add(data[a]['tekanan_tabung_img'] == null ? "-" : "http://${globals.endpoint}${data[a]['tekanan_tabung_img']}");
+    row.add(data[a]['posisi_img'] == null ? "-" : "http://${globals.endpoint}${data[a]['posisi_img']}");
+    row.add(data[a]['kondisi_roda_img'] == null ? "-" : "http://${globals.endpoint}${data[a]['kondisi_roda_img']}");
     output.add(row);
   }
   return output;

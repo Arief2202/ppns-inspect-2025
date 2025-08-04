@@ -132,13 +132,26 @@ class DisplayPictureScreen extends StatelessWidget {
   const DisplayPictureScreen({super.key, required this.imagePath});
   @override
   Widget build(BuildContext context) {
-    globals.tempDir = imagePath;
-    print(globals.tempDir);
     return Scaffold(
       appBar: AppBar(title: const Text('Display the Picture')),
       // The image is stored as a file on the device. Use the `Image.file`
       // constructor with the given path to display the image.
       body: Image.file(File(imagePath)),
+    );
+  }
+}
+// A widget that displays the picture taken by the user.
+class DisplayPictureUrl extends StatelessWidget {
+  final String imageUrl;
+
+  const DisplayPictureUrl({super.key, required this.imageUrl});
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Display the Picture')),
+      // The image is stored as a file on the device. Use the `Image.file`
+      // constructor with the given path to display the image.
+      body: Image.network(imageUrl),
     );
   }
 }

@@ -156,8 +156,8 @@ class _InputNomorState extends State<InputNomor> {
                                                   children: [
                                                     SizedBox(height: 10),
                                                     Text(
-(widget.code != 'exit' ? "Nomor  : ${respon['data']['nomor']}" : "") +
-"Lokasi : ${widget.code == 'exit' ? lokasi : respon['data']['lokasi']}" +
+(widget.code != 'exit' ? "Nomor  : ${respon['data']['nomor']}\n" : "") +
+"Lokasi : ${widget.code == 'exit' ? lokasi : respon['data']['lokasi']}\n" +
 (widget.code == 'apar' ? "Kadaluarsa : ${respon['data']['tanggal_kadaluarsa']}":""),
                                                       style: TextStyle(
                                                           fontSize: 14),

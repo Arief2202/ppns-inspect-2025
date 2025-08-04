@@ -1,6 +1,7 @@
 // ignore_for_file: file_names, camel_case_types, library_private_types_in_public_api, prefer_const_literals_to_create_immutables, prefer_const_constructors, prefer_const_constructors_in_immutables, use_build_context_synchronously, sized_box_for_whitespace, sort_child_properties_last, non_constant_identifier_names, no_logic_in_create_state, unnecessary_brace_in_string_interps, unnecessary_string_interpolations, must_be_immutable
 
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 import 'package:ppns_inspect/DisabledInput.dart';
 import 'package:ppns_inspect/RadioForm.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
@@ -8,6 +9,8 @@ import 'package:ppns_inspect/globals.dart' as globals;
 import 'package:http/http.dart' as http;
 import 'dart:developer';
 import 'package:ppns_inspect/admin/DataModel.dart';
+import 'dart:convert';
+import 'dart:io';
 
 class InspeksiApar extends StatefulWidget{
   InspeksiApar({required this.nomor, required this.id, Key? key}) : super(key: key);
@@ -404,14 +407,66 @@ class _InspeksiAparState2 extends State<InspeksiApar2> {
                             durasi += "${minutes}:";
                             durasi += seconds<10? '0' : '';
                             durasi += "${seconds}";
-                            var url = Uri.parse("http://${globals.endpoint}/api_inspeksi_apar.php?create&user_id=${globals.user_id}&apar_id=${widget.id}&tersedia=Tersedia&alasan=-&kondisi_tabung=${kondisi_tabung}&segel_pin=${segel_pin}&tuas_pegangan=${tuas_pegangan}&label_segitiga=${label_segitiga}&label_instruksi=${label_instruksi}&kondisi_selang=${kondisi_selang}&tekanan_tabung=${tekanan_tabung}&posisi=${posisi}&kondisi_roda=${kondisi_roda}&durasi_inspeksi=${durasi}");  
+                            // var url = Uri.parse("""http://${globals.endpoint}/api_inspeksi_apar.php?
+                            // create&
+                            // user_id=${globals.user_id}&
+                            // apar_id=${widget.id}&
+                            // tersedia=Tersedia&
+                            // alasan=-&
+                            // kondisi_tabung=${kondisi_tabung}&
+                            // segel_pin=${segel_pin}&
+                            // tuas_pegangan=${tuas_pegangan}&
+                            // label_segitiga=${label_segitiga}&
+                            // label_instruksi=${label_instruksi}&
+                            // kondisi_selang=${kondisi_selang}&
+                            // tekanan_tabung=${tekanan_tabung}&
+                            // posisi=${posisi}&
+                            // kondisi_roda=${kondisi_roda}&
+                            // durasi_inspeksi=${durasi}""");  
                             try {
-                              final response = await http.get(url).timeout(
-                                const Duration(seconds: 1),
-                                onTimeout: () {
-                                  return http.Response('Error', 408);
-                                },
+                              var request = http.MultipartRequest(
+                                'POST',
+                                Uri.parse("http://${globals.endpoint}/api_inspeksi_apar.php"),
                               );
+                              Map<String, String> headers = {"Content-type": "multipart/form-data"};
+                              request.fields['create'] = "";
+                              request.fields['user_id'] = "${globals.user_id}";
+                              request.fields['apar_id'] = "${widget.id}";
+                              request.fields['tersedia'] = "Tersedia";
+                              request.fields['alasan'] = "-";
+                              request.fields['kondisi_tabung'] = "${kondisi_tabung}";
+                              request.fields['segel_pin'] = "${segel_pin}";
+                              request.fields['tuas_pegangan'] = "${tuas_pegangan}";
+                              request.fields['label_segitiga'] = "${label_segitiga}";
+                              request.fields['label_instruksi'] = "${label_instruksi}";
+                              request.fields['kondisi_selang'] = "${kondisi_selang}";
+                              request.fields['tekanan_tabung'] = "${tekanan_tabung}";
+                              request.fields['posisi'] = "${posisi}";
+                              request.fields['kondisi_roda'] = "${kondisi_roda}";
+                              request.fields['durasi_inspeksi'] = "${durasi}";
+
+                              if(kondisi_tabung_img != "") request.files.add(addPhoto(kondisi_tabung_img, 'kondisi_tabung_img'));
+                              if(segel_pin_img != "") request.files.add(addPhoto(segel_pin_img, 'segel_pin_img'));
+                              if(tuas_pegangan_img != "") request.files.add(addPhoto(tuas_pegangan_img, 'tuas_pegangan_img'));
+                              if(label_segitiga_img != "") request.files.add(addPhoto(label_segitiga_img, 'label_segitiga_img'));
+                              if(label_instruksi_img != "") request.files.add(addPhoto(label_instruksi_img, 'label_instruksi_img'));
+                              if(kondisi_selang_img != "") request.files.add(addPhoto(kondisi_selang_img, 'kondisi_selang_img'));
+                              if(tekanan_tabung_img != "") request.files.add(addPhoto(tekanan_tabung_img, 'tekanan_tabung_img'));
+                              if(posisi_img != "") request.files.add(addPhoto(posisi_img, 'posisi_img'));
+                              if(kondisi_roda_img != "") request.files.add(addPhoto(kondisi_roda_img, 'kondisi_roda_img'));
+
+                              request.headers.addAll(headers);
+                              print("request: " + request.toString());
+                              var response = await request.send().timeout(
+                                const Duration(seconds: 1)
+                              );
+
+                              // final response = await http.get(url).timeout(
+                              //   const Duration(seconds: 1),
+                              //   onTimeout: () {
+                              //     return http.Response('Error', 408);
+                              //   },
+                              // );
                               if (response.statusCode == 200) {
 
                                   Alert(
