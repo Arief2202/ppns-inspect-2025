@@ -7,6 +7,7 @@ import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:ppns_inspect/globals.dart' as globals;
 import 'package:http/http.dart' as http;
 import 'dart:developer';
+import 'package:ppns_inspect/admin/DataModel.dart';
 
 class InspeksiApar extends StatefulWidget{
   InspeksiApar({required this.nomor, required this.id, Key? key}) : super(key: key);
@@ -120,7 +121,7 @@ class _InspeksiAparState extends State<InspeksiApar>{
                                   disabledInput("Email Inspektor", "${globals.user_email}"),   
                                   SizedBox(height: 20),
                                   disabledInput("Tanggal Inspeksi", "${now.day} ${monthName[now.month-1]} ${now.year}"),                
-                                  RadioForm(title: "Apakah APAR Tersedia ?", option: ["Tersedia", "Tidak"], onChange: (String? value) {setState(() {tersedia = value!;});log("Apakah Apar Tersedia : ${tersedia}");}),
+                                  RadioForm(title: "Apakah APAR Tersedia ?", option: ["Tersedia", "Tidak"], onChange: (dataRadioForm? value) {setState(() {tersedia = value!.selected;});log("Apakah Apar Tersedia : ${tersedia}");}),
                                   if(tersedia == "Tidak") Container(
                                       margin: EdgeInsets.only(top: 30, left:15, right: 15),
                                       // height: 60,
@@ -274,6 +275,16 @@ class _InspeksiAparState2 extends State<InspeksiApar2> {
   String tekanan_tabung = "";
   String posisi = "";
   String kondisi_roda = "";
+  
+  String kondisi_tabung_img = "";
+  String segel_pin_img = "";
+  String tuas_pegangan_img= "";
+  String label_segitiga_img = "";
+  String label_instruksi_img = "";
+  String kondisi_selang_img = "";
+  String tekanan_tabung_img = "";
+  String posisi_img = "";
+  String kondisi_roda_img = "";
 
   @override
   void initState() {
@@ -283,6 +294,7 @@ class _InspeksiAparState2 extends State<InspeksiApar2> {
 
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: SingleChildScrollView(
@@ -348,15 +360,15 @@ class _InspeksiAparState2 extends State<InspeksiApar2> {
                                   disabledInput("Email Inspektor", "${globals.user_email}"),   
                                   SizedBox(height: 20),
                                   disabledInput("Tanggal Inspeksi", "${now.day} ${monthName[now.month-1]} ${now.year}"),                
-                                  RadioForm(title: "Kondisi Tabung :", option: ["Baik", "Rusak"], onChange: (String? value) {setState(() {kondisi_tabung = value!;});log("Kondisi Tabung : ${kondisi_tabung}");}),
-                                  RadioForm(title: "Segel Pin :", option: ["Terpasang", "Lepas", "Tidak ada pin"], onChange: (String? value) {setState(() {segel_pin = value!;});log("Segel Pin : ${segel_pin}");}),
-                                  RadioForm(title: "Tuas Pegangan (Handle) :", option: ["Baik", "Rusak"], onChange: (String? value) {setState(() {tuas_pegangan = value!;});log("Tuas pegangan : ${tuas_pegangan}");}),
-                                  RadioForm(title: "Label (Tanda Segitiga Merah) :", option: ["Tersedia", "Tidak Tersedia"], onChange: (String? value) {setState(() {label_segitiga = value!;});log("Label Segitiga : ${label_segitiga}");}),
-                                  RadioForm(title: "Label (Instruksi Penggunaan APAR) :", option: ["Terbaca", "Tidak Terbaca", "Tidak Ada"], onChange: (String? value) {setState(() {label_instruksi = value!;});log("Label Instruksi : ${label_instruksi}");}),
-                                  RadioForm(title: "Kondisi Selang :", option: ["Baik", "Rusak", "Lainnya"], onChange: (String? value) {setState(() {kondisi_selang = value!;});log("Kondisi Selang : ${kondisi_selang}");}),
-                                  RadioForm(title: "Tekanan Tabung (Posisi Jarum) :", option: ["Tepat di hijau", "Kurang dari hijau", "Lebih dari hijau", "Tidak tersedia"], onChange: (String? value) {setState(() {tekanan_tabung = value!;});log("Tekanan Tabung : ${tekanan_tabung}");}),
-                                  RadioForm(title: "Posisi Alat Pemadam Api :", option: ["Terlihat", "Terhalang"], onChange: (String? value) {setState(() {posisi = value!;});log("Posisi : ${posisi}");}),
-                                  RadioForm(title: "Kondisi Roda :", option: ["Berfungsi", "Tidak", "Not Applicable"], onChange: (String? value) {setState(() {kondisi_roda = value!;});log("kondisi_roda : ${kondisi_roda}");}),
+                                  RadioForm(title: "Kondisi Tabung :", option: ["Baik", "Rusak"], onChange: (dataRadioForm? value) {setState(() {kondisi_tabung = value!.selected; kondisi_tabung_img = value.image;});log("Kondisi Tabung : ${kondisi_tabung}");log("Kondisi Tabung Image : ${kondisi_tabung_img}");}),
+                                  RadioForm(title: "Segel Pin :", option: ["Terpasang", "Lepas", "Tidak ada pin"], onChange: (dataRadioForm? value) {setState(() {segel_pin = value!.selected; segel_pin_img = value.image;});log("Segel Pin : ${segel_pin}");log("Segel Pin Image : ${segel_pin_img}");}),
+                                  RadioForm(title: "Tuas Pegangan (Handle) :", option: ["Baik", "Rusak"], onChange: (dataRadioForm? value) {setState(() {tuas_pegangan = value!.selected; tuas_pegangan_img = value.image;});log("Tuas pegangan : ${tuas_pegangan}");log("Tuas pegangan Image : ${tuas_pegangan_img}");}),
+                                  RadioForm(title: "Label (Tanda Segitiga Merah) :", option: ["Tersedia", "Tidak Tersedia"], onChange: (dataRadioForm? value) {setState(() {label_segitiga = value!.selected; label_segitiga_img = value.image;});log("Label Segitiga : ${label_segitiga}");log("Label Segitiga Image : ${label_segitiga_img}");}),
+                                  RadioForm(title: "Label (Instruksi Penggunaan APAR) :", option: ["Terbaca", "Tidak Terbaca", "Tidak Ada"], onChange: (dataRadioForm? value) {setState(() {label_instruksi = value!.selected; label_instruksi_img = value.image;});log("Label Instruksi : ${label_instruksi}");log("Label Instruksi Image : ${label_instruksi_img}");}),
+                                  RadioForm(title: "Kondisi Selang :", option: ["Baik", "Rusak", "Lainnya"], onChange: (dataRadioForm? value) {setState(() {kondisi_selang = value!.selected; kondisi_selang_img = value.image;});log("Kondisi Selang : ${kondisi_selang}");log("Kondisi Selang Image : ${kondisi_selang_img}");}),
+                                  RadioForm(title: "Tekanan Tabung (Posisi Jarum) :", option: ["Tepat di hijau", "Kurang dari hijau", "Lebih dari hijau", "Tidak tersedia"], onChange: (dataRadioForm? value) {setState(() {tekanan_tabung = value!.selected; tekanan_tabung_img = value.image;});log("Tekanan Tabung : ${tekanan_tabung}");log("Tekanan Tabung Image : ${tekanan_tabung_img}");}),
+                                  RadioForm(title: "Posisi Alat Pemadam Api :", option: ["Terlihat", "Terhalang"], onChange: (dataRadioForm? value) {setState(() {posisi = value!.selected; posisi_img = value.image;});log("Posisi : ${posisi}");log("Posisi Image : ${posisi_img}");}),
+                                  RadioForm(title: "Kondisi Roda :", option: ["Berfungsi", "Tidak", "Not Applicable"], onChange: (dataRadioForm? value) {setState(() {kondisi_roda = value!.selected; kondisi_roda_img = value.image;});log("kondisi_roda : ${kondisi_roda}");log("kondisi_roda Image : ${kondisi_roda_img}");}),
                                   Padding(padding: EdgeInsets.all(20))
                                 ],
                               ),

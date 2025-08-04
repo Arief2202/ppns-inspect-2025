@@ -31,9 +31,9 @@ class TakePictureScreenState extends State<TakePictureScreen> {
     );
 
     // Next, initialize the controller. This returns a Future.
-    setState(() {
-      globals.tempDir = null;
-    });
+    // setState(() {
+    //   globals.tempDir = null;
+    // });
     print(globals.tempDir);
     _initializeControllerFuture = _controller.initialize();
   }
@@ -47,8 +47,6 @@ class TakePictureScreenState extends State<TakePictureScreen> {
 
   @override
   Widget build(BuildContext context) {
-    globals.tempDir = null;
-    print(globals.tempDir);
     return Scaffold(
       appBar: AppBar(title: const Text('Take a picture')),
       // You must wait until the controller is initialized before displaying the
@@ -84,7 +82,7 @@ class TakePictureScreenState extends State<TakePictureScreen> {
             // If the picture was taken, display it on a new screen.
             await Navigator.of(context).push(
               MaterialPageRoute(
-                builder: (context) => DisplayPictureScreen(
+                builder: (context) => PreviewPictureScreen(
                   // Pass the automatically generated path to
                   // the DisplayPictureScreen widget.
                   imagePath: image.path,
@@ -102,6 +100,31 @@ class TakePictureScreenState extends State<TakePictureScreen> {
   }
 }
 
+// A widget that displays the picture taken by the user.
+class PreviewPictureScreen extends StatelessWidget {
+  final String imagePath;
+
+  const PreviewPictureScreen({super.key, required this.imagePath});
+  @override
+  Widget build(BuildContext context) {
+    globals.tempDir = imagePath;
+    print(globals.tempDir);
+    return Scaffold(
+      appBar: AppBar(title: const Text('Display the Picture')),
+      // The image is stored as a file on the device. Use the `Image.file`
+      // constructor with the given path to display the image.
+      body: Image.file(File(imagePath)),
+      floatingActionButton: FloatingActionButton(
+        // Provide an onPressed callback.
+        onPressed: () {
+          Navigator.pop(context);
+          Navigator.pop(context);
+        },
+        child: const Text("Save"),
+      ),
+    );
+  }
+}
 // A widget that displays the picture taken by the user.
 class DisplayPictureScreen extends StatelessWidget {
   final String imagePath;

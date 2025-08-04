@@ -2,6 +2,16 @@
 // ignore_for_file: camel_case_types, unnecessary_null_comparison, file_names, non_constant_identifier_names
 import 'dart:convert';
 
+class dataRadioForm {
+  dataRadioForm({
+    required this.selected,
+    required this.image,
+  });
+  
+  String selected;
+  String image;
+}
+
 class dataCheckInspect {
   dataCheckInspect({
     required this.link,

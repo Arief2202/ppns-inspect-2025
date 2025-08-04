@@ -3,6 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'package:ppns_inspect/openCamera.dart';
+import 'package:ppns_inspect/admin/DataModel.dart';
+import 'package:ppns_inspect/globals.dart' as globals;
 
 class RadioForm extends StatefulWidget {
   RadioForm(
@@ -26,16 +28,18 @@ class _RadioFormState extends State<RadioForm> {
   List<String> option;
   String title;
   String output = "";
+  dataRadioForm outputs = dataRadioForm(selected: "", image: "");
   @override
   void initState() {
     super.initState();
     setState(() {
       output = option.first;
+      outputs.selected = option.first;
       for (int a = 0; a < option.length; a++) {
         if (widget.selected == option[a]) output = option[a];
       }
       WidgetsBinding.instance.addPostFrameCallback((_) {
-        widget.onChange(output);
+        widget.onChange(outputs);
       });
     });
   }
@@ -68,8 +72,9 @@ class _RadioFormState extends State<RadioForm> {
                 onChanged: (String? value) {
                   setState(() {
                     output = value!;
+                    outputs.selected = value;
                   });
-                  if (output != "Lainnya") widget.onChange(value);
+                  if (output != "Lainnya") widget.onChange(outputs);
                 },
               ),
             ),
@@ -89,7 +94,8 @@ class _RadioFormState extends State<RadioForm> {
               ),
               onChanged: (value) {
                 if (value != null && value != "") {
-                  widget.onChange(value);
+                  outputs.selected=value;
+                  widget.onChange(outputs);
                 }
               },
             ), // controller: _data[1],
@@ -108,12 +114,19 @@ class _RadioFormState extends State<RadioForm> {
                         WidgetsFlutterBinding.ensureInitialized();
                         final cameras = await availableCameras();
                         final firstCamera = cameras.first;
+                        globals.tempDir = "";
                         Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) {
-                          return TakePictureScreen(camera: firstCamera);
-                        }),
-                      );
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                            return TakePictureScreen(camera: firstCamera);
+                            }
+                          )
+                        ).then((value){
+                          print(globals.tempDir);
+                          outputs.image = globals.tempDir;
+                          widget.onChange(outputs);
+                        });
                       },
                       child: Text("Take Picture"),
                       style: ButtonStyle(
@@ -129,13 +142,23 @@ class _RadioFormState extends State<RadioForm> {
                                       side: BorderSide(color: Colors.red)))),
                     ),
                   ),
+                  if(outputs.image != "")
                   Container(
                   margin: EdgeInsets.only(left: 10),
                     child: SizedBox(
                       width: 100,
                       height: 40,
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) {
+                                return DisplayPictureScreen(imagePath: outputs.image);
+                              }
+                            )
+                          );
+                        },
                         child: Text("Preview"),
                         style: ButtonStyle(
                             foregroundColor:
