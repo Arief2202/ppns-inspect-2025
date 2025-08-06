@@ -1,6 +1,7 @@
 // ignore_for_file: file_names, camel_case_types, library_private_types_in_public_api, prefer_const_literals_to_create_immutables, prefer_const_constructors, prefer_const_constructors_in_immutables, use_build_context_synchronously, sized_box_for_whitespace, sort_child_properties_last, unused_local_variable, must_be_immutable, prefer_final_fields, use_key_in_widget_constructors, unnecessary_this, depend_on_referenced_packages, non_constant_identifier_names, curly_braces_in_flow_control_structures, unnecessary_brace_in_string_interps
 
 import 'package:flutter/material.dart';
+import 'package:ppns_inspect/openCamera.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
@@ -90,13 +91,13 @@ class _HasilP3KState extends State<HasilP3K> with RestorationMixin {
   Timer? timer;
   
   List<String> titleColumn = [
-    "id inspeksi", "Email Inspektor", "Lokasi P3K", "Kasa Steril Bungkus", "Perban (lebar 5 Cm)", "Perban (lebar 10 Cm)", "Plester (lebar 1,25 Cm)", "Plester Cepat", "Kapas (25 gram)", "Kain segitiga/mittela", "Gunting", "Peniti", "Sarung tangan sekali pakai", "Masker", "Pinset", "Lampu senter", "Gelas untuk cuci mata", "Kantong plastik bersih", "Aquades (100 ml lar Saline)", "oxygen", "obat_luka_bakar", "buku_catatan", "daftar_isi", "durasi_inspeksi", "Tanggal Inspeksi"];
+    "id inspeksi", "Email Inspektor", "Lokasi P3K", "Kasa Steril Bungkus", "Perban (lebar 5 Cm)", "Perban (lebar 10 Cm)", "Plester (lebar 1,25 Cm)", "Plester Cepat", "Kapas (25 gram)", "Kain segitiga/mittela", "Gunting", "Peniti", "Sarung tangan sekali pakai", "Masker", "Pinset", "Lampu senter", "Gelas untuk cuci mata", "Kantong plastik bersih", "Aquades (100 ml lar Saline)", "oxygen", "obat_luka_bakar", "buku_catatan", "daftar_isi", "durasi_inspeksi", "Tanggal Inspeksi", "Kasa Steril Bungkus Image", "Perban (lebar 5 Cm) Image", "Perban (lebar 10 Cm) Image", "Plester (lebar 1,25 Cm) Image", "Plester Cepat Image", "Kapas (25 gram) Image", "Kain segitiga/mittela Image", "Gunting Image", "Peniti Image", "Sarung tangan sekali pakai Image", "Masker Image", "Pinset Image", "Lampu senter Image", "Gelas untuk cuci mata Image", "Kantong plastik bersih Image", "Aquades (100 ml lar Saline) Image", "oxygen Image", "obat_luka_bakar Image", "buku_catatan Image", "daftar_isi Image"];
   List<String> titleColumn2 = [
     "id", "Lokasi", "Timestamp"
   ];
   
   List<String> titleColumnExport = [
-    "id inspeksi", "Email Inspektor", "Nomor P3K", "Lokasi P3K",   "Kasa Steril Bungkus",  "Perban (lebar 5 Cm)", "Perban (lebar 10 Cm)", "Plester (lebar 1,25 Cm)", "Plester Cepat", "Kapas (25 gram)", "Kain segitiga/mittela", "Gunting", "Peniti", "Sarung tangan sekali pakai", "Masker", "Pinset", "Lampu senter", "Gelas untuk cuci mata", "Kantong plastik bersih", "Aquades (100 ml lar Saline)", "oxygen", "obat_luka_bakar", "buku_catatan", "daftar_isi", "durasi_inspeksi", "Tanggal Inspeksi"];
+    "id inspeksi", "Email Inspektor", "Nomor P3K", "Lokasi P3K",   "Kasa Steril Bungkus",  "Perban (lebar 5 Cm)", "Perban (lebar 10 Cm)", "Plester (lebar 1,25 Cm)", "Plester Cepat", "Kapas (25 gram)", "Kain segitiga/mittela", "Gunting", "Peniti", "Sarung tangan sekali pakai", "Masker", "Pinset", "Lampu senter", "Gelas untuk cuci mata", "Kantong plastik bersih", "Aquades (100 ml lar Saline)", "oxygen", "obat_luka_bakar", "buku_catatan", "daftar_isi", "durasi_inspeksi", "Tanggal Inspeksi", "Kasa Steril Bungkus Image", "Perban (lebar 5 Cm) Image", "Perban (lebar 10 Cm) Image", "Plester (lebar 1,25 Cm) Image", "Plester Cepat Image", "Kapas (25 gram) Image", "Kain segitiga/mittela Image", "Gunting Image", "Peniti Image", "Sarung tangan sekali pakai Image", "Masker Image", "Pinset Image", "Lampu senter Image", "Gelas untuk cuci mata Image", "Kantong plastik bersih Image", "Aquades (100 ml lar Saline) Image", "oxygen Image", "obat_luka_bakar Image", "buku_catatan Image", "daftar_isi Image"];
   List<String> titleColumnExport2 = [
     "id", "Nomor P3K", "Lokasi", "Timestamp"
   ];
@@ -107,7 +108,7 @@ class _HasilP3KState extends State<HasilP3K> with RestorationMixin {
   late DataInspeksiP3KAPI currentData = DataInspeksiP3KAPI(status: "", pesan: "", data: makeData);
   late DataAPIP3K currentDataApar = DataAPIP3K(status: "", pesan: "", data: makeData);
 
-  static List<String> columnExcel = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'X', 'Y', 'Z', 'AA', 'AB', 'AC', 'AD', 'AE'];
+  static List<String> columnExcel = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'AA', 'AB', 'AC', 'AD', 'AE', 'AF', 'AG', 'AH', 'AI', 'AJ', 'AK', 'AL', 'AM', 'AN', 'AO', 'AP', 'AQ', 'AR', 'AS', 'AT', 'AU', 'AV', 'AW', 'AX', 'AY', 'AZ'];
   static List<String> DropDownName = <String>['Sudah Di Inspeksi', 'Belum Di Inspeksi'];
   String dropdownValue = DropDownName.first;
   
@@ -453,7 +454,21 @@ class SimpleTablePage extends StatelessWidget {
         columnsLength: titleColumn.length,
         rowsLength: data.length,
         columnsTitleBuilder: (i) => Text(titleColumn[i]),
-        contentCellBuilder: (i, j) => Text(inspeksi == 'sudah' ? (i > 1 ? data[j][i+1] : data[j][i]) : (i > 0 ? data[j][i+1] : data[j][i])),
+        contentCellBuilder: (i, j) =>
+        inspeksi == 'sudah' ? 
+          (data[j][i+1].contains("http://") ? 
+          ElevatedButton(onPressed: (){
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) {
+                // return InspeksiApar();
+                return DisplayPictureUrl(imageUrl: data[j][i+1]);
+              }),
+            );
+          }, child: Text("View Photo")) : 
+          Text((i > 1 ? data[j][i+1] : data[j][i])))
+          : 
+          Text((i > 1 ? data[j][i+1] : data[j][i])),
         legendCell: Text('No P3K'),
         cellDimensions: CellDimensions.fixed(
           contentCellWidth: 120, 

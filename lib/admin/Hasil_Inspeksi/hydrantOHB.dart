@@ -1,6 +1,7 @@
 // ignore_for_file: file_names, camel_case_types, library_private_types_in_public_api, prefer_const_literals_to_create_immutables, prefer_const_constructors, prefer_const_constructors_in_immutables, use_build_context_synchronously, sized_box_for_whitespace, sort_child_properties_last, unused_local_variable, must_be_immutable, prefer_final_fields, use_key_in_widget_constructors, unnecessary_this, depend_on_referenced_packages, non_constant_identifier_names, curly_braces_in_flow_control_structures, unnecessary_brace_in_string_interps
 
 import 'package:flutter/material.dart';
+import 'package:ppns_inspect/openCamera.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
@@ -89,14 +90,14 @@ class _HasilHydrantOHBState extends State<HasilHydrantOHB> with RestorationMixin
   DateTime selectedDate = DateTime.now();
   Timer? timer;
   List<String> titleColumn = [
-    "id inspeksi", "Email Inspektor", "Lokasi Hydrant", "Kondisi Kotak", "Posisi Kotak", "Kondisi Nozzle", "Kondisi Selang", "Jenis Selang", "Kondisi Coupling", "Tuas Pembuka Pillar Hydrant", "Kondisi Outlet Cop dan Bonet Pillar Hydrant", "Penutup Cop Hydrant", "Apakah akan dilakukan flushing Hydrant", "Berapa Tekanan Jalur Hydrant", "Durasi Inspeksi", "Tanggal Inspeksi"
+    "id inspeksi", "Email Inspektor", "Lokasi Hydrant", "Kondisi Kotak", "Posisi Kotak", "Kondisi Nozzle", "Kondisi Selang", "Jenis Selang", "Kondisi Coupling", "Tuas Pembuka Pillar Hydrant", "Kondisi Outlet Cop dan Bonet Pillar Hydrant", "Penutup Cop Hydrant", "Apakah akan dilakukan flushing Hydrant", "Berapa Tekanan Jalur Hydrant", "Durasi Inspeksi", "Tanggal Inspeksi", "Kondisi Kotak Image", "Posisi Kotak Image", "Kondisi Nozzle Image", "Kondisi Selang Image", "Jenis Selang Image", "Kondisi Coupling Image", "Tuas Pembuka Pillar Hydrant Image", "Kondisi Outlet Cop dan Bonet Pillar Hydrant Image", "Penutup Cop Hydrant Image", "Apakah akan dilakukan flushing Hydrant Image", "Berapa Tekanan Jalur Hydrant Image"
   ];
   List<String> titleColumn2 = [
     "id", "Lokasi", "Timestamp"
   ];
   
   List<String> titleColumnExport = [
-    "id inspeksi", "Email Inspektor", "Nomor Hydrant", "Lokasi Hydrant", "Kondisi Kotak", "Posisi Kotak", "Kondisi Nozzle", "Kondisi Selang", "Jenis Selang", "Kondisi Coupling", "Tuas Pembuka Pillar Hydrant", "Kondisi Outlet Cop dan Bonet Pillar Hydrant", "Penutup Cop Hydrant", "Apakah akan dilakukan flushing Hydrant", "Berapa Tekanan Jalur Hydrant", "Durasi Inspeksi", "Tanggal Inspeksi"
+    "id inspeksi", "Email Inspektor", "Nomor Hydrant", "Lokasi Hydrant", "Kondisi Kotak", "Posisi Kotak", "Kondisi Nozzle", "Kondisi Selang", "Jenis Selang", "Kondisi Coupling", "Tuas Pembuka Pillar Hydrant", "Kondisi Outlet Cop dan Bonet Pillar Hydrant", "Penutup Cop Hydrant", "Apakah akan dilakukan flushing Hydrant", "Berapa Tekanan Jalur Hydrant", "Durasi Inspeksi", "Tanggal Inspeksi", "Kondisi Kotak Image", "Posisi Kotak Image", "Kondisi Nozzle Image", "Kondisi Selang Image", "Jenis Selang Image", "Kondisi Coupling Image", "Tuas Pembuka Pillar Hydrant Image", "Kondisi Outlet Cop dan Bonet Pillar Hydrant Image", "Penutup Cop Hydrant Image", "Apakah akan dilakukan flushing Hydrant Image", "Berapa Tekanan Jalur Hydrant Image"
   ];
   List<String> titleColumnExport2 = [
     "id", "Nomor Hydrant", "Lokasi", "Timestamp"
@@ -107,7 +108,7 @@ class _HasilHydrantOHBState extends State<HasilHydrantOHB> with RestorationMixin
   
   late DataInspeksiOHBAPI currentData = DataInspeksiOHBAPI(status: "", pesan: "", data: makeData);
   late DataAPIHydrant currentDataApar = DataAPIHydrant(status: "", pesan: "", data: makeData);
-  static List<String> columnExcel = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'X', 'Y', 'Z'];
+  static List<String> columnExcel = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'AA', 'AB', 'AC', 'AD', 'AE', 'AF', 'AG', 'AH', 'AI', 'AJ', 'AK', 'AL', 'AM', 'AN', 'AO', 'AP', 'AQ', 'AR', 'AS', 'AT', 'AU', 'AV', 'AW', 'AX', 'AY', 'AZ'];
   static List<String> DropDownName = <String>['Sudah Di Inspeksi', 'Belum Di Inspeksi'];
   String dropdownValue = DropDownName.first;
   
@@ -452,7 +453,21 @@ class SimpleTablePage extends StatelessWidget {
         columnsLength: titleColumn.length,
         rowsLength: data.length,
         columnsTitleBuilder: (i) => Text(titleColumn[i]),
-        contentCellBuilder: (i, j) => Text(inspeksi == 'sudah' ? (i > 1 ? data[j][i+1] : data[j][i]) : (i > 0 ? data[j][i+1] : data[j][i])),
+        contentCellBuilder: (i, j) => 
+        inspeksi == 'sudah' ? 
+          (data[j][i+1].contains("http://") ? 
+          ElevatedButton(onPressed: (){
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) {
+                // return InspeksiApar();
+                return DisplayPictureUrl(imageUrl: data[j][i+1]);
+              }),
+            );
+          }, child: Text("View Photo")) : 
+          Text((i > 1 ? data[j][i+1] : data[j][i])))
+          : 
+          Text((i > 1 ? data[j][i+1] : data[j][i])),
         legendCell: Text('No Hydrant'),
         cellDimensions: CellDimensions.fixed(
           contentCellWidth: 120, 
