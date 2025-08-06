@@ -28,6 +28,7 @@ class _InputNomorState extends State<InputNomor> {
   @override
   void initState() {
     super.initState();
+    globals.page = "input_nomor";
   }
 
   bool checked = false;
@@ -76,7 +77,7 @@ class _InputNomorState extends State<InputNomor> {
                                   Container(
                                     margin: EdgeInsets.only(top: 20),
                                     child: widget.code == 'exit' ?
-                                      RadioForm(title: "${lokasi_text} :", option: ["Gedung 1", "Gedung 2", "Gedung 3"], onChange: (String? value) {setState(() {lokasi = value!;});})
+                                      RadioForm(title: "${lokasi_text} :", option: ["Gedung 1", "Gedung 2", "Gedung 3"], onChange: (dataRadioForm? value) {setState(() {lokasi = value!.selected;});})
                                     : 
                                     TextField(
                                       controller: nomor,

@@ -28,6 +28,7 @@ class _DashboardState extends State<Dashboard> {
   @override
   void initState() {
     super.initState();
+    globals.page = "dashboard_inspektor";
     check_reminder_inspeksi();
     notif.initialize(flutterLocalNotificationsPlugin);
     globals.timerNotif = Timer.periodic(

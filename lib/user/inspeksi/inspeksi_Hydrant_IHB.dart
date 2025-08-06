@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:ppns_inspect/DisabledInput.dart';
 import 'package:ppns_inspect/RadioForm.dart';
+import 'package:ppns_inspect/admin/DataModel.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:ppns_inspect/globals.dart' as globals;
 import 'package:http/http.dart' as http;
@@ -45,10 +46,19 @@ class _InspeksiHydrantIHBState extends State<InspeksiHydrantIHB> {
   String kondisi_landing_valve = "";
   String kondisi_tray = "";
 
+  String kondisi_kotak_img = "";
+  String posisi_kotak_img = "";
+  String kondisi_nozzle_img= "";
+  String kondisi_selang_img = "";
+  String jenis_selang_img = "";
+  String kondisi_coupling_img = "";
+  String kondisi_landing_valve_img = "";
+  String kondisi_tray_img = "";
+
   @override
   void initState() {
     super.initState();
-
+    globals.page = "inspeksi";
   }
 
   @override
@@ -117,14 +127,14 @@ class _InspeksiHydrantIHBState extends State<InspeksiHydrantIHB> {
                                   disabledInput("Email Inspektor", "${globals.user_email}"),   
                                   SizedBox(height: 20),
                                   disabledInput("Tanggal Inspeksi", "${now.day} ${monthName[now.month-1]} ${now.year}"),                
-                                  RadioForm(title: "Kondisi Kotak :", option: ["Bersih", "Kotor", "Lainnya"], onChange: (String? value) {setState(() {kondisi_kotak = value!;});log("Kondisi Kotak : ${kondisi_kotak}");}),
-                                  RadioForm(title: "Posisi Kotak :", option: ["Tidak Terhalang", "Terhalang"], onChange: (String? value) {setState(() {posisi_kotak = value!;});log("Posisi Kotak : ${posisi_kotak}");}),
-                                  RadioForm(title: "Kondisi Nozzle :", option: ["Baik", "Rusak", "Lainnya"], onChange: (String? value) {setState(() {kondisi_nozzle = value!;});log("Kondisi Nozzle : ${kondisi_nozzle}");}),
-                                  RadioForm(title: "Kondisi Selang :", option: ["Baik", "Bocor", "Lainnya"], onChange: (String? value) {setState(() {kondisi_selang = value!;});log("Kondisi Selang : ${kondisi_selang}");}),
-                                  RadioForm(title: "Jenis Selang :", option: ["Kanvas hose", "Rubber hose"], onChange: (String? value) {setState(() {jenis_selang = value!;});log("Jenis Selang : ${jenis_selang}");}),
-                                  RadioForm(title: "Kondisi Coupling :", option: ["Baik", "Rusak", "Lainnya"], onChange: (String? value) {setState(() {kondisi_coupling = value!;});log("Kondisi Coupling : ${kondisi_coupling}");}),
-                                  RadioForm(title: "Kondisi Landing Valve :", option: ["Baik", "Rusak", "Lainnya"], onChange: (String? value) {setState(() {kondisi_landing_valve = value!;});log("Kondisi Landing Valve : ${kondisi_landing_valve}");}),
-                                  RadioForm(title: "Kondisi Tray :", option: ["Baik", "Rusak", "Lainnya"], onChange: (String? value) {setState(() {kondisi_tray = value!;});log("Kondisi Tray : ${kondisi_tray}");}),
+                                  RadioForm(title: "Kondisi Kotak :", option: ["Bersih", "Kotor", "Lainnya"], onChange: (dataRadioForm? value) {setState(() {kondisi_kotak = value!.selected; kondisi_kotak_img = value.image;});log("Kondisi Kotak : ${kondisi_kotak}");}),
+                                  RadioForm(title: "Posisi Kotak :", option: ["Tidak Terhalang", "Terhalang"], onChange: (dataRadioForm? value) {setState(() {posisi_kotak = value!.selected; posisi_kotak_img = value.image;});log("Posisi Kotak : ${posisi_kotak}");}),
+                                  RadioForm(title: "Kondisi Nozzle :", option: ["Baik", "Rusak", "Lainnya"], onChange: (dataRadioForm? value) {setState(() {kondisi_nozzle = value!.selected; kondisi_nozzle_img = value.image;});log("Kondisi Nozzle : ${kondisi_nozzle}");}),
+                                  RadioForm(title: "Kondisi Selang :", option: ["Baik", "Bocor", "Lainnya"], onChange: (dataRadioForm? value) {setState(() {kondisi_selang = value!.selected; kondisi_selang_img = value.image;});log("Kondisi Selang : ${kondisi_selang}");}),
+                                  RadioForm(title: "Jenis Selang :", option: ["Kanvas hose", "Rubber hose"], onChange: (dataRadioForm? value) {setState(() {jenis_selang = value!.selected; jenis_selang_img = value.image;});log("Jenis Selang : ${jenis_selang}");}),
+                                  RadioForm(title: "Kondisi Coupling :", option: ["Baik", "Rusak", "Lainnya"], onChange: (dataRadioForm? value) {setState(() {kondisi_coupling = value!.selected; kondisi_coupling_img = value.image;});log("Kondisi Coupling : ${kondisi_coupling}");}),
+                                  RadioForm(title: "Kondisi Landing Valve :", option: ["Baik", "Rusak", "Lainnya"], onChange: (dataRadioForm? value) {setState(() {kondisi_landing_valve = value!.selected; kondisi_landing_valve_img = value.image;});log("Kondisi Landing Valve : ${kondisi_landing_valve}");}),
+                                  RadioForm(title: "Kondisi Tray :", option: ["Baik", "Rusak", "Lainnya"], onChange: (dataRadioForm? value) {setState(() {kondisi_tray = value!.selected; kondisi_tray_img = value.image;});log("Kondisi Tray : ${kondisi_tray}");}),
                                   Padding(padding: EdgeInsets.all(20))
                                 ],
                               ),
@@ -160,14 +170,48 @@ class _InspeksiHydrantIHBState extends State<InspeksiHydrantIHB> {
                             durasi += "${minutes}:";
                             durasi += seconds<10? '0' : '';
                             durasi += "${seconds}";
-                            var url = Uri.parse("http://${globals.endpoint}/api_inspeksi_ihb.php?create&user_id=${globals.user_id}&hydrant_id=${widget.id}&kondisi_kotak=${kondisi_kotak}&posisi_kotak=${posisi_kotak}&kondisi_nozzle=${kondisi_nozzle}&kondisi_selang=${kondisi_selang}&jenis_selang=${jenis_selang}&kondisi_coupling=${kondisi_coupling}&kondisi_landing_valve=${kondisi_landing_valve}&kondisi_tray=${kondisi_tray}&durasi_inspeksi=${durasi}");  
+                            // var url = Uri.parse("http://${globals.endpoint}/api_inspeksi_ihb.php?create&user_id=${globals.user_id}&hydrant_id=${widget.id}&kondisi_kotak=${kondisi_kotak}&posisi_kotak=${posisi_kotak}&kondisi_nozzle=${kondisi_nozzle}&kondisi_selang=${kondisi_selang}&jenis_selang=${jenis_selang}&kondisi_coupling=${kondisi_coupling}&kondisi_landing_valve=${kondisi_landing_valve}&kondisi_tray=${kondisi_tray}&durasi_inspeksi=${durasi}");  
                             try {
-                              final response = await http.get(url).timeout(
-                                const Duration(seconds: 1),
-                                onTimeout: () {
-                                  return http.Response('Error', 408);
-                                },
+                              
+                              var request = http.MultipartRequest(
+                                'POST',
+                                Uri.parse("http://${globals.endpoint}/api_inspeksi_ihb.php"),
                               );
+                              Map<String, String> headers = {"Content-type": "multipart/form-data"};
+                              request.fields['create'] = "";
+                              request.fields['user_id'] = "${globals.user_id}";
+                              request.fields['hydrant_id'] = "${widget.id}";
+                              request.fields['durasi_inspeksi'] = "${durasi}";
+                              request.fields['kondisi_kotak'] = "${kondisi_kotak}";
+                              request.fields['posisi_kotak'] = "${posisi_kotak}";
+                              request.fields['kondisi_nozzle'] = "${kondisi_nozzle}";
+                              request.fields['kondisi_selang'] = "${kondisi_selang}";
+                              request.fields['jenis_selang'] = "${jenis_selang}";
+                              request.fields['kondisi_coupling'] = "${kondisi_coupling}";
+                              request.fields['kondisi_landing_valve'] = "${kondisi_landing_valve}";
+                              request.fields['kondisi_tray'] = "${kondisi_tray}";
+
+                              if(kondisi_kotak_img != "") request.files.add(addPhoto(kondisi_kotak_img, 'kondisi_kotak_img'));
+                              if(posisi_kotak_img != "") request.files.add(addPhoto(posisi_kotak_img, 'posisi_kotak_img'));
+                              if(kondisi_nozzle_img != "") request.files.add(addPhoto(kondisi_nozzle_img, 'kondisi_nozzle_img'));
+                              if(kondisi_selang_img != "") request.files.add(addPhoto(kondisi_selang_img, 'kondisi_selang_img'));
+                              if(jenis_selang_img != "") request.files.add(addPhoto(jenis_selang_img, 'jenis_selang_img'));
+                              if(kondisi_coupling_img != "") request.files.add(addPhoto(kondisi_coupling_img, 'kondisi_coupling_img'));
+                              if(kondisi_landing_valve_img != "") request.files.add(addPhoto(kondisi_landing_valve_img, 'kondisi_landing_valve_img'));
+                              if(kondisi_tray_img != "") request.files.add(addPhoto(kondisi_tray_img, 'kondisi_tray_img'));
+
+                              request.headers.addAll(headers);
+                              print("request: " + request.toString());
+                              var response = await request.send().timeout(
+                                const Duration(seconds: 1)
+                              );
+
+                              // final response = await http.get(url).timeout(
+                              //   const Duration(seconds: 1),
+                              //   onTimeout: () {
+                              //     return http.Response('Error', 408);
+                              //   },
+                              // );
                               if (response.statusCode == 200) {
                                 
                                   Alert(

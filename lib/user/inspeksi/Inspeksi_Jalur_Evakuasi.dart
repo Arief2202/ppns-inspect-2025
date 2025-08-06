@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:ppns_inspect/DisabledInput.dart';
 import 'package:ppns_inspect/RadioForm.dart';
+import 'package:ppns_inspect/admin/DataModel.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:ppns_inspect/globals.dart' as globals;
 import 'package:http/http.dart' as http;
@@ -43,6 +44,18 @@ class _InspeksiJalurEvakuasiState extends State<InspeksiJalurEvakuasi> {
   String eksit_terkunci = "" ; 
   String visibilitas_eksit = "" ; 
   String pencahayaan_eksit = "" ;
+
+  String lokasi_img = "";
+  String pintu_terkunci_img = "" ;
+  String pintu_berfungsi_img = "" ;
+  String ganjal_img = "" ;
+  String ganjal_tangga_img = "" ;
+  String kebersihan_tangga_img = "" ;
+  String hambatan_eksit_img = "" ; 
+  String eksit_terkunci_img = "" ; 
+  String visibilitas_eksit_img = "" ; 
+  String pencahayaan_eksit_img = "" ;
+
   String durasi = "00:00";
 
   static String pintu_terkunci_text = "Pintu eksit tidak terkunci.";
@@ -58,7 +71,7 @@ class _InspeksiJalurEvakuasiState extends State<InspeksiJalurEvakuasi> {
   @override
   void initState() {
     super.initState();
-
+    globals.page = "inspeksi";
   }
 
   @override
@@ -129,23 +142,23 @@ class _InspeksiJalurEvakuasiState extends State<InspeksiJalurEvakuasi> {
                                   disabledInput("Lokasi", "${lokasi}"),     
                                   SizedBox(height: 30),
                                   Text("1. Pintu Exit",style: TextStyle(fontFamily: "SanFrancisco",decoration: TextDecoration.none,fontWeight: FontWeight.w900,fontSize: 16)),           
-                                  RadioForm(title: "${pintu_terkunci_text} :", option: ["Ya", "Tidak", "Lainnya"], onChange: (String? value) {setState(() {pintu_terkunci = value!;});log("${pintu_terkunci_text} : ${pintu_terkunci}");}),
-                                  RadioForm(title: "${pintu_berfungsi_text} :", option: ["Ya", "Tidak", "Lainnya"], onChange: (String? value) {setState(() {pintu_berfungsi = value!;});log("${pintu_berfungsi_text} : ${pintu_berfungsi}");}),
-                                  RadioForm(title: "${ganjal_text} :", option: ["Ya", "Tidak", "Lainnya"], onChange: (String? value) {setState(() {ganjal = value!;});log("${ganjal_text} : ${ganjal}");}),
+                                  RadioForm(title: "${pintu_terkunci_text} :", option: ["Ya", "Tidak", "Lainnya"], onChange: (dataRadioForm? value) {setState(() {pintu_terkunci = value!.selected; pintu_terkunci_img = value.image;});log("${pintu_terkunci_text} : ${pintu_terkunci}");}),
+                                  RadioForm(title: "${pintu_berfungsi_text} :", option: ["Ya", "Tidak", "Lainnya"], onChange: (dataRadioForm? value) {setState(() {pintu_berfungsi = value!.selected; pintu_berfungsi_img = value.image;});log("${pintu_berfungsi_text} : ${pintu_berfungsi}");}),
+                                  RadioForm(title: "${ganjal_text} :", option: ["Ya", "Tidak", "Lainnya"], onChange: (dataRadioForm? value) {setState(() {ganjal = value!.selected; ganjal_img = value.image;});log("${ganjal_text} : ${ganjal}");}),
                                   SizedBox(height: 30),
                                   Text("2. Tangga Kebakaran",style: TextStyle(fontFamily: "SanFrancisco",decoration: TextDecoration.none,fontWeight: FontWeight.w900,fontSize: 16)),           
-                                  RadioForm(title: "${ganjal_tangga_text} :", option: ["Ya", "Tidak", "Lainnya"], onChange: (String? value) {setState(() {ganjal_tangga = value!;});log("${ganjal_tangga_text} : ${ganjal_tangga}");}),
-                                  RadioForm(title: "${kebersihan_tangga_text} :", option: ["Bersih", "Kotor", "Lainnya"], onChange: (String? value) {setState(() {kebersihan_tangga = value!;});log("${kebersihan_tangga_text} : ${kebersihan_tangga}");}),
+                                  RadioForm(title: "${ganjal_tangga_text} :", option: ["Ya", "Tidak", "Lainnya"], onChange: (dataRadioForm? value) {setState(() {ganjal_tangga = value!.selected; ganjal_tangga_img = value.image;});log("${ganjal_tangga_text} : ${ganjal_tangga}");}),
+                                  RadioForm(title: "${kebersihan_tangga_text} :", option: ["Bersih", "Kotor", "Lainnya"], onChange: (dataRadioForm? value) {setState(() {kebersihan_tangga = value!.selected; kebersihan_tangga_img = value.image;});log("${kebersihan_tangga_text} : ${kebersihan_tangga}");}),
                                   SizedBox(height: 30),
                                   Text("3. Akses eksit dan koridor untuk jalur ke luar",style: TextStyle(fontFamily: "SanFrancisco",decoration: TextDecoration.none,fontWeight: FontWeight.w900,fontSize: 16)),           
-                                  RadioForm(title: "${hambatan_eksit_text} :", option: ["Ya", "Tidak", "Lainnya"], onChange: (String? value) {setState(() {hambatan_eksit = value!;});log("${hambatan_eksit_text} : ${hambatan_eksit}");}),
+                                  RadioForm(title: "${hambatan_eksit_text} :", option: ["Ya", "Tidak", "Lainnya"], onChange: (dataRadioForm? value) {setState(() {hambatan_eksit = value!.selected; hambatan_eksit_img = value.image;});log("${hambatan_eksit_text} : ${hambatan_eksit}");}),
                                   SizedBox(height: 30),
                                   Text("4. Eksit pelepasan di lantai dasar",style: TextStyle(fontFamily: "SanFrancisco",decoration: TextDecoration.none,fontWeight: FontWeight.w900,fontSize: 16)),           
-                                  RadioForm(title: "${eksit_terkunci_text} :", option: ["Ya", "Tidak", "Lainnya"], onChange: (String? value) {setState(() {eksit_terkunci = value!;});log("${eksit_terkunci_text} : ${eksit_terkunci}");}),
+                                  RadioForm(title: "${eksit_terkunci_text} :", option: ["Ya", "Tidak", "Lainnya"], onChange: (dataRadioForm? value) {setState(() {eksit_terkunci = value!.selected; eksit_terkunci_img = value.image;});log("${eksit_terkunci_text} : ${eksit_terkunci}");}),
                                   SizedBox(height: 30),
                                   Text("5. Tanda Eksit",style: TextStyle(fontFamily: "SanFrancisco",decoration: TextDecoration.none,fontWeight: FontWeight.w900,fontSize: 16)),           
-                                  RadioForm(title: "${visibilitas_eksit_text} :", option: ["Terlihat", "Terhalang", "Lainnya"], onChange: (String? value) {setState(() {visibilitas_eksit = value!;});log("${visibilitas_eksit_text} : ${visibilitas_eksit}");}),
-                                  RadioForm(title: "${pencahayaan_eksit_text} :", option: ["Menyala", "Mati", "Lainnya"], onChange: (String? value) {setState(() {pencahayaan_eksit = value!;});log("${pencahayaan_eksit_text} : ${pencahayaan_eksit}");}),
+                                  RadioForm(title: "${visibilitas_eksit_text} :", option: ["Terlihat", "Terhalang", "Lainnya"], onChange: (dataRadioForm? value) {setState(() {visibilitas_eksit = value!.selected; visibilitas_eksit_img = value.image;});log("${visibilitas_eksit_text} : ${visibilitas_eksit}");}),
+                                  RadioForm(title: "${pencahayaan_eksit_text} :", option: ["Menyala", "Mati", "Lainnya"], onChange: (dataRadioForm? value) {setState(() {pencahayaan_eksit = value!.selected; pencahayaan_eksit_img = value.image;});log("${pencahayaan_eksit_text} : ${pencahayaan_eksit}");}),
                                   Padding(padding: EdgeInsets.all(20))
                                 ],
                               ),
@@ -181,16 +194,51 @@ class _InspeksiJalurEvakuasiState extends State<InspeksiJalurEvakuasi> {
                             durasi += "${minutes}:";
                             durasi += seconds<10? '0' : '';
                             durasi += "${seconds}";
-                            var url = Uri.parse("http://${globals.endpoint}/api_inspeksi_jalur_evakuasi.php?create&user_id=${globals.user_id}&lokasi=${lokasi}&pintu_terkunci=${pintu_terkunci}&pintu_berfungsi=${pintu_berfungsi}&ganjal=${ganjal}&ganjal_tangga=${ganjal_tangga}&kebersihan_tangga=${kebersihan_tangga}&hambatan_eksit=${hambatan_eksit}&eksit_terkunci=${eksit_terkunci}&visibilitas_eksit=${visibilitas_eksit}&pencahayaan_eksit=${pencahayaan_eksit}&durasi_inspeksi=${durasi}");  
-                            print(url);
+                            // var url = Uri.parse("http://${globals.endpoint}/api_inspeksi_jalur_evakuasi.php?create&user_id=${globals.user_id}&lokasi=${lokasi}&pintu_terkunci=${pintu_terkunci}&pintu_berfungsi=${pintu_berfungsi}&ganjal=${ganjal}&ganjal_tangga=${ganjal_tangga}&kebersihan_tangga=${kebersihan_tangga}&hambatan_eksit=${hambatan_eksit}&eksit_terkunci=${eksit_terkunci}&visibilitas_eksit=${visibilitas_eksit}&pencahayaan_eksit=${pencahayaan_eksit}&durasi_inspeksi=${durasi}");  
+
                             try {
-                              final response = await http.get(url).timeout(
-                                const Duration(seconds: 2),
-                                onTimeout: () {
-                                  return http.Response('Error', 408);
-                                },
+                              var request = http.MultipartRequest(
+                                'POST',
+                                Uri.parse("http://${globals.endpoint}/api_inspeksi_jalur_evakuasi.php"),
                               );
-                              print(response.statusCode);
+                              Map<String, String> headers = {"Content-type": "multipart/form-data"};
+                              request.fields['create'] = "";
+                              request.fields['user_id'] = "${globals.user_id}";
+                              request.fields['lokasi'] = "${lokasi}";
+                              request.fields['durasi_inspeksi'] = "${durasi}";
+                              request.fields['pintu_terkunci'] = "${pintu_terkunci}";
+                              request.fields['pintu_berfungsi'] = "${pintu_berfungsi}";
+                              request.fields['ganjal'] = "${ganjal}";
+                              request.fields['ganjal_tangga'] = "${ganjal_tangga}";
+                              request.fields['kebersihan_tangga'] = "${kebersihan_tangga}";
+                              request.fields['hambatan_eksit'] = "${hambatan_eksit}";
+                              request.fields['eksit_terkunci'] = "${eksit_terkunci}";
+                              request.fields['visibilitas_eksit'] = "${visibilitas_eksit}";
+                              request.fields['pencahayaan_eksit'] = "${pencahayaan_eksit}";
+
+                              if(pintu_terkunci_img != "") request.files.add(addPhoto(pintu_terkunci_img, 'pintu_terkunci_img'));
+                              if(pintu_berfungsi_img != "") request.files.add(addPhoto(pintu_berfungsi_img, 'pintu_berfungsi_img'));
+                              if(ganjal_img != "") request.files.add(addPhoto(ganjal_img, 'ganjal_img'));
+                              if(ganjal_tangga_img != "") request.files.add(addPhoto(ganjal_tangga_img, 'ganjal_tangga_img'));
+                              if(kebersihan_tangga_img != "") request.files.add(addPhoto(kebersihan_tangga_img, 'kebersihan_tangga_img'));
+                              if(hambatan_eksit_img != "") request.files.add(addPhoto(hambatan_eksit_img, 'hambatan_eksit_img'));
+                              if(eksit_terkunci_img != "") request.files.add(addPhoto(eksit_terkunci_img, 'eksit_terkunci_img'));
+                              if(visibilitas_eksit_img != "") request.files.add(addPhoto(visibilitas_eksit_img, 'visibilitas_eksit_img'));
+                              if(pencahayaan_eksit_img != "") request.files.add(addPhoto(pencahayaan_eksit_img, 'pencahayaan_eksit_img'));
+
+                              request.headers.addAll(headers);
+                              print("request: " + request.toString());
+                              var response = await request.send().timeout(
+                                const Duration(seconds: 1)
+                              );
+
+                              // final response = await http.get(url).timeout(
+                              //   const Duration(seconds: 2),
+                              //   onTimeout: () {
+                              //     return http.Response('Error', 408);
+                              //   },
+                              // );
+                              // print(response.statusCode);
                               if (response.statusCode == 200) {
                                 
                                   Alert(

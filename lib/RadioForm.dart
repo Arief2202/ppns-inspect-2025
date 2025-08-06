@@ -101,7 +101,7 @@ class _RadioFormState extends State<RadioForm> {
             ), // controller: _data[1],
           ),
 
-          if (output != option[0])
+          if (output != option[0] && globals.page != "input_nomor")
           Container(
               margin: EdgeInsets.only(top: 20, left: 30, right: 30),
               child: Row(
