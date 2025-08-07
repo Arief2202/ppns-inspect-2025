@@ -1,6 +1,7 @@
 // ignore_for_file: file_names, camel_case_types, library_private_types_in_public_api, prefer_const_literals_to_create_immutables, prefer_const_constructors, prefer_const_constructors_in_immutables, use_build_context_synchronously, sized_box_for_whitespace, sort_child_properties_last, unused_local_variable, must_be_immutable, prefer_final_fields, use_key_in_widget_constructors, unnecessary_this, depend_on_referenced_packages, non_constant_identifier_names, curly_braces_in_flow_control_structures, unnecessary_brace_in_string_interps, unused_field
 
 import 'package:flutter/material.dart';
+import 'package:ppns_inspect/openCamera.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter_phoenix/flutter_phoenix.dart';
@@ -381,11 +382,12 @@ class _HasilRumahPompaState extends State<HasilRumahPompa> with RestorationMixin
                           for(int a = 0; a< titleColumn.length; a++){
                             sheetObject.cell(CellIndex.indexByString('A${a+1}')).value = TextCellValue(titleColumn[a]);
                             sheetObject.cell(CellIndex.indexByString('B${a+1}')).value = TextCellValue(currentData.data[0][a]);
+                            if(a > 1) sheetObject.cell(CellIndex.indexByString('C${a+1}')).value = TextCellValue(currentData.data[0][a+31]);
                           }          
                           var fileBytes = excel.save();
 
                           Directory appDocDirectory = await getApplicationDocumentsDirectory();
-                          var dir = "/storage/emulated/0/ppns_fire_fighters/export/inspeksi_rumah_pompa_${globals.monthName[selectedDate.month-1]}_${selectedDate.year}.xlsx";
+                          var dir = "/storage/emulated/0/ppns_inspect/export/inspeksi_rumah_pompa_${globals.monthName[selectedDate.month-1]}_${selectedDate.year}.xlsx";
                           // var dir = "${appDocDirectory.path}/export/${inspeksi}_inspeksi_apar_${monthName[selectedDate.month-1]}_${selectedDate.year}.xlsx";
                           File(join(dir))
                             ..createSync(recursive: true)
@@ -453,6 +455,17 @@ class _HasilRumahPompaState extends State<HasilRumahPompa> with RestorationMixin
                           children: [
                             Text(style: tsyleTitle, "${titleColumn[a]} : "),
                             Text(style: tsyleContent, "${currentData.data[0][a]}"),
+                            if(a > 1) (currentData.data[0][a + 31].contains("http://")) ? 
+                              ElevatedButton(onPressed: (){
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) {
+                                    // return InspeksiApar();
+                                    return DisplayPictureUrl(imageUrl: currentData.data[0][a + 31]);
+                                  }),
+                                );
+                              }, child: Text("View Photo")) : 
+                              Container(),
                             SizedBox(height: 10),
                         ],)
                       ],

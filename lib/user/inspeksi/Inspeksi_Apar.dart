@@ -52,7 +52,7 @@ class _InspeksiAparState extends State<InspeksiApar>{
   @override
   void initState() {
     super.initState();
-
+    globals.page = "inspeksi";
   }
 
   @override
